@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/pokedex/precache-manifest.f197fd7937e2f9f20a97417981eee1af.js"
+  "/pokedex/precache-manifest.611a6dd7b53956e5c0c2925216ffb4ce.js"
 );
 
 workbox.clientsClaim();
