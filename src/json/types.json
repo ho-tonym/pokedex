@@ -1,0 +1,92 @@
+{
+  "normal":{
+    "take2": ["fighting"],
+    "take05": [],
+    "take0": ["ghost"]
+  },
+  "fighting":{
+    "take2": ["flying", "psychic", "fairy"],
+    "take05": ["rock", "bug", "dark"],
+    "take0": []
+  },
+  "flying":{
+    "take2": ["rock", "electric", "ice"],
+    "take05": ["fighting", "bug", "grass"],
+    "take0": ["ground"]
+  },
+  "poison":{
+    "take2": ["ground", "psychic"],
+    "take05": ["fighting", "poison", "bug", "grass", "fairy"],
+    "take0": []
+  },
+  "ground":{
+    "take2": ["water","grass","ice"],
+    "take05": ["poison","rock"],
+    "take0": ["electric"]
+  },
+  "rock":{
+    "take2": ["fighting","ground","steel","water","grass"],
+    "take05": ["normal","flying","poison","fire"],
+    "take0": []
+  },
+  "bug":{
+    "take2": ["flying", "rock", "fire"],
+    "take05": ["fighting","ground","grass"],
+    "take0": []
+  },
+  "ghost":{
+    "take2": ["ghost","dark"],
+    "take05": ["poison","bug"],
+    "take0": ["normal","fighting"]
+  },
+  "steel":{
+    "take2": ["fighting","ground","fire"],
+    "take05": ["normal","flying","rock","bug","steel","grass","psychic","ice","dragon","fairy"],
+    "take0": ["poison"]
+  },
+  "fire":{
+    "take2": ["ground","rock","water"],
+    "take05": ["bug","steel","fire","grass","ice","fairy"],
+    "take0": []
+  },
+  "water":{
+    "take2": ["grass","electric"],
+    "take05": ["steel","fire","water","ice"],
+    "take0": []
+  },
+  "grass":{
+    "take2": ["flying","poison","bug","fire","ice"],
+    "take05": ["ground","water","grass","electric"],
+    "take0": []
+  },
+  "electric":{
+    "take2": ["ground"],
+    "take05": ["flying","steel","electric"],
+    "take0": []
+  },
+  "psychic":{
+    "take2": ["bug","ghost","dark"],
+    "take05": ["fighting","psychic"],
+    "take0": []
+  },
+  "ice":{
+    "take2": ["fighting","rock","steel","fire"],
+    "take05": ["ice"],
+    "take0": []
+  },
+  "dragon":{
+    "take2": ["ice","dragon","fairy"],
+    "take05": ["fire","water","grass","electric"],
+    "take0": []
+  },
+  "dark":{
+    "take2": ["fighting","bug","fairy"],
+    "take05": ["ghost","dark"],
+    "take0": ["psychic"]
+  },
+  "fairy":{
+    "take2": ["poison","steel"],
+    "take05": ["fighting","bug","dark"],
+    "take0": ["dragon"]
+  }
+}
