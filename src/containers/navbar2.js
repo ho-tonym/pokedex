@@ -62,7 +62,6 @@ class NavBar extends Component {
                   <span></span></div></button>
               <li className="eachnav"><Link to="/">Home</Link></li>
               <li className="eachnav"><Link to="/about">About</Link></li>
-              <li className="eachnav"><Link to="/mypokemon">My Pokemon</Link></li>
               <li className="eachnav"><Search onChange={this.handleSearch} handleClearText={this.handleClearText} handlePlaceholder={this.handlePlaceholder}/></li>
           </ul>
         </div>
@@ -86,6 +85,6 @@ const mapDispatchToProps = {
 }
 export default connect(null, mapDispatchToProps)(NavBar)
 
-
+              // <li className="eachnav"><Link to="/mypokemon">My Pokemon</Link></li>
 
 // <button><Link to="/mypokemon">My Pokemon</Link></button>

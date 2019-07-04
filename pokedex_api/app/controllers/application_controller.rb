@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::API
+  # DEPRECATED : REMOVED SAVING FEATURE FOR NOW
+
+
   # protect_from_forgery with: :exception
   # helper_method :current_user, :require_logged_in, :logged_in?, :current_user_name, :current_user_level
   #
