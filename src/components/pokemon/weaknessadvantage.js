@@ -1,4 +1,5 @@
 import React from 'react'
+
 const WeaknessAdvantage = ({take2, take05, take0}) => {
   return(
     <section id="weaknessAdvantage">

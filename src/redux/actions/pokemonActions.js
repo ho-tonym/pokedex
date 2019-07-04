@@ -1,6 +1,6 @@
 import {FILTER_POKEMON, FETCH_POKEMON, SUBMIT_POKEMON, FETCH_MY_POKEMON, FETCH_ONE_POKEMON} from './types'
 
-export function fetchMyPokemon() {
+export function fetchMyPokemon() {//retrieve saved pokemon from SQL database.
   return (dispatch) => {
     return fetch(`http://localhost:3001/pokemon`)
     .then(response => response.json())
@@ -10,7 +10,7 @@ export function fetchMyPokemon() {
     }))
   }}
 
-export function submitPokemon(pokemonid) {
+export function submitPokemon(pokemonid) {//save selected pokemon to SQL databse
   return (dispatch) => {
     let pokemonName = pokemonid.replace(/[0-9]/g, '')
     let pokemonId = pokemonid.replace(/\D/g,'');
@@ -28,7 +28,7 @@ export function submitPokemon(pokemonid) {
   })}
 }
 
-export function filterPokemon(searchString = '') {
+export function filterPokemon(searchString = '') {//search bar - searches through state for pokemon that match the name
   return (dispatch, getState) => {
     const displayedPokemons = getState().pokemon.pokemon.filter(pokemon => {
       return pokemon.name.includes(searchString.toLowerCase())
@@ -42,7 +42,7 @@ export function filterPokemon(searchString = '') {
 
 // 949
 // 892
-export function fetchPokemon() {
+export function fetchPokemon() {//collect 20 pokemon from the REST API pokeapi
   return (dispatch) => {
     return fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20`)
     .then(response => response.json())
@@ -53,7 +53,7 @@ export function fetchPokemon() {
   }
 }
 
-export function fetchOnePokemon(pokemon) {
+export function fetchOnePokemon(pokemon) {// get the information on a specific pokemon which shows up at the bottom of the screen
   return (dispatch) => {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}/`)
     .then(response => response.json())

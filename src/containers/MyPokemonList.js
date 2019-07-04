@@ -8,7 +8,7 @@ import Form from '../components/user/form'
 
 
 class MyPokemonList extends Component {
-
+  //Main list of all fetched pokemon.
   componentWillMount(){
     this.props.fetchMyPokemon();
   }

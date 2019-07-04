@@ -1,23 +1,55 @@
-import {connect} from 'react-redux'
 import React, { Component } from 'react'
-
-import {fetchOnePokemon} from '../redux/actions/pokemonActions'
 import PokemonData from '../components/pokemon/pokemondata'
 import WeaknessAdvantage from '../components/pokemon/weaknessadvantage'
-import Lists from '../components/pokemon/lists'
-
 import TypeImage from '../components/home/type/typeimage'
+
+import {connect} from 'react-redux'
+import {fetchOnePokemon} from '../redux/actions/pokemonActions'
+
 import jsonTypes from '../json/types.json'
+import typeImagesImport from '../images/typeImages';
 
 class Pokemon extends Component {
+    //if bottom data is empty, we will display pickachu data as default
     componentWillMount(){
       if(this.isObjectEmpty(this.props.pokeData)){
-        // if(this.props.pokeData.name !== this.props.match.params.id){
-        //     this.props.fetchOnePokemon(this.props.match.params.id);
-            this.props.fetchOnePokemon("pikachu");
-          // }
+          this.props.fetchOnePokemon("pikachu");
+      }
+      document.addEventListener('mousedown', this.handleClick, false)
+    }
+
+    componentWillUnmount = () => {
+      document.removeEventListener('mousedown', this.handleClick, false)
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+      return true
+    }
+
+    //expand bottom nav bar
+    expandOnePokemon = () => {
+      if (this.pokemonType.style.transform === "translateY(70px)"){
+        this.pokemonType.style.transform = "translateY(100%)"
+      }
+      else{
+        this.pokemonType.style.transform = "translateY(70px)"
       }
     }
+
+    //contract bottom nav bar
+    closeOnePokemon = () => {
+      this.pokemonType.style.transform = "translateY(100%)"
+    }
+
+    handleClick = (e) => {
+      if (this.pokemonType.contains(e.target)){
+        return;
+      }
+      else{
+        this.closeOnePokemon();
+      }
+    }
+
     isObjectEmpty = (Obj) => {
       for(let key in Obj) {
         if(Obj.hasOwnProperty(key))
@@ -26,61 +58,122 @@ class Pokemon extends Component {
       return true;
     }
 
+    //change color of tag based on pokemon type
     colorPicker(type){
       switch(type) {
         case 'normal':
-          return "#bcbcac";
+          return{
+            color: "#bcbcac",
+            img: typeImagesImport.normal
+          }
         case 'poison':
-          return "#aa5da0";
+          return{
+            color: "#aa5da0",
+            img: typeImagesImport.poison
+          }
         case 'psychic':
-          return "#fa65b4";
+          return{
+            color: "#fa65b4",
+            img: typeImagesImport.psychic
+          }
         case 'grass':
-          return "#8bd54f";
+          return{
+            color: "#8bd54f",
+            img: typeImagesImport.grass
+          }
         case 'ground':
-          return "#f0cf5d";
+          return{
+            color: "#f0cf5d",
+            img: typeImagesImport.ground
+          }
         case 'ice':
-          return "#a0f6ff";
+          return{
+            color: "#a0f6ff",
+            img: typeImagesImport.ice
+          }
         case 'fire':
-          return "#f75344";
+          return{
+            color: "#f75344",
+            img: typeImagesImport.fire
+          }
         case 'rock':
-          return "#c8b873";
+          return{
+            color: "#c8b873",
+            img: typeImagesImport.rock
+          }
         case 'dragon':
-          return "#8976ff";
+          return{
+            color: "#8976ff",
+            img: typeImagesImport.dragon
+          }
         case 'water':
-          return "#57afff";
+          return{
+            color: "#57afff",
+            img: typeImagesImport.water
+          }
         case 'bug':
-          return "#c2d120";
+          return{
+            color: "#c2d120",
+            img: typeImagesImport.bug
+          }
         case 'dark':
-          return "#805f4f";
+          return{
+            color: "#805f4f",
+            img: typeImagesImport.dark
+          }
         case 'fighting':
-          return "#a45545";
+          return{
+            color: "#a45545",
+            img: typeImagesImport.fighting
+          }
         case 'ghost':
-          return "#7570cb";
+          return{
+            color: "#7570cb",
+            img: typeImagesImport.ghost
+          }
         case 'steel':
-          return "#c3c1d6";
+          return{
+            color: "#c3c1d6",
+            img: typeImagesImport.steel
+          }
         case 'flying':
-          return "#77a3ff";
+          return{
+            color: "#77a3ff",
+            img: typeImagesImport.flying
+          }
         case 'electric':
-          return "#fee63b";
+          return{
+            color: "#fee63b",
+            img: typeImagesImport.electric
+          }
         case 'fairy':
-          return "#fbaeff";
+          return{
+            color: "#fbaeff",
+            img: typeImagesImport.fairy
+          }
         default:
-          return "#fff";
+          return{
+            color: "#fff",
+            img: typeImagesImport.electric
+          }
         }
     }
 
+//create type componenets for bottom nav when a pokemon is clicked on
     createTypesButtons = (typeImages, typesArray) => {
       if (!this.isObjectEmpty(this.props.pokeData)){
         this.props.pokeData.types.map((e, index) => {
           typesArray.push(e.type.name)
           return(
             typeImages.push(
-              <TypeImage key={index} type={e.type.name} color={this.colorPicker(e.type.name)}/>
+              <TypeImage key={index} type={e.type.name} colorImg={this.colorPicker(e.type.name)}/>
             )
           )
         })
       }
     }
+
+    //determine the weaknesses and strengths for each type
     calculateDefence(typesArray, finalArray , dmgString){
       let jsonArray = [];
       typesArray.forEach((e) => {
@@ -89,11 +182,12 @@ class Pokemon extends Component {
 
       jsonArray.flat().map((e, index) => {
         finalArray.push(
-          <TypeImage key={index} type={e} color={this.colorPicker(e)}/>
+          <TypeImage key={index} type={e} colorImg={this.colorPicker(e)}/>
         )
         return null;
       })
     }
+
 
     render() {
       let typesArray = [];
@@ -107,16 +201,20 @@ class Pokemon extends Component {
       let take0 = [];
       this.calculateDefence(typesArray, take0, "take0");
 
-      let array = ["pikachu", "bulbasaur"]
+
     return (
-      <div className="selectedPokemon">
-        <PokemonData pokeData={this.props.pokeData} isObjectEmpty={this.isObjectEmpty} typeImages={typeImages}/>
+      <div className="selectedPokemon" ref={(pokemonType)=>{this.pokemonType = pokemonType}}>
+        <button id="pokemonTypeButton" onClick={this.expandOnePokemon}>
+          {typeImages}
+        </button>
+        <h1 className="capitalize">{this.props.pokeData.name} Stats</h1>
         {typeImages.length &&
           <React.Fragment>
             <WeaknessAdvantage take2={take2} take05={take05} take0={take0}/>
-            <Lists array={array}/>
           </React.Fragment>
         }
+
+        <PokemonData pokeData={this.props.pokeData} isObjectEmpty={this.isObjectEmpty} typeImages={typeImages}/>
       </div>
     )
   }

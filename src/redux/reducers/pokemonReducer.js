@@ -11,8 +11,6 @@ const initialState = {
 export default function(state = initialState, action){
   switch(action.type){
     case FETCH_POKEMON:
-        // console.log(action.payload);
-        // filteredPokemon: action.payload.slice(0,20)
       return {
         ...state,
         pokemon: action.payload,
@@ -48,6 +46,3 @@ export default function(state = initialState, action){
       return state;
   }
 }
-//reducers evaluate actions that are commmited
-//fetch posts, creating new posts
-//types = constants

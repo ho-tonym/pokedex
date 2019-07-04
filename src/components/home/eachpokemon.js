@@ -1,5 +1,6 @@
 import React from 'react'
-// {(() => { debugger; })()}
+
+//on click of each pokemon -> updates the bottom nav bar with more information on clicked pokemon
 
 const EachPokemon = ({eachPokemon, index, children}) =>
 <React.Fragment>
@@ -7,6 +8,3 @@ const EachPokemon = ({eachPokemon, index, children}) =>
 </React.Fragment>
 
 export default EachPokemon
-
-//on click of each pokemon, open a popup
-// popup - pokemon type

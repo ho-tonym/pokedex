@@ -1,5 +1,6 @@
 import React from 'react'
 
+// pokemon data at the bottom nav bar
 const PokemonData = ({pokeData, isObjectEmpty}) => {
   let statsName = [];
   let statsValue = []

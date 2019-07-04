@@ -1,10 +1,10 @@
 import {fetchPokemon, submitPokemon, fetchOnePokemon} from '../redux/actions/pokemonActions'
 import {connect} from 'react-redux'
 import React, { Component } from 'react'
-
 import PokemonList from '../components/home/_pokemonlist'
 
 class HomePage extends Component {
+
   componentWillMount(){
     if(this.isObjectEmpty(this.props.allFetchedPokemon))
     {
@@ -21,7 +21,6 @@ class HomePage extends Component {
   }
 
   handleOnePokemonClick = (event) => {
-    //this gets called
     this.props.fetchOnePokemon(event.currentTarget.id);
   }
 
@@ -53,11 +52,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomePage)
-
-// EachPokemon.propTypes = {
-//   name: eachPokemon.name.string
-// };
-//
-// EachPokemon.defaultProps = {
-//   name: 'undefined'
-// };
