@@ -112,7 +112,7 @@ class Pokemon2 extends Component {
 
     return (
       <div className="selectedPokemonContainer" ref={(pokemonType) => {this.pokemonType = pokemonType; }}>
-        <button id="pokemonTypeButton" type="button" onClick={this.expandOnePokemon}>
+        <button class="botNav" type="button" onClick={this.expandOnePokemon}>
           {typeImages}
         </button>
         <div className="scrollable">

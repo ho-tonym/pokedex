@@ -1,90 +1,76 @@
 $transition: 0.25s ease-out
 
-#burger
+#navbar__burger
   position: absolute
   width: 35px
-  height: 30px
+  height: 100%
   float: left
   border: 0
   background: 0
   top: 0
   left: 0
   outline: 0
-
-#burger div
-  width: 35px
-  height: 30px
-  margin: 10px 15px
-  position: absolute
-  cursor: pointer
+  div
+    left: 13px
+    width: 35px
+    height: 30px
+    position: relative
+    cursor: pointer
   span
-    background-color: #fff
+    background-color: #444444
     position: absolute
     border-radius: 2px
     transition: .3s cubic-bezier(.8, .5, .2, 1.4)
     width: 100%
     height: 4px
 
-#burger span:nth-child(1)
+#navbar__burger span:nth-child(1)
   top: 0px
   left: 0px
 
-#burger span:nth-child(2)
-  top: 13px
+#navbar__burger span:nth-child(2)
+  top: 12px
   left: 0px
 
-#burger span:nth-child(3)
-  bottom: 0px
+#navbar__burger span:nth-child(3)
+  bottom: 2px
   left: 0px
 
-#burger:hover span:nth-child(1)
+#navbar__burger:hover span:nth-child(1)
   transform: scaleX(.8)
 
-#burger:hover span:nth-child(2)
+#navbar__burger:hover span:nth-child(2)
   transform: scaleX(.5)
 
-#burger:hover span:nth-child(3)
+#navbar__burger:hover span:nth-child(3)
   transform: scaleX(.8)
 
 
 .navbar
   position: fixed
   top: 0
-  background-color: #333333
+  background-color: #fff
   z-index: 100
-  height: 80px
+  height: 70px
   width: 100%
   overflow: hidden
   position: -webkit-sticky
-
-.eachnav
-  font-size: 20px
-  display: inline-block
-  color: #fff
-  margin: 0px 20px 0px 20px
-  text-decoration: none
-  text-transform: uppercase
-  font-weight: bold
-  a
+  box-shadow: 0px 2px 3px #dddddd
+  li
+    font-size: 20px
+    display: inline-block
+    color: #444444
+    margin: 0px 20px 0px 20px
     text-decoration: none
-    color: #fff
-    transition: $transition
-    &:hover
-      opacity: 0.5
+    text-transform: uppercase
+    font-weight: bold
+    a
+      text-decoration: none
+      color: #444444
+      transition: $transition
 
-.sideNavBackground
-  z-index: 101
-  position: fixed
-  top: 0
-  bottom: 0
-  left: 0
-  right: 0
-  background-color: rgba(33,33,33,1.0)
-  transition: $transition
-  opacity: 0.5
-  display: none
 
-#sideNav
+#side-nav
   position: fixed
   height: 100%
   width: 0
@@ -106,6 +92,9 @@ $transition: 0.25s ease-out
     transition: 0.3s
     border: 0
     background: none
+    outline: 0
+    &:hover
+      opacity: 0.4
   a
     color: #fff
     text-decoration: none
@@ -118,51 +107,43 @@ $transition: 0.25s ease-out
 
 
 @media (max-width: 576px)
-  #navBarItems li:nth-child(2)
+  #navbar__list li:nth-child(2)
     display: none
-  #navBarItems li:nth-child(3)
-    display: none
-  #navBarItems li:nth-child(4)
+  #navbar__list li:nth-child(3)
     display: none
 
+
 @media (min-width: 576px)
-  #navBarItems li:nth-child(2)
+  #navbar__list li:nth-child(2)
     display: none
-  #navBarItems li:nth-child(3)
+  #navbar__list li:nth-child(3)
     display: none
-  #navBarItems li:nth-child(4)
-    display: none
+
 
 
 @media (min-width: 768px)
-  #navBarItems li:nth-child(2)
+  #navbar__list li:nth-child(2)
     display: none
-  #navBarItems li:nth-child(3)
-    display: none
-  #navBarItems li:nth-child(4)
+  #navbar__list li:nth-child(3)
     display: none
 
 @media (min-width: 992px)
-  #navBarItems li:nth-child(2)
+  #navbar__list li:nth-child(2)
     display: inline-block
-  #navBarItems li:nth-child(3)
+  #navbar__list li:nth-child(3)
     display: inline-block
-  #navBarItems li:nth-child(4)
-    display: inline-block
-  #burger div
+  #navbar__burger div
     display: none
-  #sideNav
+  #side-nav
     width: 0
 
 
 @media (min-width: 1200px)
-  #navBarItems li:nth-child(2)
+  #navbar__list li:nth-child(2)
     display: inline-block
-  #navBarItems li:nth-child(3)
+  #navbar__list li:nth-child(3)
     display: inline-block
-  #navBarItems li:nth-child(4)
-    display: inline-block
-  #burger div
+  #navbar__burger div
     display: none
-  #sideNav
+  #side-nav
     width: 0

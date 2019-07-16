@@ -5,103 +5,93 @@ import Search from '../components/home/search';
 import { filterPokemon, updateSideNav } from '../redux/actions/pokemonActions';
 
 class NavBar extends Component {
-  componentWillMount = () => {
-    // document.addEventListener('mousedown', this.handleClick, false);
-  }
-
-  componentWillUnmount = () => {
-    // document.removeEventListener('mousedown', this.handleClick, false);
-  }
-
-  // handleClick = (e) => {
-  //   if (!this.sideNav.contains(e.target)) {
-  //     this.closeSlideMenu();
-  //   }
-  // }
-
   openSlideMenu = () => {
     this.props.updateSideNav({
       width: "250px",
       burgerDisplay: "none",
-      backDisplay: "block"
-    })
-    // this.sideNav.style.width = "";
-    // this.burger.style.display = "none";
-    // this.sideNavBackground.style.display = "block";
+      backDisplay: "block",
+    });
   }
 
   closeSlideMenu = () => {
     this.props.updateSideNav({
       width: "0px",
       burgerDisplay: "inline",
-      backDisplay: "none"
+      backDisplay: "none",
     })
   }
 
   // Clear text on search bar
+  // Focus
   handleClearText = (event) => {
-    event.target.parentNode.firstElementChild.style.opacity = "1";
     event.target.parentNode.style.borderColor = "#fff";
     event.target.placeholder = "";
-
   }
-//tell user to enter pokemon name in search bar
+
+// NOT Focused
   handlePlaceholder = (event) => {
-    event.target.parentNode.firstElementChild.style.opacity = "0.5"
     event.target.parentNode.style.borderColor = "#6e6865"
     event.target.placeholder= "enter pokemon"
   }
-  //call redux action to search through the state for pokemon that match the entered letters
+  // call redux action to search through the state for pokemon that match the entered letters
   handleSearch = (event) => {
     this.props.filterPokemon(event.currentTarget.value);
   }
 
   render() {
+    const { sideNav } = this.props;
+
     const burgerStyle = {
-      display: this.props.sideNav.burgerDisplay
-    }
+      display: sideNav.burgerDisplay,
+    };
 
     const sideNavStyle = {
-      width: this.props.sideNav.width
-    }
+      width: sideNav.width,
+    };
 
     const sideNavBack = {
-      backDisplay: this.props.sideNav.backDisplay
-    }
+      backDisplay: sideNav.backDisplay,
+    };
     return(
       <>
         <div className="navbar">
-          <ul id="navBarItems">
-            <button id="burger" style={burgerStyle} href="#" onClick={this.openSlideMenu}>
+          <ul id="navbar__list">
+            <button id="navbar__burger" type="button" style={burgerStyle} href="#" onClick={this.openSlideMenu}>
               <div>
-                  <span></span>
-                  <span></span>
-                  <span></span></div></button>
-              <li className="eachnav"><Link to="/">Home</Link></li>
-              <li className="eachnav"><Link to="/about">About</Link></li>
-              <li className="eachnav"><Search onChange={this.handleSearch} handleClearText={this.handleClearText} handlePlaceholder={this.handlePlaceholder}/></li>
+                <span />
+                <span />
+                <span />
+              </div>
+            </button>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li>
+              <Search
+                onChange={this.handleSearch}
+                handleClearText={this.handleClearText}
+                handlePlaceholder={this.handlePlaceholder}
+              />
+            </li>
           </ul>
         </div>
 
-        <div style={sideNavBack} className="sideNavBackground">
-        </div>
-
-        <div style={sideNavStyle} id="sideNav">
-            <button><Link to="/">Home</Link></button>
-            <button><Link to="/about">About</Link></button>
+        <div id="side-nav" style={sideNavStyle}>
+          <button type="button" onClick={this.closeSlideMenu}><Link to="/">X</Link></button>
+          <button type="button"><Link to="/">Home</Link></button>
+          <button type="button"><Link to="/about">About</Link></button>
         </div>
       </>
 
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
-    sideNav: state.pokemon.sideNav,
-})
+  sideNav: state.pokemon.sideNav,
+});
 
 const mapDispatchToProps = {
   filterPokemon,
-  updateSideNav
-}
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+  updateSideNav,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

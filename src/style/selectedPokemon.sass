@@ -4,32 +4,31 @@ $transition: .25s ease-out
   position: fixed
   bottom: 0px
   background-color: #fff
-  border: 2px solid #eeeeee
   transition: $transition
   transform: translateY(100%)
   width: 100%
-
-// #ebebeb
-// #232323
+  z-index: 101
 
 .capitalize
   text-transform: capitalize
+
 .scrollable
   max-height: 300px
   overflow-y: auto
 
-#pokemonTypeButton
-  transform: translateY(-70px)
+.botNav
+  display: flex
+  align-items: center
+  justify-content: center
+  transform: translateY(-60px)
   position: fixed
   border: 0
   cursor: pointer
-  display: flex
   width: 100%
   outline: 0
-  align-items: center
-  justify-content: center
-  height: 70px
-  // background-color: #333333
+  height: 60px
+  background-color: #fff
+  box-shadow: -20px -20px -30px #dddddd
   p
     font-size: 16px
 

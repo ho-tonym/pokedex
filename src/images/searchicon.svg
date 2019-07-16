@@ -9,6 +9,6 @@
 	 xml:space="preserve">
 <defs>
 </defs>
-<circle fill="none" stroke="#FFFFFF" stroke-width="7" stroke-miterlimit="10" cx="19.179" cy="19.179" r="15.679"/>
-<line fill="none" stroke="#FFFFFF" stroke-width="7" stroke-miterlimit="10" x1="32.099" y1="32.099" x2="45.304" y2="45.304"/>
+<circle fill="none" stroke="#444444" stroke-width="7" stroke-miterlimit="10" cx="19.179" cy="19.179" r="15.679"/>
+<line fill="none" stroke="#444444" stroke-width="7" stroke-miterlimit="10" x1="32.099" y1="32.099" x2="45.304" y2="45.304"/>
 </svg>
