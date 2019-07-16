@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import {fetchOnePokemon} from '../redux/actions/pokemonActions'
 import PokemonData from '../components/pokemon/pokemondata'
 import WeaknessAdvantage from '../components/pokemon/weaknessAdvantage'
-// import Lists from '../components/pokemon/lists'
+import RecommendedList from '../components/pokemon/recommendedList';
 
 import TypeImage from '../components/home/type/typeimage'
 import jsonTypes from '../json/types.json'
@@ -111,8 +111,8 @@ class Pokemon2 extends Component {
 
 
     return (
-      <div className="selectedPokemonContainer" ref={(pokemonType) => {this.pokemonType = pokemonType; }}>
-        <button class="botNav" type="button" onClick={this.expandOnePokemon}>
+      <div className="bot-nav-container" ref={(pokemonType) => {this.pokemonType = pokemonType; }}>
+        <button class="bot-nav" type="button" onClick={this.expandOnePokemon}>
           {typeImages}
         </button>
         <div className="scrollable">
@@ -124,7 +124,12 @@ class Pokemon2 extends Component {
               <WeaknessAdvantage take2={take2} take05={take05} take0={take0}/>
             </>
           }
-          <PokemonData pokeData={this.props.pokeData} isObjectEmpty={this.isObjectEmpty} typeImages={typeImages}/>
+          <RecommendedList />
+          <PokemonData
+            pokeData={this.props.pokeData}
+            isObjectEmpty={this.isObjectEmpty}
+            typeImages={typeImages}
+          />
         </div>
       </div>
     )

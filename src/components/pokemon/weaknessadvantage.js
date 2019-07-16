@@ -1,7 +1,7 @@
 import React from 'react';
 
 const WeaknessAdvantage = ({ take2, take05, take0 }) => (
-  <section id="weaknessAdvantage">
+  <section id="bot-nav__weakness-advantage">
     {take2.length > 0
       && (
       <div className="types" id="take2">

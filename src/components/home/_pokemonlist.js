@@ -10,13 +10,12 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
     return(
       <button id={`${eachPokemon.name}`}
         type="button"
-        className="each_pokemon_button"
+        className="each-pokemon-button"
         key={index}
         onClick={handleActiveOnePokemon}
       >
-        <h3 id="pokeIndex">
-          #
-          {index}
+        <h3 id="each-pokemon-button__index">
+          {`#${index}`}
         </h3>
         <EachPokemon
           eachPokemon={eachPokemon}
@@ -24,7 +23,7 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
         >
           {`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index}.png`}
         </EachPokemon>
-        <h3 className="nametag">{eachPokemon.name}</h3>
+        <h3 className="each-pokemon-button__name">{eachPokemon.name}</h3>
       </button>
     );
   });
@@ -32,7 +31,7 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
   return(
     <>
       {allFetchedPokemon.length > 0
-        ? <div id="pokemon_list">{allPokemon}</div>
+        ? <div id="pokemon-list">{allPokemon}</div>
         : (
           <div className="loader">
             <span />

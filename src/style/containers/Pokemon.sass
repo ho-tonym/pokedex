@@ -1,6 +1,6 @@
 $transition: .25s ease-out
 
-.selectedPokemonContainer
+.bot-nav-container
   position: fixed
   bottom: 0px
   background-color: #fff
@@ -9,14 +9,7 @@ $transition: .25s ease-out
   width: 100%
   z-index: 101
 
-.capitalize
-  text-transform: capitalize
-
-.scrollable
-  max-height: 300px
-  overflow-y: auto
-
-.botNav
+.bot-nav
   display: flex
   align-items: center
   justify-content: center
@@ -36,30 +29,27 @@ hr
   width: 90%
   border-bottom: 1px solid rgb(214,214,214)
 
-// #pokemonDataName
-//   font-size: 2.5em
-
-#pokeData
+#bot-nav__poke-data
   text-transform: capitalize
   img
     max-width: 250px
     min-width: 150px
     width: 100%
     height: auto
+  table
+    padding-top: 25px
 
-#pokeDataStats
-  padding-top: 25px
-
-#weaknessAdvantage
+#bot-nav__weakness-advantage
   display: flex
   align-items: start
   justify-content: center
   .types
 
 
-#lists
+#bot-nav__recommended-lists
   text-transform: capitalize
   background-color: inherit
+
 table
   font-family: arial, sans-serif
   border-collapse: collapse

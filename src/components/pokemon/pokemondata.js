@@ -22,8 +22,7 @@ const PokemonData = ({ pokeData, isObjectEmpty }) => {
     });
 
     pokedata = (
-      <section id="pokeData">
-        <div id="pokeDataStats">
+      <section id="bot-nav__poke-data">
           <table>
             <thead>
               <tr>
@@ -42,7 +41,6 @@ const PokemonData = ({ pokeData, isObjectEmpty }) => {
               </tr>
             </tbody>
           </table>
-        </div>
       </section>
     );
   }
