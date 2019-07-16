@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-//on click of each pokemon -> updates the bottom nav bar with more information on clicked pokemon
+const EachPokemon = ({ eachPokemon, children }) => (
+  <>
+    <img src={children} alt={eachPokemon.name} />
+  </>
+);
 
-const EachPokemon = ({eachPokemon, index, children}) =>
-<React.Fragment>
-   <img src={children} alt={eachPokemon.name}/>
-</React.Fragment>
-
-export default EachPokemon
+export default EachPokemon;

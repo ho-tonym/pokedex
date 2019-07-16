@@ -1,7 +1,7 @@
-import React from 'react'
-//Deprecated- src/components/user folder components
+import React from 'react';
+// Deprecated- src/components/user folder components
 
-const MyPokemon = ({myPokemon, handleSubmitForm}) =>
+const MyPokemon = ({ myPokemon, handleSubmitForm }) =>
   <div className="mypokemon">
     <h1>These are my Pokemon!</h1>
       {

@@ -1,45 +1,48 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Search from '../components/home/search'
-import {connect} from 'react-redux'
-import {filterPokemon} from '../redux/actions/pokemonActions'
+import { connect } from 'react-redux';
+import Search from '../components/home/search';
+import { filterPokemon, updateSideNav } from '../redux/actions/pokemonActions';
 
 class NavBar extends Component {
-
   componentWillMount = () => {
-    document.addEventListener('mousedown', this.handleClick, false)
+    // document.addEventListener('mousedown', this.handleClick, false);
   }
 
   componentWillUnmount = () => {
-    document.removeEventListener('mousedown', this.handleClick, false)
+    // document.removeEventListener('mousedown', this.handleClick, false);
   }
 
-  handleClick = (e) => {
-    if (this.sideNav.contains(e.target)){
-      return;
-    }
-    else{
-      this.closeSlideMenu();
-    }
+  // handleClick = (e) => {
+  //   if (!this.sideNav.contains(e.target)) {
+  //     this.closeSlideMenu();
+  //   }
+  // }
+
+  openSlideMenu = () => {
+    this.props.updateSideNav({
+      width: "250px",
+      burgerDisplay: "none",
+      backDisplay: "block"
+    })
+    // this.sideNav.style.width = "";
+    // this.burger.style.display = "none";
+    // this.sideNavBackground.style.display = "block";
   }
 
-  openSlideMenu = (event) => {
-    this.sideNav.style.width = "250px"
-    this.burger.style.display = "none"
-    this.sideNavBackground.style.display = "block"
+  closeSlideMenu = () => {
+    this.props.updateSideNav({
+      width: "0px",
+      burgerDisplay: "inline",
+      backDisplay: "none"
+    })
   }
 
-  closeSlideMenu = (event) => {
-    this.sideNav.style.width = "0px"
-    this.burger.style.display = "inline"
-    this.sideNavBackground.style.display = "none"
-  }
-
-//clear text on search bar
+  // Clear text on search bar
   handleClearText = (event) => {
-    event.target.parentNode.firstElementChild.style.opacity = "1"
-    event.target.parentNode.style.borderColor = "#fff"
-    event.target.placeholder= ""
+    event.target.parentNode.firstElementChild.style.opacity = "1";
+    event.target.parentNode.style.borderColor = "#fff";
+    event.target.placeholder = "";
 
   }
 //tell user to enter pokemon name in search bar
@@ -53,12 +56,23 @@ class NavBar extends Component {
     this.props.filterPokemon(event.currentTarget.value);
   }
 
-  render(){
+  render() {
+    const burgerStyle = {
+      display: this.props.sideNav.burgerDisplay
+    }
+
+    const sideNavStyle = {
+      width: this.props.sideNav.width
+    }
+
+    const sideNavBack = {
+      backDisplay: this.props.sideNav.backDisplay
+    }
     return(
-      <React.Fragment>
+      <>
         <div className="navbar">
           <ul id="navBarItems">
-            <button id="burger" ref={(burger)=>{this.burger = burger}} href="#" onClick={this.openSlideMenu}>
+            <button id="burger" style={burgerStyle} href="#" onClick={this.openSlideMenu}>
               <div>
                   <span></span>
                   <span></span>
@@ -69,21 +83,25 @@ class NavBar extends Component {
           </ul>
         </div>
 
-        <div ref={(sideNavBackground)=>{this.sideNavBackground = sideNavBackground}} className="sideNavBackground">
+        <div style={sideNavBack} className="sideNavBackground">
         </div>
 
-        <div ref={(sideNav)=>{this.sideNav = sideNav}} id="sideNav">
+        <div style={sideNavStyle} id="sideNav">
             <button><Link to="/">Home</Link></button>
             <button><Link to="/about">About</Link></button>
         </div>
-      </React.Fragment>
+      </>
 
     )
   }
 }
 
+const mapStateToProps = (state) => ({
+    sideNav: state.pokemon.sideNav,
+})
 
 const mapDispatchToProps = {
-  filterPokemon
+  filterPokemon,
+  updateSideNav
 }
-export default connect(null, mapDispatchToProps)(NavBar)
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

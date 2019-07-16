@@ -35,5 +35,5 @@ export default {
   psychic: psychicImg,
   rock: rockImg,
   steel: steelImg,
-  water: waterImg
+  water: waterImg,
 };

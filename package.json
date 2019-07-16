@@ -1,20 +1,29 @@
 {
-  "name": "react-project",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "https://ho-tonym.github.io/pokedex/",
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
+  "homepage": "https://github.com/ho-tonym/pokedex#readme",
+  "main": "index.js",
   "dependencies": {
     "gh-pages": "^2.0.1",
-    "i": "^0.3.6",
-    "node-sass": "^4.10.0",
-    "npm": "^6.4.1",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "npm": "^6.10.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.1",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "react-scripts": "^3.0.1",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,13 +33,25 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "redux-devtools-extension": "^2.13.5"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ho-tonym/pokedex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ho-tonym/pokedex/issues"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -1,14 +1,14 @@
 import React from 'react'
 
-const TypeImage = ({type, colorImg}) => {
+const TypeImage = ({type, color, img}) => {
   const buttonStyle = {
-    borderColor: colorImg.color
+    borderColor: color
   };
   return(
     <React.Fragment>
 
     <div className="typeButton" style={buttonStyle}>
-      <img src={colorImg.img} alt={type + " type img"}/>
+      <img src={img} alt={type + " type img"}/>
       <p>{type}</p>
     </div>
     </React.Fragment>

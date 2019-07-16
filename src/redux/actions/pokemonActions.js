@@ -1,12 +1,20 @@
-import {FILTER_POKEMON, FETCH_POKEMON, SUBMIT_POKEMON, FETCH_MY_POKEMON, FETCH_ONE_POKEMON} from './types'
+import {
+  FILTER_POKEMON,
+  FETCH_POKEMON,
+  SUBMIT_POKEMON,
+  FETCH_MY_POKEMON,
+  FETCH_ONE_POKEMON,
+  CREATE_TYPES,
+  UPDATE_SIDE_NAV,
+} from './types'
 
-export function fetchMyPokemon() {//retrieve saved pokemon from SQL database.
+export function fetchMyPokemon() { // retrieve saved pokemon from SQL database.
   return (dispatch) => {
-    return fetch(`http://localhost:3001/pokemon`)
+    return fetch('http://localhost:3001/pokemon')
     .then(response => response.json())
     .then(data => dispatch({
       type: FETCH_MY_POKEMON,
-      payload: data
+      payload: data,
     }))
   }}
 
@@ -52,8 +60,9 @@ export function fetchPokemon() {//collect 20 pokemon from the REST API pokeapi
     }))
   }
 }
+// Additional information on one pokemon at bottom Nav.
 
-export function fetchOnePokemon(pokemon) {// get the information on a specific pokemon which shows up at the bottom of the screen
+export function fetchOnePokemon(pokemon) {
   return (dispatch) => {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}/`)
     .then(response => response.json())
@@ -62,4 +71,11 @@ export function fetchOnePokemon(pokemon) {// get the information on a specific p
       payload: data
     }))
   }
+}
+
+export function updateSideNav(newValues) {
+  return ({
+      type: UPDATE_SIDE_NAV,
+      payload: newValues,
+    })
 }

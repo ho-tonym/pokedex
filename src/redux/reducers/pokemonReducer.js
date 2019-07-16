@@ -1,4 +1,12 @@
-import {FILTER_POKEMON, FETCH_POKEMON, SUBMIT_POKEMON, FETCH_MY_POKEMON, FETCH_ONE_POKEMON} from '../actions/types'
+import {
+  FILTER_POKEMON,
+  FETCH_POKEMON,
+  SUBMIT_POKEMON,
+  FETCH_MY_POKEMON,
+  FETCH_ONE_POKEMON,
+  CREATE_TYPES,
+  UPDATE_SIDE_NAV,
+} from '../actions/types'
 
 const initialState = {
   pokemon: [],
@@ -6,6 +14,9 @@ const initialState = {
   currentSubmittedPokemon: "",
   myPokemon: [],
   fetchOnePokemon: {},
+  types: {},
+  sideNav: {}
+
 }
 
 export default function(state = initialState, action){
@@ -40,6 +51,19 @@ export default function(state = initialState, action){
         return {
           ...state,
           myPokemon: action.payload
+        }
+
+    case CREATE_TYPES:
+      console.log(action.payload)
+        return {
+          ...state,
+          types: action.payload
+        }
+    case UPDATE_SIDE_NAV:
+      console.log(action.payload)
+        return {
+          ...state,
+          sideNav: action.payload
         }
 
     default:
