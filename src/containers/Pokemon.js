@@ -1,8 +1,7 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react'
 
-import {fetchOnePokemon} from '../redux/actions/pokemonActions'
-import PokemonData from '../components/pokemon/pokemondata'
+import { fetchOnePokemon } from '../redux/actions/pokemonActions';
 import WeaknessAdvantage from '../components/pokemon/weaknessAdvantage'
 import RecommendedList from '../components/pokemon/recommendedList';
 
@@ -10,7 +9,7 @@ import TypeImage from '../components/home/type/typeimage'
 import jsonTypes from '../json/types.json'
 import typeImagesImport from '../images/typeImages';
 
-class Pokemon2 extends Component {
+class Pokemon extends Component {
     // <Lists array={array}/>
     // let array = ["pikachu", "bulbasaur"]
     componentWillMount() {
@@ -112,12 +111,12 @@ class Pokemon2 extends Component {
 
     return (
       <div className="bot-nav-container" ref={(pokemonType) => {this.pokemonType = pokemonType; }}>
-        <button class="bot-nav" type="button" onClick={this.expandOnePokemon}>
+        <button className="bot-nav" type="button" onClick={this.expandOnePokemon}>
           {typeImages}
         </button>
-        <div className="scrollable">
-          <h1 className="capitalize">{this.props.pokeData.name}
-            Stats
+        <div className="bot-nav__scrollable scrollable">
+          <h1 className="capitalize">
+            {`${this.props.pokeData.name} Stats`}
           </h1>
           {typeImages.length &&
             <>
@@ -125,11 +124,6 @@ class Pokemon2 extends Component {
             </>
           }
           <RecommendedList />
-          <PokemonData
-            pokeData={this.props.pokeData}
-            isObjectEmpty={this.isObjectEmpty}
-            typeImages={typeImages}
-          />
         </div>
       </div>
     )
@@ -145,4 +139,4 @@ const mapDispatchToProps = {
   fetchOnePokemon
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pokemon2)
+export default connect(mapStateToProps, mapDispatchToProps)(Pokemon)

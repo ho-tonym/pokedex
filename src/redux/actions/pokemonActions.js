@@ -5,7 +5,9 @@ import {
   FETCH_MY_POKEMON,
   FETCH_ONE_POKEMON,
   CREATE_TYPES,
-  UPDATE_SIDE_NAV,
+  TOGGLE_SIDE_NAV,
+  UPDATE_SEARCH_CSS,
+  UPDATE_SEARCH_STRING
 } from './types'
 
 export function fetchMyPokemon() { // retrieve saved pokemon from SQL database.
@@ -73,9 +75,28 @@ export function fetchOnePokemon(pokemon) {
   }
 }
 
-export function updateSideNav(newValues) {
-  return ({
-      type: UPDATE_SIDE_NAV,
-      payload: newValues,
-    })
+export function toggleSideNav() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: TOGGLE_SIDE_NAV,
+      payload: !(getState().pokemon.sideNav),
+    });
+  };
 }
+
+export function updateSeachCSS(bool) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_SEARCH_CSS,
+      payload: bool,
+    });
+  };
+}
+
+export function updateSearchState(searchString = '') {
+    return (dispatch) => {
+  dispatch({
+    type: UPDATE_SEARCH_STRING,
+    payload: searchString
+  })
+}}

@@ -5,8 +5,10 @@ import {
   FETCH_MY_POKEMON,
   FETCH_ONE_POKEMON,
   CREATE_TYPES,
-  UPDATE_SIDE_NAV,
-} from '../actions/types'
+  TOGGLE_SIDE_NAV,
+  UPDATE_SEARCH_CSS,
+  UPDATE_SEARCH_STRING,
+} from '../actions/types';
 
 const initialState = {
   pokemon: [],
@@ -15,56 +17,64 @@ const initialState = {
   myPokemon: [],
   fetchOnePokemon: {},
   types: {},
-  sideNav: {}
+  sideNav: false,
+  searchFocused: false,
+  searchString: "",
+};
 
-}
-
-export default function(state = initialState, action){
-  switch(action.type){
+export default function (state = initialState, action) {
+  switch(action.type) {
     case FETCH_POKEMON:
       return {
         ...state,
         pokemon: action.payload,
-        filteredPokemon: action.payload
-      }
+        filteredPokemon: action.payload,
+      };
 
     case FETCH_ONE_POKEMON:
-    console.log(action.payload);
       return {
         ...state,
-        fetchOnePokemon: action.payload
-      }
+        fetchOnePokemon: action.payload,
+      };
 
     case FILTER_POKEMON:
       return {
         ...state,
-        filteredPokemon: action.payload
-      }
+        filteredPokemon: action.payload,
+      };
 
     case SUBMIT_POKEMON:
       return{
         ...state,
-      }
+      };
 
     case FETCH_MY_POKEMON:
-      console.log(action.payload)
-        return {
-          ...state,
-          myPokemon: action.payload
-        }
+      return {
+        ...state,
+        myPokemon: action.payload,
+      };
 
     case CREATE_TYPES:
-      console.log(action.payload)
-        return {
-          ...state,
-          types: action.payload
-        }
-    case UPDATE_SIDE_NAV:
-      console.log(action.payload)
-        return {
-          ...state,
-          sideNav: action.payload
-        }
+      return {
+        ...state,
+        types: action.payload,
+      };
+
+    case TOGGLE_SIDE_NAV:
+      return {
+        ...state,
+        sideNav: action.payload,
+      };
+    case UPDATE_SEARCH_CSS:
+      return {
+        ...state,
+        searchFocused: action.payload,
+      };
+    case UPDATE_SEARCH_STRING:
+      return {
+        ...state,
+        searchString: action.payload,
+      };
 
     default:
       return state;

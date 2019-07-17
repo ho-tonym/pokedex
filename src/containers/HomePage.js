@@ -26,6 +26,12 @@ class HomePage extends Component {
   handleActiveOnePokemon = (event) => {
     this.props.fetchOnePokemon(event.currentTarget.id);
   }
+  //
+  // handleAnimationSearch = () => {
+  //
+  //   searchBtn.addEventListener("click", expand);
+  //   // on click toggle class close, square
+  // }
 
   render() {
     const { searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon } = this.props;

@@ -10,6 +10,7 @@ $transition: .25s ease-out
   z-index: 101
 
 .bot-nav
+  z-index: 99
   display: flex
   align-items: center
   justify-content: center
@@ -20,10 +21,15 @@ $transition: .25s ease-out
   width: 100%
   outline: 0
   height: 60px
-  background-color: #fff
-  box-shadow: -20px -20px -30px #dddddd
+  box-shadow: 0px -1px 7px #dddddd
   p
     font-size: 16px
+
+.bot-nav__scrollable
+  // this bot padding is because of bot-nav transform: translateY(-60px)
+  // otherwise, bottom data will be clipped
+  padding-bottom: 60px
+  max-height: 300px
 
 hr
   width: 90%
@@ -54,12 +60,9 @@ table
   font-family: arial, sans-serif
   border-collapse: collapse
   width: 100%
-  color: black
+  color: #444444
 
 td, th
-  border: 1px solid #dddddd
-  text-align: left
+  // border: 1px solid #dddddd
+  text-align: center
   padding: 8px
-
-tr:nth-child(even)
-  background-color: #dddddd
