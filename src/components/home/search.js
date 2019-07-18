@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import SearchIcon from '../../images/searchicon.svg';
+import React, { Component } from 'react'
+import SearchIcon from '../../images/searchicon.svg'
 
 class Search extends Component {
+  handleImgFocus = () => {
+    this.input.focus()
+  }
 
-handleImgFocus = () =>{
-    this.input.focus();
-}
   render() {
     const {
       onChange,
@@ -13,11 +13,11 @@ handleImgFocus = () =>{
       searchString,
       handleBlur,
       handleFocus,
-    } = this.props;
+    } = this.props
     return(
       <div className={`Search ${searchFocused ? "search-focus" : "search-blur"}`}>
         <input id="search-input"
-          ref={(input) => { this.input = input; }}
+          ref={(input) => { this.input = input }}
           onChange={onChange}
           type="text"
           name="input"
@@ -26,12 +26,12 @@ handleImgFocus = () =>{
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
-      <button type="button" onClick={this.handleImgFocus}>
-        <img src={SearchIcon} alt="search-icon" />
-      </button>
+        <button type="button" onClick={this.handleImgFocus}>
+          <img src={SearchIcon} alt="search-icon" />
+        </button>
       </div>
-    );
+    )
   }
 }
 
-export default Search;
+export default Search

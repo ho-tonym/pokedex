@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 // Deprecated- src/components/user folder components
 
 const MyPokemon = ({ myPokemon, handleSubmitForm }) =>

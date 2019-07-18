@@ -1,14 +1,14 @@
-$transition: 0.25s ease-out
+@import "../variables/utilities"
 
 #navbar__burger
   position: relative
   height: 100%
-  float: left
   border: 0
   background: 0
   top: 2px
   left: -30px
   outline: 0
+  float: left
   div
     // dont change values on left, width, height
     left: 13px
@@ -17,7 +17,7 @@ $transition: 0.25s ease-out
     position: relative
     cursor: pointer
   span
-    background-color: #444444
+    background-color: $d-gray
     position: absolute
     border-radius: 2px
     transition: .3s cubic-bezier(.8, .5, .2, 1.4)
@@ -49,24 +49,25 @@ $transition: 0.25s ease-out
 .navbar
   // position: fixed
   top: 0
-  background-color: #fff
+  background-color: $white
   z-index: 100
   height: 70px
   width: 100%
   overflow: hidden
   position: -webkit-sticky
-  box-shadow: 0px 1px 7px #dddddd
+  box-shadow: 0px 1px 7px $box-shadow-color
   li
     font-size: 20px
     display: inline-block
-    color: #444444
+    color: $d-gray
     margin: 5px 20px 0px 20px
     text-decoration: none
     text-transform: uppercase
     font-weight: bold
+    float: left
     a
       text-decoration: none
-      color: #444444
+      color: $d-gray
       transition: $transition
 
 
@@ -78,7 +79,7 @@ $transition: 0.25s ease-out
   left: 0
   z-index: 102
   overflow-x: hidden
-  background-color: #333333
+  background-color: $d-gray
   padding-top: 30px
   transition: $transition
   white-space: nowrap
@@ -86,7 +87,6 @@ $transition: 0.25s ease-out
     padding: 8px 8px 8px 32px
     text-decoration: none
     font-size: 25px
-    color: #818181
     display: block
     transition: 0.3s
     border: 0
@@ -95,7 +95,7 @@ $transition: 0.25s ease-out
     &:hover
       opacity: 0.4
   a
-    color: #fff
+    color: $white
     text-decoration: none
     font-size: 23px
     font-family: 'Lato', sans-serif
@@ -106,21 +106,21 @@ $transition: 0.25s ease-out
 
 #open-side-nav
     width: 250px
-    border-right: 2px solid #6e6865
+    border-right: 2px solid $d-gray
 
 .no-burger
     display: none
 
 #closed-side-nav
     width: 0px
-    border-right: 2px solid #6e6865
+    border-right: 2px solid $d-gray
 
 .yes-burger
     display: inline
 
 .Search
-  background-color: #fff
-  z-index: 200
+  background-color: $white
+  z-index: 101
   position: fixed
   top: 0px
   right: 0px
@@ -129,8 +129,8 @@ $transition: 0.25s ease-out
   width: 70px
   height: 70px
   transition: $transition
-  box-shadow: 0px 1px 7px #dddddd
-  border-bottom: 3px solid #444444
+  box-shadow: 0px 1px 7px $box-shadow-color
+  border-bottom: 3px solid $d-gray
 
   img
     position: fixed
@@ -142,7 +142,7 @@ $transition: 0.25s ease-out
     font-size: 20px
     font-weight: bold
     background-color: transparent
-    color: #333333
+    color: $d-gray
     text-align: right
     position: relative
     bottom: 2px
@@ -171,6 +171,10 @@ $transition: 0.25s ease-out
 .search-blur
   width: 70px
 
+.load-bar
+  width: 100%
+  height: 2px
+  background-color: #e04b4b
 //
 // .sticky {
 //   position: fixed;
@@ -211,10 +215,10 @@ $transition: 0.25s ease-out
 //   box-sizing: border-box
 //   width: 50px
 //   height: 50px
-//   border: 4px solid #444444
+//   border: 4px solid $d-gray
 //   border-radius: 50%
 //   background: none
-//   color: #444444
+//   color: $d-gray
 //   font-size: 16px
 //   font-weight: 400
 //   font-family: Roboto
@@ -253,7 +257,7 @@ $transition: 0.25s ease-out
 //   position: absolute
 //   width: 20px
 //   height: 4px
-//   background-color: #444444
+//   background-color: $d-gray
 //   -webkit-transform: rotate(45deg)
 //   -ms-transform: rotate(45deg)
 //   transform: rotate(45deg)
@@ -277,7 +281,7 @@ $transition: 0.25s ease-out
 //   height: 4px
 //   margin-top: -1px
 //   margin-left: -13px
-//   background-color: #444444
+//   background-color: $d-gray
 //   -webkit-transform: rotate(45deg)
 //   -ms-transform: rotate(45deg)
 //   transform: rotate(45deg)
@@ -290,7 +294,7 @@ $transition: 0.25s ease-out
 //   position: absolute
 //   width: 27px
 //   height: 4px
-//   background-color: #444444
+//   background-color: $d-gray
 //   margin-top: -1px
 //   margin-left: -13px
 //   cursor: pointer
@@ -304,10 +308,10 @@ $transition: 0.25s ease-out
 //   padding: 0 40px 0 10px
 //   width: 300px
 //   height: 50px
-//   border: 4px solid #444444
+//   border: 4px solid $d-gray
 //   border-radius: 0
 //   background: none
-//   color: #444444
+//   color: $d-gray
 //   font-family: Roboto
 //   font-size: 16px
 //   font-weight: 400

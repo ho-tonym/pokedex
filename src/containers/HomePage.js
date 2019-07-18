@@ -1,40 +1,40 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
 
-import { fetchPokemon, submitPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions';
-import PokemonList from '../components/home/_pokemonlist';
+import { fetchPokemon, submitPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
+import PokemonList from '../components/home/_pokemonlist'
 
 class HomePage extends Component {
 
   componentWillMount() {
-    const { allFetchedPokemon, fetchPokemon } = this.props;
+    const { allFetchedPokemon, fetchPokemon } = this.props
     if(this.isObjectEmpty(allFetchedPokemon)) {
-      fetchPokemon();
+      fetchPokemon()
     }
   }
 
   isObjectEmpty = (Obj) => {
     for(let key in Obj) {
       if(Obj.hasOwnProperty(key))
-        return false;
+        return false
     }
-    return true;
+    return true
   }
 
 
   handleActiveOnePokemon = (event) => {
-    this.props.fetchOnePokemon(event.currentTarget.id);
+    this.props.fetchOnePokemon(event.currentTarget.id)
   }
   //
   // handleAnimationSearch = () => {
   //
-  //   searchBtn.addEventListener("click", expand);
+  //   searchBtn.addEventListener("click", expand)
   //   // on click toggle class close, square
   // }
 
   render() {
-    const { searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon } = this.props;
+    const { searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon } = this.props
     return (
       <div className="HomePage">
         <PokemonList searchedPokemonList={searchedPokemonList}
@@ -42,7 +42,7 @@ class HomePage extends Component {
           handleActiveOnePokemon={this.handleActiveOnePokemon}
         />
       </div>
-    );
+    )
   }
 }
 
@@ -50,12 +50,12 @@ const mapStateToProps = (state) => ({
   pokeData: state.pokemon.fetchOnePokemon,
   allFetchedPokemon: state.pokemon.pokemon,
   searchedPokemonList: state.pokemon.filteredPokemon,
-});
+})
 
 const mapDispatchToProps = {
   fetchPokemon,
   submitPokemon,
   fetchOnePokemon,
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

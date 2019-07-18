@@ -1,12 +1,12 @@
-import React from 'react';
-import EachPokemon from './eachpokemon';
+import React from 'react'
+import EachPokemon from './eachpokemon'
 
 // Button Click -> dispatch request to PokeApi
 // for more information on one pokemon
 const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon }) => {
   const allPokemon = searchedPokemonList.map(eachPokemon => {
-    const newUrlArray = eachPokemon.url.split("/");
-    const index = newUrlArray[newUrlArray.length - 2];
+    const newUrlArray = eachPokemon.url.split("/")
+    const index = newUrlArray[newUrlArray.length - 2]
     return(
       <button id={`${eachPokemon.name}`}
         type="button"
@@ -25,8 +25,8 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
         </EachPokemon>
         <h3 className="each-pokemon-button__name">{eachPokemon.name}</h3>
       </button>
-    );
-  });
+    )
+  })
 
   return(
     <>
@@ -41,7 +41,7 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
         )
       }
     </>
-  );
-};
+  )
+}
 
-export default PokemonList;
+export default PokemonList

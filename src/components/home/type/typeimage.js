@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 const TypeImage = ({ type, color, img }) => {
   const buttonStyle = {
     borderColor: color,
-  };
+  }
   return(
     <React.Fragment>
 
@@ -12,7 +12,7 @@ const TypeImage = ({ type, color, img }) => {
         <p>{type}</p>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default TypeImage;
+export default TypeImage

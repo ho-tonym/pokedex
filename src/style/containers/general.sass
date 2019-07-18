@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700,900')
-$transition: .25s ease-out
-$border: 1px solid #eeeeee
-$font: 'Lato', sans-serif
+@import "../variables/utilities"
+
 
 .about, .mypokemon
   // margin-top: 100px
@@ -9,17 +8,17 @@ $font: 'Lato', sans-serif
 
 body
   text-align: center
-  background-color: #f4f4f4
+  background-color: $l-gray
   margin: 0
   padding: 0
   font-family: $font
-  color: #fff
+  color: $white
   overflow-x: hidden
   transition: $transition
 
 h1, h3, p
   font-family: $font
-  color: #444444
+  color: $d-gray
 
 .capitalize
   text-transform: capitalize

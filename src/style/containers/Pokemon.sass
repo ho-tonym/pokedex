@@ -1,9 +1,9 @@
-$transition: .25s ease-out
+@import "../variables/utilities"
 
 .bot-nav-container
   position: fixed
   bottom: 0px
-  background-color: #fff
+  background-color: $white
   transition: $transition
   transform: translateY(100%)
   width: 100%
@@ -21,7 +21,7 @@ $transition: .25s ease-out
   width: 100%
   outline: 0
   height: 60px
-  box-shadow: 0px -1px 7px #dddddd
+  box-shadow: 0px -1px 7px $box-shadow-color
   p
     font-size: 16px
 
@@ -60,9 +60,9 @@ table
   font-family: arial, sans-serif
   border-collapse: collapse
   width: 100%
-  color: #444444
+  color: $d-gray
 
 td, th
-  // border: 1px solid #dddddd
+  // border: 1px solid $box-shadow-color
   text-align: center
   padding: 8px

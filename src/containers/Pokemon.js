@@ -1,20 +1,20 @@
 import {connect} from 'react-redux'
 import React, { Component } from 'react'
 
-import { fetchOnePokemon } from '../redux/actions/pokemonActions';
+import { fetchOnePokemon } from '../redux/actions/pokemonActions'
 import WeaknessAdvantage from '../components/pokemon/weaknessAdvantage'
-import RecommendedList from '../components/pokemon/recommendedList';
+import RecommendedList from '../components/pokemon/recommendedList'
 
 import TypeImage from '../components/home/type/typeimage'
 import jsonTypes from '../json/types.json'
-import typeImagesImport from '../images/typeImages';
+import typeImagesImport from '../images/typeImages'
 
 class Pokemon extends Component {
     // <Lists array={array}/>
     // let array = ["pikachu", "bulbasaur"]
     componentWillMount() {
       if(this.isObjectEmpty(this.props.pokeData)){
-          this.props.fetchOnePokemon("pikachu");
+          this.props.fetchOnePokemon("pikachu")
       }
       document.addEventListener('mousedown', this.handleClick, false)
     }
@@ -44,19 +44,19 @@ class Pokemon extends Component {
 
     handleClick = (e) => {
       if (this.pokemonType.contains(e.target)){
-        return;
+        return
       }
       else{
-        this.closeOnePokemon();
+        this.closeOnePokemon()
       }
     }
 
     isObjectEmpty = (Obj) => {
       for(let key in Obj) {
         if(Obj.hasOwnProperty(key))
-          return false;
+          return false
         }
-      return true;
+      return true
     }
 
     createTypesButtons = (typeImages, typesArray) => {
@@ -77,7 +77,7 @@ class Pokemon extends Component {
       }
     }
     calculateDefence(typesArray, finalArray , dmgString){
-      let jsonArray = [];
+      let jsonArray = []
       typesArray.forEach((e) => {
         jsonArray.push(jsonTypes[e][dmgString])
       })
@@ -91,26 +91,26 @@ class Pokemon extends Component {
             img={typeImagesImport[e]}
           />
         )
-        return null;
+        return null
       })
     }
 
 
     render() {
-      let typesArray = [];
-      let typeImages = [];
-      this.createTypesButtons(typeImages, typesArray);
+      let typesArray = []
+      let typeImages = []
+      this.createTypesButtons(typeImages, typesArray)
 
-      let take2 = [];
-      this.calculateDefence(typesArray, take2, "take2");
-      let take05 = [];
-      this.calculateDefence(typesArray, take05, "take05");
-      let take0 = [];
-      this.calculateDefence(typesArray, take0, "take0");
+      let take2 = []
+      this.calculateDefence(typesArray, take2, "take2")
+      let take05 = []
+      this.calculateDefence(typesArray, take05, "take05")
+      let take0 = []
+      this.calculateDefence(typesArray, take0, "take0")
 
 
     return (
-      <div className="bot-nav-container" ref={(pokemonType) => {this.pokemonType = pokemonType; }}>
+      <div className="bot-nav-container" ref={(pokemonType) => {this.pokemonType = pokemonType }}>
         <button className="bot-nav" type="button" onClick={this.expandOnePokemon}>
           {typeImages}
         </button>

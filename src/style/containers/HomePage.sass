@@ -1,6 +1,4 @@
-$transition: .25s ease-out
-$border: 1px solid #eeeeee
-$font: 'Lato', sans-serif
+@import "../variables/utilities"
 
 #pokemon-list
   grid-area: pokemon_list
@@ -29,9 +27,9 @@ $font: 'Lato', sans-serif
   width: 180px
   height: 200px
   margin: 10px
-  background: #fff
+  background: $white
   border: $border
-  box-shadow: 0px 2px 0.5px #dddddd
+  box-shadow: 0px 2px 0.5px $box-shadow-color
   transition: $transition
   overflow: hidden
   img
@@ -41,13 +39,13 @@ $font: 'Lato', sans-serif
     overflow: hidden
   &:hover
     filter: grayscale(100%)
-    background: #f4f4f4
+    background: $l-gray
     box-shadow: none
     border: none
     transform: scale(1.1, 1.1)
   &:active
     filter: grayscale(100%)
-    background: #f4f4f4
+    background: $l-gray
     box-shadow: none
     border: none
     transform: scale(1.1, 1.1)

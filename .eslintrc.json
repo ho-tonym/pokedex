@@ -21,7 +21,7 @@
         "react"
     ],
     "rules": {
-      "semi": "warn",
+      "semi": "off",
       "indent": "warn",
       "spaced-comment": "warn",
       "object-curly-spacing": "warn",

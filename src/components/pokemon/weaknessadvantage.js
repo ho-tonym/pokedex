@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const WeaknessAdvantage = ({ take2, take05, take0 }) => (
   <section id="bot-nav__weakness-advantage">
@@ -24,6 +24,6 @@ const WeaknessAdvantage = ({ take2, take05, take0 }) => (
       </div>
       )}
   </section>
-);
+)
 
-export default WeaknessAdvantage;
+export default WeaknessAdvantage
