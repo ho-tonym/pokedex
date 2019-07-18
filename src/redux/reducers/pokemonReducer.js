@@ -8,6 +8,7 @@ import {
   TOGGLE_SIDE_NAV,
   UPDATE_SEARCH_CSS,
   UPDATE_SEARCH_STRING,
+  NO_MORE_POKEMON,
 } from '../actions/types';
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   sideNav: false,
   searchFocused: false,
   searchString: "",
+  apiHasMore: true,
 };
 
 export default function (state = initialState, action) {
@@ -27,8 +29,8 @@ export default function (state = initialState, action) {
     case FETCH_POKEMON:
       return {
         ...state,
-        pokemon: action.payload,
-        filteredPokemon: action.payload,
+        pokemon: state.pokemon.concat(action.payload),
+        filteredPokemon: state.filteredPokemon.concat(action.payload),
       };
 
     case FETCH_ONE_POKEMON:
@@ -74,6 +76,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         searchString: action.payload,
+      };
+    case NO_MORE_POKEMON:
+      return {
+        ...state,
+        apiHasMore: action.payload,
       };
 
     default:

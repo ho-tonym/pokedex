@@ -1,5 +1,7 @@
 import React from 'react'
+import uuid from 'uuid'
 import EachPokemon from './eachpokemon'
+import Loader from '../general/loader'
 
 // Button Click -> dispatch request to PokeApi
 // for more information on one pokemon
@@ -11,7 +13,7 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
       <button id={`${eachPokemon.name}`}
         type="button"
         className="each-pokemon-button"
-        key={index}
+        key={uuid.v4()}
         onClick={handleActiveOnePokemon}
       >
         <h3 id="each-pokemon-button__index">
@@ -32,14 +34,8 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
     <>
       {allFetchedPokemon.length > 0
         ? <div id="pokemon-list">{allPokemon}</div>
-        : (
-          <div className="loader">
-            <span />
-            <span />
-            <span />
-          </div>
-        )
-      }
+        : <Loader />
+       }
     </>
   )
 }

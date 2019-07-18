@@ -33,7 +33,8 @@
       "react/jsx-first-prop-new-line": "off",
       "react/prop-types": "off",
       "quotes": "off",
-      "react/jsx-vlosing-tag-location": "warning"
+      "react/jsx-vlosing-tag-location": "warning",
+      "no-shadow": "off"
     },
     "parser": "babel-eslint"
 }

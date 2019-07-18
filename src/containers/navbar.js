@@ -10,15 +10,18 @@ import {
 } from '../redux/actions/pokemonActions'
 
 class NavBar extends Component {
+  // "no-shadow": "off" -> redux/import/destructure
   // call redux action to search through the state for pokemon that match the entered letters
   handleSearch = (event) => {
-    this.props.updateSearchState(event.currentTarget.value)
-    this.props.filterPokemon(event.currentTarget.value)
+    const { updateSearchState, filterPokemon } = this.props;
+    updateSearchState(event.currentTarget.value)
+    filterPokemon(event.currentTarget.value)
   }
 
-  handleBlur = (event) => {
-    this.props.updateSeachCSS(false)
-    this.props.updateSearchState("")
+  handleBlur = () => {
+    const { updateSeachCSS, updateSearchState } = this.props;
+    updateSeachCSS(false)
+    updateSearchState("")
   }
 
   handleFocus = () => {
@@ -26,16 +29,22 @@ class NavBar extends Component {
   }
 
   render() {
-    const { sideNav } = this.props
+    const { sideNav, searchFocused, searchString } = this.props // state
+    const { toggleSideNav, updateSeachCSS } = this.props // actions
+    const { handleBlur, handleFocus, handleSearch } = this
     return(
       <>
+        <div
+          className="side-nav-background"
+          id={sideNav ? "open-side-nav-back" : "close-side-nav-back"}
+        />
         <div className="navbar">
           <ul id="navbar__list">
             <button id="navbar__burger"
               className={sideNav ? "no-burger" : "yes-burger"}
               type="button"
               href="#"
-              onClick={this.props.toggleSideNav}
+              onClick={toggleSideNav}
             >
               <div>
                 <span />
@@ -48,17 +57,18 @@ class NavBar extends Component {
           </ul>
         </div>
         <Search
-          onChange={this.handleSearch}
-          handleFocus={this.handleFocus}
-          handleBlur={this.handleBlur}
-          searchFocused={this.props.searchFocused}
-          searchString={this.props.searchString}
+          onChange={handleSearch}
+          handleFocus={handleFocus}
+          handleBlur={handleBlur}
+          searchFocused={searchFocused}
+          searchString={searchString}
         />
 
-      <div className="load-bar"></div>
-
-        <div id={this.props.sideNav ? "open-side-nav" : "close-side-nav"} className="side-nav">
-          <button type="button" onClick={this.props.toggleSideNav}><Link to="/">X</Link></button>
+        {/* <div className="load-bar" />
+        // none and block
+      */}
+        <div id={sideNav ? "open-side-nav" : "close-side-nav"} className="side-nav">
+          <button type="button" onClick={toggleSideNav}><Link to="/">X</Link></button>
           <button type="button"><Link to="/">Home</Link></button>
           <button type="button"><Link to="/about">About</Link></button>
         </div>
