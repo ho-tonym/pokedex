@@ -56,7 +56,7 @@ class NavBar extends Component {
               </div>
             </button>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
+            <li><Link to="/faq">Faq</Link></li>
             <li><Link to="/mypokemon">My Pokemon</Link></li>
           </ul>
         </div>
@@ -70,7 +70,7 @@ class NavBar extends Component {
         <div className={`side-nav ${sideNav ? "open-side-nav" : "close-side-nav"}`}>
           <button type="button" onClick={toggleSideNav}>X</button>
           <button type="button"><Link to="/">Home</Link></button>
-          <button type="button"><Link to="/about">About</Link></button>
+          <button type="button"><Link to="/faq">Faq</Link></button>
           <button type="button"><Link to="/mypokemon">My Pokemon</Link></button>
         </div>
       </>

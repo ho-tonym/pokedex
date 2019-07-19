@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 // import Loader from '../components/general/loader'
 import { fetchPokemon, submitPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
 import PokemonList from '../components/home/_pokemonlist'
-import Pokemon from './Pokemon'
+import BotNav from './BotNav'
 
 class HomePage extends Component {
 
@@ -46,7 +46,7 @@ class HomePage extends Component {
             allFetchedPokemon={allFetchedPokemon}
             handleActiveOnePokemon={this.handleActiveOnePokemon}
           />
-        <Pokemon />
+        <BotNav />
       </div>
     )
   }

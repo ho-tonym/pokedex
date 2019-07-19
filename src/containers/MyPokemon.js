@@ -11,6 +11,7 @@ class MyPokemon extends Component {
       <div className="MyPokemon">
         <p>add pokemon</p>
         <p>unique id - restore saved items</p>
+        <p>display current pokemon</p>
       </div>
     )
   }

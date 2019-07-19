@@ -3,14 +3,14 @@ import React, { Component } from 'react'
 import uuid from 'uuid'
 
 import { fetchOnePokemon } from '../redux/actions/pokemonActions'
-import WeaknessAdvantage from '../components/pokemon/weaknessAdvantage'
-import RecommendedList from '../components/pokemon/recommendedList'
+import WeaknessAdvantage from '../components/botnav/weaknessAdvantage'
+import RecommendedList from '../components/botnav/recommendedList'
 
-import TypeImage from '../components/type/typeimage'
+import TypeImage from '../components/general/typeimage'
 import jsonTypes from '../json/types.json'
 import typeImagesImport from '../images/typeImages'
 
-class Pokemon extends Component {
+class BotNav extends Component {
   componentWillMount() {
     const { fetchOnePokemon, pokeData } = this.props
     if(this.isObjectEmpty(pokeData)) {
@@ -127,4 +127,4 @@ const mapDispatchToProps = {
   fetchOnePokemon,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pokemon)
+export default connect(mapStateToProps, mapDispatchToProps)(BotNav)

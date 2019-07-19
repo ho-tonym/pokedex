@@ -1,9 +1,9 @@
 import React from 'react'
 
-const About = () =>
-  <div className="about">
-    <h1>About</h1>
+const Faq = () =>
+  <div className="Faq">
+    <h1>Faq</h1>
     <p>Pokemon data populated from pokeapi.co.</p>
   </div>
 
-export default About
+export default Faq

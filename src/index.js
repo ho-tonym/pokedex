@@ -7,7 +7,7 @@ import './style/containers/HomePage.min.css';
 import './style/containers/navbar.min.css';
 import './style/containers/general.min.css';
 
-import './style/containers/Pokemon.min.css';
+import './style/containers/BotNav.min.css';
 import './style/components/loader.min.css';
 import './style/components/typeButton.min.css';
 
