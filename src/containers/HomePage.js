@@ -38,9 +38,10 @@ class HomePage extends Component {
   }
 
   render() {
-    const { searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon, apiHasMore, fetchPokemon } = this.props
+    const { searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon, apiHasMore, fetchPokemon, isFetching } = this.props
     return (
       <div className="HomePage">
+          <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
           <PokemonList searchedPokemonList={searchedPokemonList}
             allFetchedPokemon={allFetchedPokemon}
             handleActiveOnePokemon={this.handleActiveOnePokemon}
@@ -56,6 +57,7 @@ const mapStateToProps = (state) => ({
   allFetchedPokemon: state.pokemon.pokemon,
   searchedPokemonList: state.pokemon.filteredPokemon,
   apiHasMore: state.pokemon.apiHasMore,
+  isFetching: state.pokemon.isFetching,
 })
 
 const mapDispatchToProps = {

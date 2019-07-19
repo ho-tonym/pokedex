@@ -67,7 +67,6 @@ class NavBar extends Component {
           searchFocused={searchFocused}
           searchString={searchString}
         />
-        <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
         <div className={`side-nav ${sideNav ? "open-side-nav" : "close-side-nav"}`}>
           <button type="button" onClick={toggleSideNav}>X</button>
           <button type="button"><Link to="/">Home</Link></button>
