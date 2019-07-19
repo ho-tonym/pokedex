@@ -29,38 +29,49 @@
   // otherwise, bottom data will be clipped
   padding-bottom: 60px
   max-height: 300px
+  background-color: $white
+  border: 10px $light-gray
+  margin: 0px 10px 0px 0px
+  h2
+    // opacity: 0.6
 
 hr
   width: 90%
-  border-bottom: 1px solid rgb(214,214,214)
-
-#bot-nav__poke-data
-  text-transform: capitalize
-  img
-    max-width: 250px
-    min-width: 150px
-    width: 100%
-    height: auto
-  table
-    padding-top: 25px
+  border-bottom: 1px solid $l-gray
+  opacity: 0.2
+  // height: 1px
+  // border: 0
+  background-color: $light-gray
+  // box-shadow: 0px 1px 3px $box-shadow-color
 
 #bot-nav__weakness-advantage
   display: flex
   align-items: start
   justify-content: center
   margin-bottom: 20px
+  // background-color: $l-gray
+  h3
+    // color: #ff8281
+    opacity: 0.8
 
 #bot-nav__recommended-lists
   text-transform: capitalize
   background-color: inherit
 
-table
-  font-family: arial, sans-serif
-  border-collapse: collapse
-  width: 100%
-  color: $d-gray
-
-td, th
-  // border: 1px solid $box-shadow-color
-  text-align: center
-  padding: 8px
+// @media (max-width: 576px)
+//
+// @media (min-width: 576px)
+//
+// @media (min-width: 768px)
+//
+// @media (min-width: 992px)
+//
+// @media (min-width: 1200px)
+//   #navbar__list li:nth-child(2)
+//     display: inline-block
+//   #navbar__list li:nth-child(3)
+//     display: inline-block
+//   #navbar__burger div
+//     display: none
+//   #side-nav
+//     width: 0

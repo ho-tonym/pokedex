@@ -111,10 +111,10 @@
   height: 100%
   width: 100%
 
-#open-side-nav
+.open-side-nav
   width: 250px
 
-#open-side-nav-back
+.open-side-nav-back
   // animation: open-black-panel cubic-bezier(0.77, 0, 0.175, 1) 1s forwards
   display: block
   opacity: 0.5
@@ -122,10 +122,10 @@
 .no-burger
   display: none
 
-#closed-side-nav
+.closed-side-nav
   width: 0px
 
-#close-side-nav-back
+.close-side-nav-back
   // animation: close-black-panel cubic-bezier(0.77, 0, 0.175, 1) 1s forwards
   display: none
   opacity: 0
@@ -205,7 +205,7 @@
 .load-bar
   z-index: 125
   height: 2px
-  background-color: #e04b4b
+  background-color: $red
   position: fixed
   transform: translateY(70px)
   transition: $transition
@@ -245,8 +245,6 @@
   #navbar__list li:nth-child(3)
     display: none
 
-
-
 @media (min-width: 768px)
   #navbar__list li:nth-child(2)
     display: none
@@ -262,7 +260,6 @@
     display: none
   #side-nav
     width: 0
-
 
 @media (min-width: 1200px)
   #navbar__list li:nth-child(2)

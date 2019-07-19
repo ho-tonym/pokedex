@@ -40,10 +40,7 @@ class NavBar extends Component {
     const { handleBlur, handleFocus, handleSearch } = this
     return(
       <>
-        <div
-          className="side-nav-background"
-          id={sideNav ? "open-side-nav-back" : "close-side-nav-back"}
-        />
+        <div className={`side-nav-background ${sideNav ? "open-side-nav-back" : "close-side-nav-back"}`} />
         <div className="navbar">
           <ul id="navbar__list">
             <button id="navbar__burger"
@@ -60,6 +57,7 @@ class NavBar extends Component {
             </button>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About</Link></li>
+            <li><Link to="/mypokemon">My Pokemon</Link></li>
           </ul>
         </div>
         <Search
@@ -69,11 +67,12 @@ class NavBar extends Component {
           searchFocused={searchFocused}
           searchString={searchString}
         />
-      <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
-        <div id={sideNav ? "open-side-nav" : "close-side-nav"} className="side-nav">
+        <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
+        <div className={`side-nav ${sideNav ? "open-side-nav" : "close-side-nav"}`}>
           <button type="button" onClick={toggleSideNav}>X</button>
           <button type="button"><Link to="/">Home</Link></button>
           <button type="button"><Link to="/about">About</Link></button>
+          <button type="button"><Link to="/mypokemon">My Pokemon</Link></button>
         </div>
       </>
 

@@ -97,16 +97,15 @@ class Pokemon extends Component {
       const take0 = []
       this.calculateDefence(typesArray, take0, "take0")
 
-      const {} = this.props
+      const { pokeData } = this.props
       return (
         <div className="bot-nav-container" ref={(pokemonType) => {this.pokemonType = pokemonType }}>
           <button className="bot-nav" type="button" onClick={this.expandOnePokemon}>
             {typeImages}
           </button>
           <div className="bot-nav__scrollable scrollable">
-            <h1 className="capitalize">
-              {`${this.props.pokeData.name} Stats`}
-            </h1>
+            <h2 className="capitalize">{pokeData.name}</h2>
+            <hr />
             <WeaknessAdvantage take2={take2} take05={take05} take0={take0} />
             {this.props.myPokemon <= 0 ?
               null :

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
-import Loader from '../components/general/loader'
+// import Loader from '../components/general/loader'
 import { fetchPokemon, submitPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
 import PokemonList from '../components/home/_pokemonlist'
 import Pokemon from './Pokemon'
