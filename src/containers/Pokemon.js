@@ -6,7 +6,7 @@ import { fetchOnePokemon } from '../redux/actions/pokemonActions'
 import WeaknessAdvantage from '../components/pokemon/weaknessAdvantage'
 import RecommendedList from '../components/pokemon/recommendedList'
 
-import TypeImage from '../components/home/type/typeimage'
+import TypeImage from '../components/type/typeimage'
 import jsonTypes from '../json/types.json'
 import typeImagesImport from '../images/typeImages'
 
@@ -97,6 +97,7 @@ class Pokemon extends Component {
       const take0 = []
       this.calculateDefence(typesArray, take0, "take0")
 
+      const {} = this.props
       return (
         <div className="bot-nav-container" ref={(pokemonType) => {this.pokemonType = pokemonType }}>
           <button className="bot-nav" type="button" onClick={this.expandOnePokemon}>
@@ -107,7 +108,10 @@ class Pokemon extends Component {
               {`${this.props.pokeData.name} Stats`}
             </h1>
             <WeaknessAdvantage take2={take2} take05={take05} take0={take0} />
-            <RecommendedList />
+            {this.props.myPokemon <= 0 ?
+              null :
+              <RecommendedList />
+            }
           </div>
         </div>
       )
@@ -115,7 +119,10 @@ class Pokemon extends Component {
 }
 
 const mapStateToProps = (state) => (
-  { pokeData: state.pokemon.fetchOnePokemon }
+  {
+    pokeData: state.pokemon.fetchOnePokemon,
+    myPokemon: state.pokemon.myPokemon,
+  }
 )
 const mapDispatchToProps = {
   fetchOnePokemon,

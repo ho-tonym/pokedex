@@ -9,6 +9,7 @@ import {
   UPDATE_SEARCH_CSS,
   UPDATE_SEARCH_STRING,
   NO_MORE_POKEMON,
+  FETCHING,
 } from '../actions/types';
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   searchFocused: false,
   searchString: "",
   apiHasMore: true,
+  isFetching: false,
 };
 
 export default function (state = initialState, action) {
@@ -37,6 +39,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         fetchOnePokemon: action.payload,
+        isFetching: false,
       };
 
     case FILTER_POKEMON:
@@ -82,7 +85,11 @@ export default function (state = initialState, action) {
         ...state,
         apiHasMore: action.payload,
       };
-
+    case FETCHING:
+      return {
+        ...state,
+        isFetching: action.payload,
+      };
     default:
       return state;
   }

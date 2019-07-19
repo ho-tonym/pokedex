@@ -38,14 +38,9 @@ class HomePage extends Component {
   }
 
   render() {
-    const Icon = ({ className = 'icon-large', onClick }) => (
-      <span className={`icon-hover ${className}`} onClick={onClick} />
-    );
-
     const { searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon, apiHasMore, fetchPokemon } = this.props
     return (
       <div className="HomePage">
-        <Icon />
           <PokemonList searchedPokemonList={searchedPokemonList}
             allFetchedPokemon={allFetchedPokemon}
             handleActiveOnePokemon={this.handleActiveOnePokemon}

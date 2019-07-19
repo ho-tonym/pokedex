@@ -25,12 +25,18 @@ class NavBar extends Component {
   }
 
   handleFocus = () => {
-    this.props.updateSeachCSS(true)
+    const { updateSeachCSS } = this.props
+    updateSeachCSS(true)
   }
 
   render() {
-    const { sideNav, searchFocused, searchString } = this.props // state
-    const { toggleSideNav, updateSeachCSS } = this.props // actions
+    const {
+      sideNav,
+      searchFocused,
+      searchString,
+      isFetching,
+    } = this.props // state
+    const { toggleSideNav } = this.props // actions
     const { handleBlur, handleFocus, handleSearch } = this
     return(
       <>
@@ -63,12 +69,9 @@ class NavBar extends Component {
           searchFocused={searchFocused}
           searchString={searchString}
         />
-
-        {/* <div className="load-bar" />
-        // none and block
-      */}
+      <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
         <div id={sideNav ? "open-side-nav" : "close-side-nav"} className="side-nav">
-          <button type="button" onClick={toggleSideNav}><Link to="/">X</Link></button>
+          <button type="button" onClick={toggleSideNav}>X</button>
           <button type="button"><Link to="/">Home</Link></button>
           <button type="button"><Link to="/about">About</Link></button>
         </div>
@@ -78,11 +81,15 @@ class NavBar extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  sideNav: state.pokemon.sideNav,
-  searchFocused: state.pokemon.searchFocused,
-  searchString: state.pokemon.searchString,
-})
+const mapStateToProps = (state) => {
+  const { sideNav, searchFocused, searchString, isFetching } = state.pokemon
+  return{
+    sideNav,
+    searchFocused,
+    searchString,
+    isFetching,
+  }
+}
 
 const mapDispatchToProps = {
   filterPokemon,

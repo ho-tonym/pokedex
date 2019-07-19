@@ -47,7 +47,7 @@
 
 
 .navbar
-  // position: fixed
+  position: fixed
   top: 0
   background-color: $white
   z-index: 100
@@ -203,9 +203,34 @@
   width: 70px
 
 .load-bar
-  width: 100%
+  z-index: 125
   height: 2px
   background-color: #e04b4b
+  position: fixed
+  transform: translateY(70px)
+  transition: $transition
+  // width: 100%
+
+.w-100
+  animation: load-anim-end 0.5s forwards
+
+.w-35
+  animation: load-anim-start 0.5s forwards
+
+@keyframes load-anim-start
+  0%
+    width: 0%
+  100%
+    width: 35%
+
+@keyframes load-anim-end
+  0%
+    width: 35%
+  95%
+    width: 100%
+  100%
+    width: 0%
+
 
 @media (max-width: 576px)
   #navbar__list li:nth-child(2)
