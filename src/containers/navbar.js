@@ -56,8 +56,8 @@ class NavBar extends Component {
               </div>
             </button>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/faq">Faq</Link></li>
             <li><Link to="/mypokemon">My Pokemon</Link></li>
+            <li><Link to="/faq">Faq</Link></li>
           </ul>
         </div>
         <Search
@@ -68,10 +68,10 @@ class NavBar extends Component {
           searchString={searchString}
         />
         <div className={`side-nav ${sideNav ? "open-side-nav" : "close-side-nav"}`}>
-          <button type="button" onClick={toggleSideNav}>X</button>
+          <button id="side-nav__close" type="button" onClick={toggleSideNav}>X</button>
           <button type="button"><Link to="/">Home</Link></button>
-          <button type="button"><Link to="/faq">Faq</Link></button>
           <button type="button"><Link to="/mypokemon">My Pokemon</Link></button>
+          <button type="button"><Link to="/faq">Faq</Link></button>
         </div>
       </>
 

@@ -13,7 +13,7 @@ import {
 } from './types'
 
 // retrieve saved pokemon from SQL database
-export const fetchMyPokemon = () => (dispatch) => fetch('http://localhost:3001/pokemon')
+export const fetchMyPokemon = () => dispatch => fetch('http://localhost:3001/pokemon')
   .then(response => response.json())
   .then(data => dispatch({
     type: FETCH_MY_POKEMON,
@@ -21,7 +21,7 @@ export const fetchMyPokemon = () => (dispatch) => fetch('http://localhost:3001/p
   }))
 
 // save selected pokemon to SQL databse
-export const submitPokemon = (pokemonid) => (dispatch) => {
+export const submitPokemon = pokemonid => dispatch => {
   const pokemonName = pokemonid.replace(/[0-9]/g, '')
   const pokemonId = pokemonid.replace(/\D/g, '');
   return fetch('http://localhost:3001/pokemon', {
@@ -65,7 +65,7 @@ export const fetchPokemon = (fetchedPokemon = 0, number = 20) => dispatch => {
     }))
 }
 
-export const fetchOnePokemon = (pokemon) => dispatch => {
+export const fetchOnePokemon = pokemon => dispatch => {
   dispatch({ type: FETCHING, payload: true });
   fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
     .then(response => response.json())
@@ -82,14 +82,14 @@ export const toggleSideNav = () => (dispatch, getState) => {
   });
 }
 
-export const updateSeachCSS = (bool) => (dispatch) => {
+export const updateSeachCSS = bool => dispatch => {
   dispatch({
     type: UPDATE_SEARCH_CSS,
     payload: bool,
   });
 }
 
-export const updateSearchState = (searchString = '') => (dispatch) => {
+export const updateSearchState = (searchString = '') => dispatch => {
   dispatch({
     type: UPDATE_SEARCH_STRING,
     payload: searchString,
