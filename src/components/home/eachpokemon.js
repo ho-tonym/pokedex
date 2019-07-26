@@ -1,8 +1,10 @@
+
+
 import React from 'react'
 
-const EachPokemon = ({ eachPokemon, children }) => (
+const EachPokemon = ({ name, children }) => (
   <>
-    <img src={children} alt={eachPokemon.name} />
+    <img src={children} alt={name} />
   </>
 )
 

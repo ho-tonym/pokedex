@@ -4,16 +4,17 @@ import {
   SUBMIT_POKEMON,
   FETCH_MY_POKEMON,
   FETCH_ONE_POKEMON,
-  CREATE_TYPES,
+  // CREATE_TYPES,
   TOGGLE_SIDE_NAV,
   UPDATE_SEARCH_CSS,
   UPDATE_SEARCH_STRING,
   NO_MORE_POKEMON,
   FETCHING,
+  UPDATE_MYPOKE_INPUTS,
 } from './types'
 
 // retrieve saved pokemon from SQL database
-export const fetchMyPokemon = () => dispatch => fetch('http://localhost:3001/pokemon')
+export const fetchMyPokemon = () => dispatch => fetch('http://localhost:5000/api/mypokemon/')
   .then(response => response.json())
   .then(data => dispatch({
     type: FETCH_MY_POKEMON,
@@ -93,5 +94,15 @@ export const updateSearchState = (searchString = '') => dispatch => {
   dispatch({
     type: UPDATE_SEARCH_STRING,
     payload: searchString,
+  })
+}
+
+export const updateMyPokeInputs = (field, value) => dispatch => {
+  dispatch({
+    type: UPDATE_MYPOKE_INPUTS,
+    payload: {
+      field,
+      value,
+    },
   })
 }

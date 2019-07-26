@@ -20,7 +20,7 @@ const PokemonList = ({ searchedPokemonList, allFetchedPokemon, handleActiveOnePo
           {`#${index}`}
         </h3>
         <EachPokemon
-          eachPokemon={eachPokemon}
+          eachPokemon={eachPokemon.name}
           index={index}
         >
           {`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index}.png`}

@@ -10,13 +10,21 @@ import {
   UPDATE_SEARCH_STRING,
   NO_MORE_POKEMON,
   FETCHING,
+  UPDATE_MYPOKE_INPUTS,
 } from '../actions/types';
 
 const initialState = {
   pokemon: [],
   filteredPokemon: [],
-  currentSubmittedPokemon: "",
-  myPokemon: [],
+  myPokemon: [{
+    name: "charizard",
+    cp: 1245,
+  },
+  {
+    name: "pikachu",
+    cp: 2432,
+  },
+  ],
   fetchOnePokemon: {},
   types: {},
   sideNav: false,
@@ -24,6 +32,7 @@ const initialState = {
   searchString: "",
   apiHasMore: true,
   isFetching: false,
+  myPokeInputs: { name: "", cp: "" },
 };
 
 export default function (state = initialState, action) {
@@ -89,6 +98,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isFetching: action.payload,
+      };
+    case UPDATE_MYPOKE_INPUTS:
+    const newFields = {...state.myPokeInputs};
+    newFields[action.payload.field] = action.payload.value;
+      return {
+        ...state,
+        myPokeInputs: newFields,
       };
     default:
       return state;
