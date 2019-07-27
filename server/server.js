@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
 
+app.use(cors());
 // body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

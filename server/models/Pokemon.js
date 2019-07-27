@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const PokemonSchema = new Schema({
-  name: {
+  myPokemon: {
+    type: Array,
+    required: true,
+  },
+  key: {
     type: String,
-    required: true,
-  },
-  cp: {
-    type: Number,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const Pokemon = mongoose.model('pokemon', PokemonSchema);
