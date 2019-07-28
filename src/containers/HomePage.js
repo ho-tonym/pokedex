@@ -2,8 +2,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import _ from 'lodash'
 // import PropTypes from 'prop-types'
-// import Loader from '../components/general/loader'
-// import Loader from '../components/general/loader'
+import Loader from '../components/general/loader'
 import { fetchPokemon, submitPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
 import PokemonList from '../components/home/_pokemonlist'
 import BotNav from './BotNav'
@@ -13,6 +12,7 @@ class HomePage extends Component {
     window.addEventListener('scroll', this.handleScroll);
     const { pokemon, fetchPokemon } = this.props
     if(!pokemon[0]) {
+      // !pokemon[0]
       fetchPokemon()
     }
   }
@@ -30,12 +30,7 @@ class HomePage extends Component {
     fetchOnePokemon(event.currentTarget.id)
   }
 
-  handleGetAllPokemon = () => {
-    debugger
-    const { fetchPokemon, pokemon } = this.props
-    fetchPokemon(pokemon.length, true)
-  }
-  // {isFetching && <Loader />}
+        // {isFetching && <Loader />}
   render() {
     const {
       filteredPokemon,
@@ -51,6 +46,7 @@ class HomePage extends Component {
           pokemon={pokemon}
           handleActiveOnePokemon={this.handleActiveOnePokemon}
         />
+        {filteredPokemon.length <= 0 ? "load the rest" : null}
         <BotNav handleGetAllPokemon={this.handleGetAllPokemon} />
       </div>
 
