@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Search from '../components/home/search'
+import SideNav from '../components/navbar/sidenav'
+import NavBarComponent from '../components/navbar/navbarcomponent'
 import {
   filterPokemon,
   toggleSideNav,
@@ -34,32 +35,19 @@ class NavBar extends Component {
       sideNav,
       searchFocused,
       searchString,
-      isFetching,
     } = this.props // state
     const { toggleSideNav } = this.props // actions
     const { handleBlur, handleFocus, handleSearch } = this
     return(
       <>
-        <div className={`side-nav-background ${sideNav ? "open-side-nav-back" : "close-side-nav-back"}`} />
-        <div className="navbar">
-          <ul id="navbar__list">
-            <button id="navbar__burger"
-              className={sideNav ? "no-burger" : "yes-burger"}
-              type="button"
-              href="#"
-              onClick={toggleSideNav}
-            >
-              <div>
-                <span />
-                <span />
-                <span />
-              </div>
-            </button>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/mypokemon">My Pokemon</Link></li>
-            <li><Link to="/faq">Faq</Link></li>
-          </ul>
-        </div>
+        <SideNav
+          sideNav={sideNav}
+          toggleSideNav={toggleSideNav}
+        />
+        <NavBarComponent
+          sideNav={sideNav}
+          toggleSideNav={toggleSideNav}
+        />
         <Search
           onChange={handleSearch}
           handleFocus={handleFocus}
@@ -67,12 +55,6 @@ class NavBar extends Component {
           searchFocused={searchFocused}
           searchString={searchString}
         />
-        <div className={`side-nav ${sideNav ? "open-side-nav" : "close-side-nav"}`}>
-          <button id="side-nav__close" type="button" onClick={toggleSideNav}>X</button>
-          <button type="button"><Link to="/">Home</Link></button>
-          <button type="button"><Link to="/mypokemon">My Pokemon</Link></button>
-          <button type="button"><Link to="/faq">Faq</Link></button>
-        </div>
       </>
 
     )
@@ -80,12 +62,11 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { sideNav, searchFocused, searchString, isFetching } = state.pokemon
+  const { sideNav, searchFocused, searchString } = state.pokemon
   return{
     sideNav,
     searchFocused,
     searchString,
-    isFetching,
   }
 }
 

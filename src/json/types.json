@@ -3,6 +3,9 @@
     "take2": ["fighting"],
     "take05": [],
     "take0": ["ghost"],
+    "deal2": [],
+    "deal05": [],
+    "deal0": [],
     "color": "#9ca071"
   },
   "fighting":{

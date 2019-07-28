@@ -5,13 +5,12 @@ const TypeImage = ({ type, color, img }) => {
     borderColor: color,
   }
   return(
-    <React.Fragment>
-
+    <>
       <div className="typeButton" style={buttonStyle}>
         <img src={img} alt={`${type} type`} />
         <p>{type}</p>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

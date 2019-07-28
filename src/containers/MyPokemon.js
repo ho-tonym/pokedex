@@ -1,76 +1,123 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import uuid from 'uuid'
-import { fetchMyPokemon, submitPokemon, updateMyPokeInputs } from '../redux/actions/pokemonActions'
+import { submitPokemon, updateMyPokeInputs, sendToBackend, getFromBackend, updateSelectedOption } from '../redux/actions/pokemonActions'
 // import EachPokemon from '../components/home/eachpokemon'
-
+import EachMyPokemon from '../components/mypokemon/eachmypokemon'
 
 class MyPokemon extends Component {
-  componentWillMount() {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { submitPokemon, selectedOption } = this.props
 
-  }
-
-  handleSubmit = () => {
-    // Object.keys(stateProps.fields).map((field) => {
-    //   console.log(`${field}: ${stateProps.fields[field]}`);
+    if (selectedOption === "add-pokemon") {
+      submitPokemon();
+    } else if (selectedOption === "save-pokemon") {
+      this.handleCreateURL();
+    } else if (selectedOption === "get-pokemon") {
+      this.handleGetFromBackend(event);
+    }
   }
 
   handleChange = (event) => {
-    this.props.updateMyPokeInputs(event.currentTarget.id, event.currentTarget.value);
+    const { updateMyPokeInputs } = this.props
+    updateMyPokeInputs(event.currentTarget.id, event.currentTarget.value);
+  }
+
+  handleCreateURL = () => {
+    const { sendToBackend } = this.props
+    const key = uuid.v4()
+    sendToBackend(key)
+  }
+
+  handleGetFromBackend = (event) => {
+    const { getFromBackend } = this.props
+    event.preventDefault()
+    getFromBackend()
+  }
+
+  handleOptionChange = (event) => {
+    const { updateSelectedOption } = this.props
+    updateSelectedOption(event.target.id)
   }
 
   render() {
-    const { myPokemon, myPokeInputs } = this.props
-    const myPokemonList = myPokemon.map((eachPokemon) => {
-      return(
-        <div key={uuid.v4()}>
-          <h3>{eachPokemon.name}</h3>
-          <p>{eachPokemon.cp}</p>
-        </div>
-      )
-    })
+    const { myPokemon, myPokeInputs, id, selectedOption } = this.props
+    const myPokemonList = myPokemon.map(eachPokemon => (
+      <EachMyPokemon
+        key={uuid.v4()}
+        eachPokemon={eachPokemon.name}
+        cp={eachPokemon.cp}
+        classname="each-pokemon-button-disable"
+      />
+    ))
     return (
       <div className="MyPokemon">
-        <p>add pokemon</p>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">
-            Pokemon:
-            <input id="name"
-              onChange={this.handleChange}
-              value={myPokeInputs.name}
-              type="text"
+        <div className="flex-wrap">
+          <form onSubmit={this.handleSubmit}>
+            <input className="radio"
+              type="radio"
+              name="rg"
+              id="add-pokemon"
+              checked={selectedOption === 'add-pokemon'}
+              onChange={this.handleOptionChange}
+            />
+            <input className="radio"
+              type="radio"
+              name="rg"
+              id="save-pokemon"
+              checked={selectedOption === 'save-pokemon'}
+              onChange={this.handleOptionChange}
+            />
+            <input className="radio"
+              type="radio"
+              name="rg"
+              id="get-pokemon"
+              checked={selectedOption === 'get-pokemon'}
+              onChange={this.handleOptionChange}
             />
 
-          </label>
-          <label htmlFor="cp">
-            CP:
-            <input id="cp"
-              onChange={this.handleChange}
-              value={myPokeInputs.cp}
-              type="text"
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        <hr />
+            <label htmlFor="add-pokemon">Add</label>
+            <label htmlFor="save-pokemon">Save</label>
+            <label htmlFor="get-pokemon">Get</label>
 
-        <p>unique id - restore saved items</p>
-        <hr />
-        <h1>My Pokemon</h1>
-        {myPokemonList}
+            <input id="name" className="input add-pokemon" placeholder="Name" value={myPokeInputs.name} onChange={this.handleChange} />
+            <input id="cp" className="input add-pokemon" placeholder="CP" value={myPokeInputs.cp} onChange={this.handleChange} />
+            <p className="input save-pokemon">
+              {id === "" ? "Save your pokemon to the database for future use!"
+                : 'Use this code in "Get" section to retrieve your pokemon'
+              }
+            </p>
+            <input id="id" className="input get-pokemon" type="text" placeholder="ID" value={myPokeInputs.id} onChange={this.handleChange} />
+
+            {selectedOption === 'save-pokemon' ? <p className="font-13-blue">{id}</p> : null}
+            <button className="backend-button orange-button" type="submit" />
+          </form>
+        </div>
+
+        <div className="my-pokemon-list pad-top-20">
+          <h3>My Pokemon</h3>
+          {myPokemonList}
+        </div>
       </div>
+
     )
   }
 }
 const mapStateToProps = (state) => ({
   myPokemon: state.pokemon.myPokemon || "",
   myPokeInputs: state.pokemon.myPokeInputs || "",
+  id: state.pokemon.id || "",
+  selectedOption: state.pokemon.selectedOption,
 })
 
 const mapDispatchToProps = {
-  fetchMyPokemon,
+  // fetchMyPokemon,
   submitPokemon,
   updateMyPokeInputs,
+  sendToBackend,
+  getFromBackend,
+  updateSelectedOption,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPokemon)

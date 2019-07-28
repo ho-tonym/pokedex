@@ -7,54 +7,58 @@ import PokemonList from '../components/home/_pokemonlist'
 import BotNav from './BotNav'
 
 class HomePage extends Component {
-
   componentWillMount() {
     window.addEventListener('scroll', this.handleScroll);
-    const { allFetchedPokemon, fetchPokemon } = this.props
-    if(this.isObjectEmpty(allFetchedPokemon)) {
+    const { pokemon, fetchPokemon } = this.props
+    if(!pokemon[0]) {
       fetchPokemon()
     }
   }
 
   handleScroll = () => {
-     if (
-       window.innerHeight + document.documentElement.scrollTop
-       === document.documentElement.offsetHeight
-     ) {
-       this.props.fetchPokemon(this.props.allFetchedPokemon.length)
-     }
- }
-
-  isObjectEmpty = (Obj) => {
-    for(let key in Obj) {
-      if(Obj.hasOwnProperty(key))
-        return false
+    const { fetchPokemon, pokemon } = this.props
+    if (window.innerHeight + document.documentElement.scrollTop
+        === document.documentElement.offsetHeight) {
+      fetchPokemon(pokemon.length)
     }
-    return true
   }
 
   handleActiveOnePokemon = (event) => {
-    this.props.fetchOnePokemon(event.currentTarget.id)
+    const { fetchOnePokemon } = this.props
+    fetchOnePokemon(event.currentTarget.id)
+  }
+
+  handleGetAllPokemon = () => {
+    const { fetchPokemon, pokemon } = this.props
+    fetchPokemon(pokemon.length, true)
   }
 
   render() {
-    const { searchedPokemonList, allFetchedPokemon, handleActiveOnePokemon, apiHasMore, fetchPokemon, isFetching } = this.props
+    const {
+      searchedPokemonList,
+      pokemon,
+      // handleActiveOnePokemon,
+      // apiHasMore,
+      // fetchPokemon,
+      isFetching,
+    } = this.props
     return (
       <div className="HomePage">
-          <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
-          <PokemonList searchedPokemonList={searchedPokemonList}
-            allFetchedPokemon={allFetchedPokemon}
-            handleActiveOnePokemon={this.handleActiveOnePokemon}
-          />
-        <BotNav />
+        <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
+        <PokemonList searchedPokemonList={searchedPokemonList}
+          pokemon={pokemon}
+          handleActiveOnePokemon={this.handleActiveOnePokemon}
+        />
+        <BotNav handleGetAllPokemon={this.handleGetAllPokemon} />
       </div>
+
     )
   }
 }
 
 const mapStateToProps = (state) => ({
   pokeData: state.pokemon.fetchOnePokemon,
-  allFetchedPokemon: state.pokemon.pokemon,
+  pokemon: state.pokemon.pokemon,
   searchedPokemonList: state.pokemon.filteredPokemon,
   apiHasMore: state.pokemon.apiHasMore,
   isFetching: state.pokemon.isFetching,

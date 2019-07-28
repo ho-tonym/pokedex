@@ -35,7 +35,8 @@
       "quotes": "off",
       "react/jsx-vlosing-tag-location": "warning",
       "no-shadow": "off",
-      "object-curly-newline" : "warn"
+      "object-curly-newline" : "off",
+      "lines-between-class-members" : "off"
     },
     "parser": "babel-eslint"
 }

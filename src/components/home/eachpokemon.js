@@ -1,5 +1,3 @@
-
-
 import React from 'react'
 
 const EachPokemon = ({ name, children }) => (

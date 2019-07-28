@@ -1,8 +1,7 @@
 import {
   FILTER_POKEMON,
   FETCH_POKEMON,
-  SUBMIT_POKEMON,
-  FETCH_MY_POKEMON,
+  UPDATE_MY_POKEMON,
   FETCH_ONE_POKEMON,
   // CREATE_TYPES,
   TOGGLE_SIDE_NAV,
@@ -11,33 +10,63 @@ import {
   NO_MORE_POKEMON,
   FETCHING,
   UPDATE_MYPOKE_INPUTS,
+  UPDATE_SELECTED_OPTION,
+  SEND_TO_BACKEND,
 } from './types'
 
 // retrieve saved pokemon from SQL database
-export const fetchMyPokemon = () => dispatch => fetch('http://localhost:5000/api/mypokemon/')
-  .then(response => response.json())
-  .then(data => dispatch({
-    type: FETCH_MY_POKEMON,
-    payload: data,
-  }))
+// export const fetchMyPokemon = () => dispatch => fetch('http://localhost:5000/api/mypokemon/')
+//   .then(response => response.json())
+//   .then(data => dispatch({
+//     type: FETCH_MY_POKEMON,
+//     payload: data,
+//   }))
 
 // save selected pokemon to SQL databse
-export const submitPokemon = pokemonid => dispatch => {
-  const pokemonName = pokemonid.replace(/[0-9]/g, '')
-  const pokemonId = pokemonid.replace(/\D/g, '');
-  return fetch('http://localhost:3001/pokemon', {
-    method: 'post',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pokemonId, pokemonName }),
+export const submitPokemon = () => (dispatch, getState) => {
+  const newCP = parseInt(getState().pokemon.myPokeInputs.cp, 10)
+  const newPokemon = {
+    name: getState().pokemon.myPokeInputs.name,
+    cp: newCP,
+  }
+
+  dispatch({
+    type: UPDATE_MY_POKEMON,
+    payload: getState().pokemon.myPokemon.concat(newPokemon),
   })
-    .then(response => response.json())
-    .then(data => {
-      dispatch({
-        type: SUBMIT_POKEMON,
-        payload: data,
-      })
-    })
 }
+
+export const sendToBackend = (key) => (dispatch, getState) => fetch('http://localhost:5000/api/mypokemon/', {
+  method: 'post',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    myPokemon: getState().pokemon.myPokemon,
+    key,
+  }),
+})
+  .then(response => response.json())
+  .then(() => {
+    dispatch({ type: SEND_TO_BACKEND, payload: key })
+  })
+
+export const getFromBackend = () => async (dispatch, getState) => {
+  const response = await fetch(`http://localhost:5000/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
+  const json = await response.json()
+  dispatch({
+    type: UPDATE_MY_POKEMON,
+    payload: json.myPokemon,
+  })
+}
+//
+// export const getFromBackend = () => (dispatch, getState) => fetch(`http://localhost:5000/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
+//   .then(data => data.json())
+//   .then(data => {
+//     dispatch({
+//       type: UPDATE_MY_POKEMON,
+//       payload: data.myPokemon,
+//     })
+//   })
+
 
 // search bar - searches through state for pokemon that match the name
 export const filterPokemon = (searchString = '') => (dispatch, getState) => {
@@ -50,20 +79,24 @@ export const filterPokemon = (searchString = '') => (dispatch, getState) => {
   })
 }
 
-// 949
-// 892
+// 857- magic number - before the pokemon from PokeAPI don't have pictures
 // collect 20 pokemon from the REST API pokeapi
-export const fetchPokemon = (fetchedPokemon = 0, number = 20) => dispatch => {
-  if(fetchedPokemon >= 892) {
-    dispatch({ type: NO_MORE_POKEMON, payload: false })
+export const fetchPokemon = (numfetchedPokemon = 0, fetchAll = false) => (dispatch) => {
+  if(numfetchedPokemon >= 897) { return (dispatch({ type: NO_MORE_POKEMON, payload: false })) }
+
+  let amtToFetch = 20
+  if (fetchAll) {
+    amtToFetch = 897 - numfetchedPokemon
+    dispatch({ type: FETCHING, payload: true });
   }
 
-  fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${number}/&offset=${fetchedPokemon}`)
-    .then(response => response.json())
-    .then(data => dispatch({
-      type: FETCH_POKEMON,
-      payload: data.results,
-    }))
+  return(
+    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${amtToFetch}/&offset=${numfetchedPokemon}`)
+      .then(response => response.json())
+      .then(data => dispatch({
+        type: FETCH_POKEMON,
+        payload: data.results,
+      })))
 }
 
 export const fetchOnePokemon = pokemon => dispatch => {
@@ -104,5 +137,12 @@ export const updateMyPokeInputs = (field, value) => dispatch => {
       field,
       value,
     },
+  })
+}
+
+export const updateSelectedOption = (option) => dispatch => {
+  dispatch({
+    type: UPDATE_SELECTED_OPTION,
+    payload: option,
   })
 }

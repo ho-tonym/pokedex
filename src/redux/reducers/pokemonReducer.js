@@ -1,38 +1,42 @@
 import {
   FILTER_POKEMON,
   FETCH_POKEMON,
-  SUBMIT_POKEMON,
-  FETCH_MY_POKEMON,
+  UPDATE_MY_POKEMON,
   FETCH_ONE_POKEMON,
-  CREATE_TYPES,
   TOGGLE_SIDE_NAV,
   UPDATE_SEARCH_CSS,
   UPDATE_SEARCH_STRING,
   NO_MORE_POKEMON,
   FETCHING,
   UPDATE_MYPOKE_INPUTS,
+  UPDATE_SELECTED_OPTION,
+  SEND_TO_BACKEND,
 } from '../actions/types';
 
 const initialState = {
   pokemon: [],
   filteredPokemon: [],
-  myPokemon: [{
-    name: "charizard",
-    cp: 1245,
-  },
-  {
-    name: "pikachu",
-    cp: 2432,
-  },
-  ],
-  fetchOnePokemon: {},
-  types: {},
+  myPokemon: [],
+  onePokemonData: {},
+
   sideNav: false,
+
   searchFocused: false,
   searchString: "",
+
   apiHasMore: true,
   isFetching: false,
-  myPokeInputs: { name: "", cp: "" },
+
+  myPokeInputs: { name: "", cp: "", id: "" },
+  id: "",
+  selectedOption: "add-pokemon",
+
+  typeImages: [],
+  take4: [],
+  take2: [],
+  take05: [],
+  take025: [],
+  take0: [],
 };
 
 export default function (state = initialState, action) {
@@ -42,12 +46,13 @@ export default function (state = initialState, action) {
         ...state,
         pokemon: state.pokemon.concat(action.payload),
         filteredPokemon: state.filteredPokemon.concat(action.payload),
+        isFetching: false,
       };
 
     case FETCH_ONE_POKEMON:
       return {
         ...state,
-        fetchOnePokemon: action.payload,
+        onePokemonData: action.payload,
         isFetching: false,
       };
 
@@ -57,23 +62,11 @@ export default function (state = initialState, action) {
         filteredPokemon: action.payload,
       };
 
-    case SUBMIT_POKEMON:
-      return{
-        ...state,
-      };
-
-    case FETCH_MY_POKEMON:
+    case UPDATE_MY_POKEMON:
       return {
         ...state,
         myPokemon: action.payload,
       };
-
-    case CREATE_TYPES:
-      return {
-        ...state,
-        types: action.payload,
-      };
-
     case TOGGLE_SIDE_NAV:
       return {
         ...state,
@@ -100,11 +93,21 @@ export default function (state = initialState, action) {
         isFetching: action.payload,
       };
     case UPDATE_MYPOKE_INPUTS:
-    const newFields = {...state.myPokeInputs};
-    newFields[action.payload.field] = action.payload.value;
+      const newFields = { ...state.myPokeInputs }
+      newFields[action.payload.field] = action.payload.value;
       return {
         ...state,
         myPokeInputs: newFields,
+      };
+    case SEND_TO_BACKEND:
+      return {
+        ...state,
+        id: action.payload,
+      };
+    case UPDATE_SELECTED_OPTION:
+      return {
+        ...state,
+        selectedOption: action.payload,
       };
     default:
       return state;

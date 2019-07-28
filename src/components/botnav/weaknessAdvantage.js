@@ -1,7 +1,20 @@
 import React from 'react'
 
-const WeaknessAdvantage = ({ take2, take05, take0 }) => (
+const WeaknessAdvantage = ({
+  take4,
+  take2,
+  take05,
+  take025,
+  take0,
+}) => (
   <section id="bot-nav__weakness-advantage">
+    {take4.length > 0
+      && (
+      <div className="types" id="take4">
+        <h3>Take 4x:</h3>
+        {take4}
+      </div>
+      )}
     {take2.length > 0
       && (
       <div className="types" id="take2">
@@ -14,6 +27,13 @@ const WeaknessAdvantage = ({ take2, take05, take0 }) => (
       <div className="types" id="take05">
         <h3>Take 0.5x:</h3>
         {take05}
+      </div>
+      )}
+    {take025.length > 0
+      && (
+      <div className="types" id="take025">
+        <h3>Take 0.25x:</h3>
+        {take025}
       </div>
       )}
     {take0.length > 0
