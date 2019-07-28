@@ -1,6 +1,6 @@
 @import "./variables/utilities"
 
-.backend-button
+.rounded-button
   cursor: pointer
   outline: 0
   text-transform: uppercase
@@ -26,24 +26,28 @@
     -webkit-transform: translate(0px, 5px)
     box-shadow: 0px 1px 0px 0px
 
-.orange-button
+.blue-button
     background-color: #55acee
     box-shadow: 0px 5px 0px 0px #3C93D5
     &:hover
       background-color: #6FC6FF
 
+.larger-button
+  width: 250px
+  height: 50px
+
 [id=add-pokemon]:checked
-	& ~ .orange-button
+	& ~ .blue-button
 		&:before
 			content: "Add Pokemon"
 
 [id=save-pokemon]:checked
-	& ~ .orange-button
+	& ~ .blue-button
   	&:before
   		content: "Save Pokemon"
 
 [id=get-pokemon]:checked
-	& ~ .orange-button
+	& ~ .blue-button
 		&:before
 			content: "Get Pokemon"
       display: inline-block

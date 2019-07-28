@@ -24,9 +24,13 @@ class NavBar extends Component {
   }
 
   handleBlur = () => {
-    const { updateSeachCSS, updateSearchState } = this.props;
+    const { updateSeachCSS, updateSearchState, filterPokemon } = this.props;
+    const { filteredPokemon } = this.props
     updateSeachCSS(false)
     updateSearchState("")
+    if (filteredPokemon.length <= 0) {
+      filterPokemon("")
+    }
   }
 
   handleFocus = () => {

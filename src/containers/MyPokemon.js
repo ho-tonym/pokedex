@@ -92,7 +92,7 @@ class MyPokemon extends Component {
             <input id="id" className="input get-pokemon" type="text" placeholder="ID" value={myPokeInputs.id} onChange={this.handleChange} />
 
             {selectedOption === 'save-pokemon' ? <p className="font-13-blue">{id}</p> : null}
-            <button className="backend-button orange-button" type="submit" />
+            <button className="rounded-button blue-button" type="submit" />
           </form>
         </div>
 

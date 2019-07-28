@@ -42,6 +42,7 @@ class HomePage extends Component {
       // handleActiveOnePokemon,
       // apiHasMore,
       // fetchPokemon,
+      apiHasMore,
       isFetching,
     } = this.props
     return (
@@ -50,9 +51,9 @@ class HomePage extends Component {
           pokemon={pokemon}
           handleActiveOnePokemon={this.handleActiveOnePokemon}
         />
-      {filteredPokemon.length <= 0
-        ? <button className="backend-button orange-button" type="submit" onClick={this.handleGetAllPokemon}>Load All Pokemon</button>
-        : null}
+        {filteredPokemon.length <= 0 && pokemon.length > 0 && apiHasMore
+          ? <button className="rounded-button blue-button larger-button" type="submit" onClick={this.handleGetAllPokemon}>Load All Pokemon</button>
+          : null}
         <BotNav handleGetAllPokemon={this.handleGetAllPokemon} />
       </div>
 
@@ -66,6 +67,7 @@ const mapStateToProps = (state) => ({
   filteredPokemon: state.pokemon.filteredPokemon,
   apiHasMore: state.pokemon.apiHasMore,
   isFetching: state.pokemon.isFetching,
+  apiHasMore: state.pokemon.apiHasMore,
 })
 
 const mapDispatchToProps = {

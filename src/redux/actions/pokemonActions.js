@@ -87,7 +87,8 @@ export const fetchPokemon = (numfetchedPokemon = 0, fetchAll = false) => (dispat
   let amtToFetch = 20
   if (fetchAll) {
     amtToFetch = 897 - numfetchedPokemon
-    dispatch({ type: FETCHING, payload: true });
+    dispatch({ type: FETCHING, payload: true })
+    dispatch({ type: NO_MORE_POKEMON, payload: false })
   }
 
   return(
