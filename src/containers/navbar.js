@@ -17,12 +17,6 @@ class NavBar extends Component {
   // "no-shadow": "off" -> redux/import/destructure
   // call redux action to search through the state for pokemon that match the entered letters
 
-
-  handleGetAllPokemon = _.debounce(() => {
-    const { fetchPokemon, pokemon } = this.props
-    fetchPokemon(pokemon.length, true)
-  }, 1000)
-
   handleSearch = (event) => {
     const { updateSearchState, filterPokemon, filteredPokemon } = this.props;
     updateSearchState(event.currentTarget.value)
@@ -30,10 +24,9 @@ class NavBar extends Component {
   }
 
   handleBlur = () => {
-    const { updateSeachCSS, updateSearchState, filterPokemon } = this.props;
+    const { updateSeachCSS, updateSearchState } = this.props;
     updateSeachCSS(false)
     updateSearchState("")
-    filterPokemon("")
   }
 
   handleFocus = () => {

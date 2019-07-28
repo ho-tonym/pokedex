@@ -99,14 +99,16 @@ export const fetchPokemon = (numfetchedPokemon = 0, fetchAll = false) => (dispat
       })))
 }
 
-export const fetchOnePokemon = pokemon => dispatch => {
-  dispatch({ type: FETCHING, payload: true });
-  fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-    .then(response => response.json())
-    .then(data => dispatch({
-      type: FETCH_ONE_POKEMON,
-      payload: data,
-    }))
+export const fetchOnePokemon = pokemon => (dispatch, getState) => {
+  if (getState().pokemon.onePokemonData.name !== pokemon) {
+    dispatch({ type: FETCHING, payload: true });
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+      .then(response => response.json())
+      .then(data => dispatch({
+        type: FETCH_ONE_POKEMON,
+        payload: data,
+      }))
+  }
 }
 
 export const toggleSideNav = () => (dispatch, getState) => {

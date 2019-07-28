@@ -30,6 +30,10 @@ class HomePage extends Component {
     fetchOnePokemon(event.currentTarget.id)
   }
 
+  handleGetAllPokemon = _.debounce(() => {
+    const { fetchPokemon, pokemon } = this.props
+    fetchPokemon(pokemon.length, true)
+  }, 1000)
         // {isFetching && <Loader />}
   render() {
     const {
@@ -46,7 +50,9 @@ class HomePage extends Component {
           pokemon={pokemon}
           handleActiveOnePokemon={this.handleActiveOnePokemon}
         />
-        {filteredPokemon.length <= 0 ? "load the rest" : null}
+      {filteredPokemon.length <= 0
+        ? <button className="backend-button orange-button" type="submit" onClick={this.handleGetAllPokemon}>Load All Pokemon</button>
+        : null}
         <BotNav handleGetAllPokemon={this.handleGetAllPokemon} />
       </div>
 
