@@ -3,13 +3,13 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 // import PropTypes from 'prop-types'
 // import Loader from '../components/general/loader'
+// import Loader from '../components/general/loader'
 import { fetchPokemon, submitPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
 import PokemonList from '../components/home/_pokemonlist'
 import BotNav from './BotNav'
 
-
 class HomePage extends Component {
-  componentWillMount() {
+  componentWillMount() { // eslint-disable-line react/sort-comp
     window.addEventListener('scroll', this.handleScroll);
     const { pokemon, fetchPokemon } = this.props
     if(!pokemon[0]) {
@@ -18,7 +18,6 @@ class HomePage extends Component {
   }
 
   handleScroll = _.throttle(() => {
-    console.log("scrolling")
     const { fetchPokemon, pokemon } = this.props
     if (window.innerHeight + document.documentElement.scrollTop
         === document.documentElement.offsetHeight) {
@@ -32,13 +31,14 @@ class HomePage extends Component {
   }
 
   handleGetAllPokemon = () => {
+    debugger
     const { fetchPokemon, pokemon } = this.props
     fetchPokemon(pokemon.length, true)
   }
-
+  // {isFetching && <Loader />}
   render() {
     const {
-      searchedPokemonList,
+      filteredPokemon,
       pokemon,
       // handleActiveOnePokemon,
       // apiHasMore,
@@ -47,8 +47,7 @@ class HomePage extends Component {
     } = this.props
     return (
       <div className="HomePage">
-        <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
-        <PokemonList searchedPokemonList={searchedPokemonList}
+        <PokemonList filteredPokemon={filteredPokemon}
           pokemon={pokemon}
           handleActiveOnePokemon={this.handleActiveOnePokemon}
         />
@@ -62,7 +61,7 @@ class HomePage extends Component {
 const mapStateToProps = (state) => ({
   pokeData: state.pokemon.fetchOnePokemon,
   pokemon: state.pokemon.pokemon,
-  searchedPokemonList: state.pokemon.filteredPokemon,
+  filteredPokemon: state.pokemon.filteredPokemon,
   apiHasMore: state.pokemon.apiHasMore,
   isFetching: state.pokemon.isFetching,
 })

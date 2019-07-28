@@ -31,11 +31,7 @@ class NavBar extends Component {
   }
 
   render() {
-    const {
-      sideNav,
-      searchFocused,
-      searchString,
-    } = this.props // state
+    const { sideNav, searchFocused, searchString, isFetching } = this.props // state
     const { toggleSideNav } = this.props // actions
     const { handleBlur, handleFocus, handleSearch } = this
     return(
@@ -48,6 +44,7 @@ class NavBar extends Component {
           sideNav={sideNav}
           toggleSideNav={toggleSideNav}
         />
+        <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
         <Search
           onChange={handleSearch}
           handleFocus={handleFocus}
@@ -62,11 +59,12 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { sideNav, searchFocused, searchString } = state.pokemon
+  const { sideNav, searchFocused, searchString, isFetching } = state.pokemon
   return{
     sideNav,
     searchFocused,
     searchString,
+    isFetching,
   }
 }
 
