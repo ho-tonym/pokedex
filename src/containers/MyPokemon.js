@@ -82,6 +82,7 @@ class MyPokemon extends Component {
             <label htmlFor="get-pokemon">Get</label>
 
             <input id="name" className="input add-pokemon" placeholder="Name" value={myPokeInputs.name} onChange={this.handleChange} />
+            <div className="check" />
             <input id="cp" className="input add-pokemon" placeholder="CP" value={myPokeInputs.cp} onChange={this.handleChange} />
             <p className="input save-pokemon">
               {id === "" ? "Save your pokemon to the database for future use!"

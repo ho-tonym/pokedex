@@ -72,7 +72,7 @@
   font-size: 13px
   color: #3C93D5
 
-// 
+//
 // .my-pokemon-list
 //
 //
@@ -132,3 +132,23 @@ label
 [id=save-pokemon]:checked ~ [for=save-pokemon]:after,
 [id=get-pokemon]:checked ~ [for=get-pokemon]:after
 	border-bottom-color: $white
+
+
+.check
+  position: absolute
+  display: inline-block
+  &:after
+    /*Add another block-level blank space*/
+    content: ''
+    display: block
+
+    /*Make it a small rectangle so the border will create an L-shape*/
+    width: 3px
+    height: 6px
+
+    /*Add a white border on the bottom and left, creating that 'L' */
+    border: solid #000
+    border-width: 0 2px 2px 0
+
+    /*Rotate the L 45 degrees to turn it into a checkmark*/
+    transform: rotate(45deg)

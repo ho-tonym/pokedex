@@ -1,10 +1,12 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
+import _ from 'lodash'
 // import PropTypes from 'prop-types'
 // import Loader from '../components/general/loader'
 import { fetchPokemon, submitPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
 import PokemonList from '../components/home/_pokemonlist'
 import BotNav from './BotNav'
+
 
 class HomePage extends Component {
   componentWillMount() {
@@ -15,13 +17,14 @@ class HomePage extends Component {
     }
   }
 
-  handleScroll = () => {
+  handleScroll = _.throttle(() => {
+    console.log("scrolling")
     const { fetchPokemon, pokemon } = this.props
     if (window.innerHeight + document.documentElement.scrollTop
         === document.documentElement.offsetHeight) {
       fetchPokemon(pokemon.length)
     }
-  }
+  }, 1000)
 
   handleActiveOnePokemon = (event) => {
     const { fetchOnePokemon } = this.props
