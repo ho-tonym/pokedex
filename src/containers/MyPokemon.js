@@ -28,15 +28,16 @@ class MyPokemon extends Component {
   }
 
   handleCheckValid = _.debounce((field) => {
-    const { updateShowCheckMark, myPokeInputs } = this.props
-    if (field === "name" && myPokeInputs.name.length > 0) {
+    const { updateShowCheckMark, myPokeInputs, pokemon } = this.props
+
+    if (pokemon.find(x => x.name === myPokeInputs.name)) {
       updateShowCheckMark(field, true)
     }else if (field === "cp" && myPokeInputs.cp.length > 0 && myPokeInputs.cp > 0 && myPokeInputs.cp < 9999) {
       updateShowCheckMark(field, true)
     }else{
       updateShowCheckMark(field, false)
     }
-  })
+  }, 1500)
 
   handleCreateURL = () => {
     const { sendToBackend } = this.props
@@ -133,7 +134,7 @@ class MyPokemon extends Component {
             <button
               className="rounded-button blue-button"
               type="submit"
-              disabled={selectedOption === 'add-pokemon' && !showCheckMark.name && !showCheckMark.cp}
+              disabled={(!showCheckMark.name || !showCheckMark.cp) && selectedOption === 'add-pokemon'}
             />
             { showCheckMark.name ? <div className="check check-name" /> : null }
             { showCheckMark.cp ? <div className="check check-cp" /> : null }

@@ -100,6 +100,9 @@ export const fetchPokemon = (numfetchedPokemon = 0, fetchAll = false) => (dispat
         type: FETCH_POKEMON,
         payload: data.results,
       })))
+  // .catch(e => {
+  //   this.setState({...this.state, isFetching: false});
+  // });
 }
 
 export const fetchOnePokemon = pokemon => (dispatch, getState) => {
