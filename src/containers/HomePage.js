@@ -30,11 +30,11 @@ class HomePage extends Component {
     fetchOnePokemon(event.currentTarget.id)
   }
 
-  handleGetAllPokemon = _.debounce(() => {
+  handleGetAllPokemon = () => {
     const { fetchPokemon, pokemon } = this.props
     fetchPokemon(pokemon.length, true)
-  }, 1000)
-        // {isFetching && <Loader />}
+  }
+
   render() {
     const {
       filteredPokemon,

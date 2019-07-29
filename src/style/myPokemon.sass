@@ -36,21 +36,10 @@
   width: 250px
   height: 50px
 
-[id=add-pokemon]:checked
-	& ~ .blue-button
-		&:before
-			content: "Add Pokemon"
-
-[id=save-pokemon]:checked
-	& ~ .blue-button
-  	&:before
-  		content: "Save Pokemon"
-
-[id=get-pokemon]:checked
-	& ~ .blue-button
-		&:before
-			content: "Get Pokemon"
-      display: inline-block
+button:disabled
+  color: #8accff
+  &:hover
+    background-color: #55acee
 
 #button-retrieve-backend
   width: 100px
@@ -71,6 +60,9 @@
 	height: 300px
 	text-align: center
 	background-color: #9acff7
+
+.flex-wrap form
+  position: relative
 
 .font-13-blue
   font-size: 13px
@@ -102,14 +94,6 @@
 	font-size: 16px
 	text-align: center
 	outline: 0
-  // where you actually type
-[id=add-pokemon]:checked ~ input.add-pokemon,
-[id=save-pokemon]:checked ~ .save-pokemon,
-[id=get-pokemon]:checked ~ input.get-pokemon
-	max-height: 40px
-	padding: 10px
-	margin: 10px 0
-	opacity: 1
 
 label
 	position: relative
@@ -127,32 +111,69 @@ label
 		bottom: -10px
 		left: calc(50% - 10px)
 		transition: inherit
+
 // color of labels
 [id=add-pokemon]:checked ~ [for=add-pokemon],
 [id=save-pokemon]:checked ~ [for=save-pokemon],
 [id=get-pokemon]:checked ~ [for=get-pokemon]
 	color: $white
+//arrow under label
 [id=add-pokemon]:checked ~ [for=add-pokemon]:after,
 [id=save-pokemon]:checked ~ [for=save-pokemon]:after,
 [id=get-pokemon]:checked ~ [for=get-pokemon]:after
 	border-bottom-color: $white
+  // where you actually type
+[id=add-pokemon]:checked ~ input.add-pokemon,
+[id=save-pokemon]:checked ~ p.save-pokemon,
+[id=get-pokemon]:checked ~ input.get-pokemon,
+	max-height: 40px
+	padding: 10px
+	margin: 10px 0
+	opacity: 1
 
+[id=add-pokemon]:not(:checked) ~ .check:after
+  width: 0px
+  height: 0px
+  opacity: 0
+
+[id=add-pokemon]:checked
+	& ~ .blue-button
+		&:before
+			content: "Add Pokemon"
+
+[id=save-pokemon]:checked
+	& ~ .blue-button
+  	&:before
+  		content: "Save Pokemon"
+
+[id=get-pokemon]:checked
+	& ~ .blue-button
+		&:before
+			content: "Get Pokemon"
+
+#name
+  // transition: $transition
+  // border-bottom: 5px solid #11bd0e
 
 .check
   position: absolute
-  display: inline-block
+  width: 8px
+  height: 8px
+  transition: $transition
   &:after
-    /*Add another block-level blank space*/
+    position: absolute
     content: ''
     display: block
-
-    /*Make it a small rectangle so the border will create an L-shape*/
-    width: 3px
-    height: 6px
-
-    /*Add a white border on the bottom and left, creating that 'L' */
-    border: solid #000
-    border-width: 0 2px 2px 0
-
-    /*Rotate the L 45 degrees to turn it into a checkmark*/
+    width: 4px
+    height: 8px
+    border: solid #11bd0e
+    border-width: 0 3px 3px 0
     transform: rotate(45deg)
+
+.check-name
+  top: 40px
+  right: 10px
+
+.check-cp
+  top: 89px
+  right: 10px

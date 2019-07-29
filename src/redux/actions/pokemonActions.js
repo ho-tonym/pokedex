@@ -12,6 +12,8 @@ import {
   UPDATE_MYPOKE_INPUTS,
   UPDATE_SELECTED_OPTION,
   SEND_TO_BACKEND,
+  UPDATE_MYPOKE_INPUTS_STATE,
+  UPDATE_MYPOKE_INPUTS_CHECK_STATE,
 } from './types'
 
 // retrieve saved pokemon from SQL database
@@ -133,6 +135,13 @@ export const updateSearchState = (searchString = '') => dispatch => {
   })
 }
 
+export const updateMyPokeInputsState = (field, bool) => dispatch => {
+  dispatch({
+    type: UPDATE_MYPOKE_INPUTS_STATE,
+    payload: { field, bool },
+  })
+}
+
 export const updateMyPokeInputs = (field, value) => dispatch => {
   dispatch({
     type: UPDATE_MYPOKE_INPUTS,
@@ -147,5 +156,12 @@ export const updateSelectedOption = (option) => dispatch => {
   dispatch({
     type: UPDATE_SELECTED_OPTION,
     payload: option,
+  })
+}
+
+export const updateShowCheckMark = (field, bool) => dispatch => {
+  dispatch({
+    type: UPDATE_MYPOKE_INPUTS_CHECK_STATE,
+    payload: { field, bool },
   })
 }

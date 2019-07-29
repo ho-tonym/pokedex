@@ -11,10 +11,13 @@ import {
   UPDATE_MYPOKE_INPUTS,
   UPDATE_SELECTED_OPTION,
   SEND_TO_BACKEND,
+  UPDATE_MYPOKE_INPUTS_STATE,
+  UPDATE_MYPOKE_INPUTS_CHECK_STATE,
 } from '../actions/types';
 
 const initialState = {
   pokemon: [],
+  pokemonNames: [],
   filteredPokemon: [],
   myPokemon: [],
   onePokemonData: {},
@@ -31,12 +34,17 @@ const initialState = {
   id: "",
   selectedOption: "add-pokemon",
 
-  typeImages: [],
-  take4: [],
-  take2: [],
-  take05: [],
-  take025: [],
-  take0: [],
+  myPokeInputsFocused: { name: false, cp: false },
+  showCheckMark: { name: false, cp: false },
+
+  typeImages: {
+    type: [],
+    take4: [],
+    take2: [],
+    take05: [],
+    take025: [],
+    take0: [],
+  },
 };
 
 export default function (state = initialState, action) {
@@ -109,6 +117,22 @@ export default function (state = initialState, action) {
         ...state,
         selectedOption: action.payload,
       };
+    case UPDATE_MYPOKE_INPUTS_STATE:
+      const pokeState = { ...state.myPokeInputsFocused }
+      pokeState[action.payload.field] = action.payload.bool;
+      return {
+        ...state,
+        myPokeInputsFocused: pokeState,
+      };
+    case UPDATE_MYPOKE_INPUTS_CHECK_STATE:
+      const pokeStateCheck = { ...state.showCheckMark }
+      pokeStateCheck[action.payload.field] = action.payload.bool;
+      return {
+        ...state,
+        showCheckMark: pokeStateCheck,
+      };
+
+
     default:
       return state;
   }
