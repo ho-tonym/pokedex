@@ -27,15 +27,15 @@ import {
 // save selected pokemon to SQL databse
 export const submitPokemon = () => (dispatch, getState) => {
   const newCP = parseInt(getState().pokemon.myPokeInputs.cp, 10)
-  const newPokemon = {
-    name: getState().pokemon.myPokeInputs.name,
-    cp: newCP,
-  }
 
-  dispatch({
-    type: UPDATE_MY_POKEMON,
-    payload: getState().pokemon.myPokemon.concat(newPokemon),
-  })
+  dispatch({ type: FETCHING, payload: true });
+  fetch(`https://pokeapi.co/api/v2/pokemon/${getState().pokemon.myPokeInputs.name}`)
+    .then(response => response.json())
+    .then(data => dispatch({
+      type: UPDATE_MY_POKEMON,
+      payload: data,
+      cp: newCP,
+    }))
 }
 
 export const sendToBackend = (key) => (dispatch, getState) => fetch('http://localhost:5000/api/mypokemon/', {

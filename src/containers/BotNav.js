@@ -128,7 +128,7 @@ class BotNav extends Component {
     const take05Array = []
     const take025Array = []
     const take0Array = []
-    const { onePokemonData, myPokemon, handleGetAllPokemon } = this.props
+    const { onePokemonData, myPokemon } = this.props
     if(onePokemonData.types){this.createTypesButtons(typesArray, typeImages)}
     this.calculateDefence(take2Array, "take2", typesArray, take4Array, take025Array)
     this.calculateDefence(take05Array, "take05", typesArray, take4Array, take025Array)
@@ -148,7 +148,6 @@ class BotNav extends Component {
         </button>
         <div className="bot-nav__scrollable scrollable">
           <h2 className="capitalize">{onePokemonData.name}</h2>
-          <button type="button" onClick={handleGetAllPokemon} />
           <hr />
           <WeaknessAdvantage
             take2={take2}

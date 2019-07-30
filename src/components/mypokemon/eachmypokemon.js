@@ -1,25 +1,36 @@
 import React from 'react'
-import EachPokemon from '../home/eachpokemon'
+import uuid from 'uuid'
 
-const EachMyPokemon = ({ eachPokemon, classname, cp }) => (
+import EachPokemon from '../home/eachpokemon'
+import TypeImage from '../general/typeimage'
+import jsonTypes from '../../json/types.json'
+import typeImagesImport from '../../images/typeImages'
+
+const EachMyPokemon = ({ eachPokemon, cp, id, types }) => (
   <>
-    <button id={eachPokemon}
-      type="button"
-      className="each-my-pokemon"
-    >
-      <h3 id="each-pokemon-button__index">{cp}</h3>
-      <EachPokemon
-        eachPokemon={eachPokemon}
-      >
-        {`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${cp}.png`}
+    <button id={eachPokemon} type="button">
+      <EachPokemon eachPokemon={eachPokemon}>
+        {`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
       </EachPokemon>
-      <h3 className="each-pokemon-button__name">{eachPokemon}</h3>
+      <h3>{eachPokemon}</h3>
+      <h3>{cp}</h3>
+      <div className="types">
+        {types.map(name => (
+          <TypeImage
+            classname="my-pokemon-type-image"
+            key={uuid.v4()}
+            type={name}
+            color={jsonTypes[name].color}
+            img={typeImagesImport[name]}
+          />
+        ))}
+      </div>
     </button>
   </>
 )
 
 EachMyPokemon.defaultProps = {
-  classname: "",
+
 };
 
 export default EachMyPokemon

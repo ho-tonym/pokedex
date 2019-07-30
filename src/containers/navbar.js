@@ -1,24 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import Search from '../components/home/search'
 import SideNav from '../components/navbar/sidenav'
 import NavBarComponent from '../components/navbar/navbarcomponent'
+import LoadBar from '../components/navbar/loadbar'
 import {
   filterPokemon,
   toggleSideNav,
   updateSeachCSS,
   updateSearchState,
-  fetchOnePokemon,
-  fetchPokemon,
 } from '../redux/actions/pokemonActions'
 
 class NavBar extends Component {
-  // "no-shadow": "off" -> redux/import/destructure
-  // call redux action to search through the state for pokemon that match the entered letters
-
   handleSearch = (event) => {
-    const { updateSearchState, filterPokemon, filteredPokemon } = this.props;
+    const { updateSearchState, filterPokemon } = this.props;
     updateSearchState(event.currentTarget.value)
     filterPokemon(event.currentTarget.value)
   }
@@ -52,7 +47,7 @@ class NavBar extends Component {
           sideNav={sideNav}
           toggleSideNav={toggleSideNav}
         />
-        <div className={`load-bar ${isFetching ? "w-35" : "w-100"}`} />
+        <LoadBar isFetching={isFetching} />
         <Search
           onChange={handleSearch}
           handleFocus={handleFocus}
@@ -67,13 +62,12 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { sideNav, searchFocused, searchString, isFetching, pokemon, filteredPokemon } = state.pokemon
+  const { sideNav, searchFocused, searchString, isFetching, filteredPokemon } = state.pokemon
   return{
     sideNav,
     searchFocused,
     searchString,
     isFetching,
-    pokemon,
     filteredPokemon,
   }
 }
@@ -83,7 +77,5 @@ const mapDispatchToProps = {
   toggleSideNav,
   updateSeachCSS,
   updateSearchState,
-  fetchOnePokemon,
-  fetchPokemon,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

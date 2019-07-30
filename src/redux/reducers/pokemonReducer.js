@@ -73,7 +73,11 @@ export default function (state = initialState, action) {
     case UPDATE_MY_POKEMON:
       return {
         ...state,
-        myPokemon: action.payload,
+        myPokemon: state.myPokemon.concat({
+          data: action.payload,
+          cp: action.cp,
+        }),
+        isFetching: false,
       };
     case TOGGLE_SIDE_NAV:
       return {

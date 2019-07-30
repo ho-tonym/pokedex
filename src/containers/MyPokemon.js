@@ -2,11 +2,21 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import uuid from 'uuid'
 import _ from 'lodash'
-
-import { submitPokemon, updateMyPokeInputs, sendToBackend, getFromBackend, updateSelectedOption, updateMyPokeInputsState, fetchOnePokemon, updateShowCheckMark } from '../redux/actions/pokemonActions'
-import EachMyPokemon from '../components/mypokemon/eachmypokemon'
+import { submitPokemon, updateMyPokeInputs, sendToBackend, getFromBackend, updateSelectedOption, updateMyPokeInputsState, updateShowCheckMark, fetchPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
+import Form from '../components/mypokemon/form'
+import MyPokemonList from '../components/mypokemon/mypokemonlist'
 
 class MyPokemon extends Component {
+  componentDidUpdate(prevProps) {
+    const { myPokeInputs } = this.props
+
+    if(prevProps.myPokeInputs.cp !== myPokeInputs.cp) {
+      this.handleCheckValid("cp")
+    }else if (prevProps.myPokeInputs.name !== myPokeInputs.name) {
+      this.handleCheckValid("name")
+    }
+  }
+
   handleSubmit = (event) => { // eslint-disable-line react/sort-comp
     event.preventDefault();
     const { submitPokemon, selectedOption } = this.props
@@ -22,22 +32,29 @@ class MyPokemon extends Component {
 
   handleChange = (event) => {
     const { updateMyPokeInputs } = this.props
-    updateMyPokeInputs(event.currentTarget.id, event.currentTarget.value);
-    // this.handleGetAllPokemon()
-    this.handleCheckValid(event.currentTarget.id)
+
+    updateMyPokeInputs(event.currentTarget.id, event.currentTarget.value)
   }
 
-  handleCheckValid = _.debounce((field) => {
-    const { updateShowCheckMark, myPokeInputs, pokemon } = this.props
+  handleGetAllPokemon = _.debounce(() => {
+    const { fetchPokemon, pokemon } = this.props
+    fetchPokemon(pokemon.length, true)
+  }, 1500)
 
-    if (pokemon.find(x => x.name === myPokeInputs.name)) {
-      updateShowCheckMark(field, true)
+  handleCheckValid = field => {
+    const { updateShowCheckMark, myPokeInputs, pokemon, apiHasMore } = this.props
+
+    if (field === "name" && pokemon.find(x => x.name === myPokeInputs.name)) {
+      updateShowCheckMark(field, true, myPokeInputs.name)
     }else if (field === "cp" && myPokeInputs.cp.length > 0 && myPokeInputs.cp > 0 && myPokeInputs.cp < 9999) {
       updateShowCheckMark(field, true)
     }else{
       updateShowCheckMark(field, false)
+      if(field === "name" && apiHasMore) {
+        this.handleGetAllPokemon()
+      }
     }
-  }, 1500)
+  }
 
   handleCreateURL = () => {
     const { sendToBackend } = this.props
@@ -59,118 +76,63 @@ class MyPokemon extends Component {
   handleFocus = (event) => {
     const { updateMyPokeInputsState } = this.props
     updateMyPokeInputsState(event.target.id, true)
+    // this.handleCheckValid("name") this prevents cp from being validated
   }
 
   handleBlur = (event) => {
     const { updateMyPokeInputsState } = this.props
     updateMyPokeInputsState(event.target.id, false)
+    // this.handleCheckValid("name")
   }
 
   render() {
     const { myPokemon, myPokeInputs, id, selectedOption, showCheckMark } = this.props
-    const myPokemonList = myPokemon.map(eachPokemon => (
-      <EachMyPokemon
-        key={uuid.v4()}
-        eachPokemon={eachPokemon.name}
-        cp={eachPokemon.cp}
-        classname="each-pokemon-button-disable"
-      />
-    ))
     return (
       <div className="MyPokemon">
-        <div className="flex-wrap">
-          <form onSubmit={this.handleSubmit}>
-            <input className="radio"
-              type="radio"
-              name="rg"
-              id="add-pokemon"
-              checked={selectedOption === 'add-pokemon'}
-              onChange={this.handleOptionChange}
-            />
-            <input className="radio"
-              type="radio"
-              name="rg"
-              id="save-pokemon"
-              checked={selectedOption === 'save-pokemon'}
-              onChange={this.handleOptionChange}
-            />
-            <input className="radio"
-              type="radio"
-              name="rg"
-              id="get-pokemon"
-              checked={selectedOption === 'get-pokemon'}
-              onChange={this.handleOptionChange}
-            />
-
-            <label htmlFor="add-pokemon">Add</label>
-            <label htmlFor="save-pokemon">Save</label>
-            <label htmlFor="get-pokemon">Get</label>
-
-            <input
-              id="name"
-              className="input add-pokemon"
-              placeholder="Name"
-              value={myPokeInputs.name}
-              onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-            />
-            <input
-              id="cp"
-              className="input add-pokemon"
-              placeholder="CP"
-              value={myPokeInputs.cp}
-              onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-            />
-            <p className="input save-pokemon">
-              {id === "" ? "Save your pokemon to the database for future use!"
-                : 'Use this code in "Get" section to retrieve your pokemon'
-              }
-            </p>
-            <input id="id" className="input get-pokemon" type="text" placeholder="ID" value={myPokeInputs.id} onChange={this.handleChange} />
-            {selectedOption === 'save-pokemon' ? <p className="font-13-blue">{id}</p> : null}
-            <button
-              className="rounded-button blue-button"
-              type="submit"
-              disabled={(!showCheckMark.name || !showCheckMark.cp) && selectedOption === 'add-pokemon'}
-            />
-            { showCheckMark.name ? <div className="check check-name" /> : null }
-            { showCheckMark.cp ? <div className="check check-cp" /> : null }
-          </form>
-        </div>
-
-        <div className="my-pokemon-list pad-top-20">
-          <h3>My Pokemon</h3>
-          {myPokemonList}
-        </div>
+        <h1>My Pokemon</h1>
+        <Form
+          handleSubmit={this.handleSubmit}
+          handleOptionChange={this.handleOptionChange}
+          selectedOption={selectedOption}
+          myPokeInputs={myPokeInputs}
+          handleChange={this.handleChange}
+          handleFocus={this.handleFocus}
+          handleBlur={this.handleBlur}
+          showCheckMark={showCheckMark}
+          id={id}
+        />
+        <MyPokemonList
+          myPokemon={myPokemon}
+        />
       </div>
 
     )
   }
 }
-const mapStateToProps = (state) => ({
-  myPokemon: state.pokemon.myPokemon || "",
-  myPokeInputs: state.pokemon.myPokeInputs || "",
-  id: state.pokemon.id || "",
-  selectedOption: state.pokemon.selectedOption,
-  pokemon: state.pokemon.pokemon,
-  showCheckMark: state.pokemon.showCheckMark,
-})
+
+const mapStateToProps = (state) => {
+  const { myPokemon, myPokeInputs, id, selectedOption, pokemon, showCheckMark, apiHasMore } = state.pokemon
+  return{
+    myPokemon,
+    myPokeInputs,
+    id,
+    selectedOption,
+    pokemon,
+    showCheckMark,
+    apiHasMore,
+  }
+}
 
 const mapDispatchToProps = {
-  // fetchMyPokemon,
   submitPokemon,
   updateMyPokeInputs,
   sendToBackend,
   getFromBackend,
   updateSelectedOption,
   updateMyPokeInputsState,
-  fetchOnePokemon,
   updateShowCheckMark,
+  fetchPokemon,
+  fetchOnePokemon,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPokemon)
-//           <input type="submit" value="Submit" />
-// export default connect(mapStateToProps, mapDispatchToProps)(MyPokemon)

@@ -8,13 +8,11 @@ const EachPokemonButton = ({ eachPokemon, handleActiveOnePokemon, index }) => (
       className="each-pokemon-button"
       onClick={handleActiveOnePokemon}
     >
-      <h3 id="each-pokemon-button__index">{`#${index}`}</h3>
-      <EachPokemon
-        eachPokemon={eachPokemon}
-      >
+      <h3>{`#${index}`}</h3>
+      <EachPokemon eachPokemon={eachPokemon}>
         {`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index}.png`}
       </EachPokemon>
-      <h3 className="each-pokemon-button__name">{eachPokemon}</h3>
+      <h3>{eachPokemon}</h3>
     </button>
   </>
 )
