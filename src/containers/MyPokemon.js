@@ -17,7 +17,7 @@ class MyPokemon extends Component {
     }
   }
 
-  handleSubmit = (event) => { // eslint-disable-line react/sort-comp
+  handleSubmit = (event) => {
     event.preventDefault();
     const { submitPokemon, selectedOption } = this.props
 
@@ -32,11 +32,16 @@ class MyPokemon extends Component {
 
   handleChange = (event) => {
     const { updateMyPokeInputs } = this.props
-
-    updateMyPokeInputs(event.currentTarget.id, event.currentTarget.value)
+    let newValue = ""
+    if (event.currentTarget.id === "name") {
+      newValue = event.currentTarget.value.toLowerCase()
+    }else if(event.currentTarget.id === "cp") {
+      newValue = event.currentTarget.value
+    }
+    updateMyPokeInputs(event.currentTarget.id, newValue)
   }
 
-  handleGetAllPokemon = _.debounce(() => {
+  handleGetAllPokemon = _.debounce(() => { // eslint-disable-line react/sort-comp
     const { fetchPokemon, pokemon } = this.props
     fetchPokemon(pokemon.length, true)
   }, 1500)
@@ -86,7 +91,7 @@ class MyPokemon extends Component {
   }
 
   render() {
-    const { myPokemon, myPokeInputs, id, selectedOption, showCheckMark } = this.props
+    const { myPokemon, myPokeInputs, id, selectedOption, showCheckMark, isFetching } = this.props
     return (
       <div className="MyPokemon">
         <h1>My Pokemon</h1>
@@ -100,6 +105,7 @@ class MyPokemon extends Component {
           handleBlur={this.handleBlur}
           showCheckMark={showCheckMark}
           id={id}
+          isFetching={isFetching}
         />
         <MyPokemonList
           myPokemon={myPokemon}
@@ -111,7 +117,7 @@ class MyPokemon extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { myPokemon, myPokeInputs, id, selectedOption, pokemon, showCheckMark, apiHasMore } = state.pokemon
+  const { myPokemon, myPokeInputs, id, selectedOption, pokemon, showCheckMark, apiHasMore, isFetching } = state.pokemon
   return{
     myPokemon,
     myPokeInputs,
@@ -120,6 +126,7 @@ const mapStateToProps = (state) => {
     pokemon,
     showCheckMark,
     apiHasMore,
+    isFetching,
   }
 }
 

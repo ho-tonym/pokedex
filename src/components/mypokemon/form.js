@@ -10,6 +10,7 @@ const Form = ({
   handleBlur,
   showCheckMark,
   id,
+  isFetching,
 }) => (
   <div className="flex-wrap">
     <form onSubmit={handleSubmit}>
@@ -69,6 +70,13 @@ const Form = ({
         type="submit"
         disabled={(!showCheckMark.name || !showCheckMark.cp) && selectedOption === 'add-pokemon'}
       />
+      { isFetching ? (
+        <div className="ripple">
+          <div />
+          <div />
+        </div>
+      )
+        : null}
       { showCheckMark.name ? <div className="check check-name" /> : null }
       { showCheckMark.cp ? <div className="check check-cp" /> : null }
     </form>
