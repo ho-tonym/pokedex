@@ -14,6 +14,7 @@ import {
   SEND_TO_BACKEND,
   UPDATE_MYPOKE_INPUTS_STATE,
   UPDATE_MYPOKE_INPUTS_CHECK_STATE,
+  GET_FROM_BACKEND,
 } from './types'
 
 // retrieve saved pokemon from SQL database
@@ -33,8 +34,12 @@ export const submitPokemon = () => (dispatch, getState) => {
     .then(response => response.json())
     .then(data => dispatch({
       type: UPDATE_MY_POKEMON,
-      payload: data,
-      cp: newCP,
+      payload: {
+        cp: newCP,
+        name: data.name,
+        id: data.id,
+        types: data.types,
+      },
     }))
 }
 
@@ -55,7 +60,7 @@ export const getFromBackend = () => async (dispatch, getState) => {
   const response = await fetch(`http://localhost:5000/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
   const json = await response.json()
   dispatch({
-    type: UPDATE_MY_POKEMON,
+    type: GET_FROM_BACKEND,
     payload: json.myPokemon,
   })
 }

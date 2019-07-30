@@ -8,16 +8,35 @@ const MyPokemonList = ({ myPokemon }) => (
       {myPokemon.map(eachPokemon => (
         <EachMyPokemon
           key={uuid.v4()}
-          eachPokemon={eachPokemon.data.name}
+          eachPokemon={eachPokemon.name}
           cp={eachPokemon.cp}
-          id={eachPokemon.data.id}
-          types={
-            eachPokemon.data.types.map(e => e.type.name)
+          id={eachPokemon.id}
+          types={eachPokemon.types.map(e => e.type.name)
           }
         />
       ))}
     </div>
   </>
 )
+
+EachMyPokemon.defaultProps = {
+  eachPokemon: {
+    cp: 0,
+    id: 0,
+    name: "PokemonName",
+    types: [
+      {
+        type: {
+          name: "fighting",
+        },
+      },
+      {
+        type: {
+          name: "fire",
+        },
+      },
+    ],
+  },
+};
 
 export default MyPokemonList

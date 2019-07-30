@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:key', (req, res) => {
-  Pokemon.findOne({key: req.params.key})
+  Pokemon.findOne({ key: req.params.key })
     .then(mypokemon => res.send(mypokemon))
     .catch(err => res.status(404).json({ success: false, error: err }));
 });
@@ -20,7 +20,7 @@ router.get('/:key', (req, res) => {
 router.post('/', (req, res) => {
   const newPokemon = new Pokemon({
     myPokemon: req.body.myPokemon,
-    key: req.body.key
+    key: req.body.key,
   });
 
   newPokemon.save().then(pokemon => res.json(pokemon))

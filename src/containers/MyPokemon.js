@@ -35,7 +35,7 @@ class MyPokemon extends Component {
     let newValue = ""
     if (event.currentTarget.id === "name") {
       newValue = event.currentTarget.value.toLowerCase()
-    }else if(event.currentTarget.id === "cp") {
+    }else if(event.currentTarget.id === "cp" || event.currentTarget.id === "id") {
       newValue = event.currentTarget.value
     }
     updateMyPokeInputs(event.currentTarget.id, newValue)
@@ -92,7 +92,9 @@ class MyPokemon extends Component {
 
   render() {
     const { myPokemon, myPokeInputs, id, selectedOption, showCheckMark, isFetching } = this.props
+          console.log(myPokemon)
     return (
+
       <div className="MyPokemon">
         <h1>My Pokemon</h1>
         <Form

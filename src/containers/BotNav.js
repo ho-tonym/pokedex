@@ -111,7 +111,7 @@ class BotNav extends Component {
     jsonArray.flat().map(e => (
       takeArray.push(e)
     ))
-    console.log(takeArray)
+    // console.log(takeArray)
   }
 
   render() {

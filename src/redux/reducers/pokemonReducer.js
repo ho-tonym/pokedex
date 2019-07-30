@@ -13,6 +13,7 @@ import {
   SEND_TO_BACKEND,
   UPDATE_MYPOKE_INPUTS_STATE,
   UPDATE_MYPOKE_INPUTS_CHECK_STATE,
+  GET_FROM_BACKEND,
 } from '../actions/types';
 
 const initialState = {
@@ -73,10 +74,13 @@ export default function (state = initialState, action) {
     case UPDATE_MY_POKEMON:
       return {
         ...state,
-        myPokemon: state.myPokemon.concat({
-          data: action.payload,
-          cp: action.cp,
-        }),
+        myPokemon: state.myPokemon.concat(action.payload),
+        isFetching: false,
+      };
+    case GET_FROM_BACKEND:
+      return {
+        ...state,
+        myPokemon: action.payload,
         isFetching: false,
       };
     case TOGGLE_SIDE_NAV:
