@@ -92,7 +92,6 @@ class MyPokemon extends Component {
 
   render() {
     const { myPokemon, myPokeInputs, id, selectedOption, showCheckMark, isFetching } = this.props
-          console.log(myPokemon)
     return (
 
       <div className="MyPokemon">

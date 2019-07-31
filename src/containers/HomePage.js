@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import _ from 'lodash'
 // import PropTypes from 'prop-types'
-import { fetchPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
+import { fetchPokemon, fetchOnePokemon, filterPokemon } from '../redux/actions/pokemonActions'
 import PokemonList from '../components/home/pokemonlist'
 import BotNav from './BotNav'
 import LoadMoreButton from '../components/home/loadmorebutton'
@@ -30,7 +30,7 @@ class HomePage extends Component {
   }
 
   handleGetAllPokemon = () => {
-    const { fetchPokemon, pokemon } = this.props
+    const { fetchPokemon, pokemon, filterPokemon } = this.props
     fetchPokemon(pokemon.length, true)
   }
 
@@ -67,6 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   fetchPokemon,
   fetchOnePokemon,
+  filterPokemon,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
