@@ -44,7 +44,7 @@ export const submitPokemon = () => (dispatch, getState) => {
     }))
 }
 
-export const sendToBackend = (key) => (dispatch, getState) => fetch('http://localhost:5000/api/mypokemon/', {
+export const sendToBackend = (key) => (dispatch, getState) => fetch('/api/mypokemon/', {
   method: 'post',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -58,7 +58,7 @@ export const sendToBackend = (key) => (dispatch, getState) => fetch('http://loca
   })
 
 export const getFromBackend = () => async (dispatch, getState) => {
-  const response = await fetch(`http://localhost:5000/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
+  const response = await fetch(`/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
   const json = await response.json()
   dispatch({
     type: GET_FROM_BACKEND,
