@@ -1,66 +1,33 @@
 {
-  "name": "pokedex_client",
+  "name": "pokedex_server",
   "version": "1.0.0",
-  "description": "Client side for pokedex",
-  "homepage": "https://github.com/ho-tonym/pokedex#readme",
-  "main": "index.js",
-  "dependencies": {
-    "concurrently": "^4.1.1",
-    "gh-pages": "^2.0.1",
-    "lodash": "^4.17.15",
-    "npm": "^6.10.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^5.1.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.0.1",
-    "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "typescript": "^3.5.3",
-    "uuid": "^3.3.2"
-  },
-  "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2",
-    "nodemon": "^1.19.1",
-    "react-test-renderer": "^16.8.6"
-  },
+  "description": "Server side for pokedex",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "install-client-server": "npm i && cd client && npm i",
-    "client": "react-scripts start",
-    "server": "cd server && nodemon server.js",
-    "both": "concurrently \"npm run client\" \"npm run server\""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ho-tonym/pokedex.git"
+    "client": "cd client && react-scripts start",
+    "both": "concurrently \"npm run client\" \"npm run server\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false
+    npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ho-tonym/pokedex/issues"
+  "dependencies": {
+    "concurrently": "^4.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.6",
+    "react-scripts": "^3.0.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.1"
   }
 }

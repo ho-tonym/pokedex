@@ -20,7 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /node_modules
-.eslintrc.json
 .sass-cache/
 *.css.map
 *.sass.map

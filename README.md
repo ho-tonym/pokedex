@@ -1,4 +1,4 @@
-# Project Title
+# Pokedex
 The purpose of this app is for convenient comparisons of your pokemon against certain matchups to determine your best lineup. Specifically for Pokemon Go.
 
 Under the My Pokemon section, we can add pokemon with their combat power (CP)
@@ -36,10 +36,6 @@ Express.js - Backend server that handles requests from REACT and responses from 
 Node.js - React, express use node
 Redux - State management
 redux-thunk - for dispatching actions
-
-Authors
-Billie Thompson - Initial work - PurpleBooth
-See also the list of contributors who participated in this project.
 
 License
 This project is licensed under the MIT License - see the LICENSE.md file for details
