@@ -12,9 +12,9 @@ app.use('/api/mypokemon', require('./routes/api/mypokemon'));
 
 mongoose.connect(process.env.MONGODB_URI || require('./config/keys').mongoURI, { useNewUrlParser: true });
 
-app.get('/', (req, res) => {
-  res.send('You have reached the backend server. Wooh!');
-});
+// app.get('/', (req, res) => {
+//   res.send('You have reached the backend server. Wooh!');
+// });
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
