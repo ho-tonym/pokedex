@@ -3,10 +3,7 @@ import { connect } from 'react-redux'
 import { toggleDiv } from '../redux/actions/pokemonActions'
 
 class Faq extends Component {
-  // how to use
-  // how to use my pokemon
-  // built with
-
+  
   handleonClick = (event) => {
     const { toggleDiv } = this.props
     const { id } = event.currentTarget

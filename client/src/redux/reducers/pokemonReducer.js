@@ -39,7 +39,7 @@ const initialState = {
   myPokeInputsFocused: { name: false, cp: false },
   showCheckMark: { name: false, cp: false },
 
-  typeImages: {
+  types: {
     type: [],
     take4: [],
     take2: [],

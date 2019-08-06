@@ -1,11 +1,9 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import uuid from 'uuid'
-
 import { fetchOnePokemon } from '../redux/actions/pokemonActions'
 import WeaknessAdvantage from '../components/botnav/weaknessAdvantage'
 import RecommendedList from '../components/botnav/recommendedList'
-
 import TypeImage from '../components/general/typeimage'
 import jsonTypes from '../json/types.json'
 import typeImagesImport from '../images/typeImages'
@@ -43,34 +41,30 @@ class BotNav extends Component {
 
   createTypesButtons = (typesArray, typeImages) => {
     const { onePokemonData } = this.props
-      this.props.onePokemonData.types.forEach(e => {
-        typesArray.push(e.type.name)
-        typeImages.push(
-          <TypeImage
-            key={uuid.v4()}
-            type={e.type.name}
-            color={jsonTypes[e.type.name].color}
-            img={typeImagesImport[e.type.name]}
-          />,
-        )
-      })
-
-
+    onePokemonData.types.forEach(e => {
+      typesArray.push(e.type.name)
+      typeImages.push(
+        <TypeImage
+          key={uuid.v4()}
+          type={e.type.name}
+          color={jsonTypes[e.type.name].color}
+          img={typeImagesImport[e.type.name]}
+        />,
+      )
+    })
   }
 
   createTypes = (array, arrayTypeImage) => {
-    if (array.length > 0) {
-      array.forEach(e => {
-        arrayTypeImage.push(
-          <TypeImage
-            key={uuid.v4()}
-            type={e}
-            color={jsonTypes[e].color}
-            img={typeImagesImport[e]}
-          />,
-        )
-      })
-    }
+    array.forEach(e => {
+      arrayTypeImage.push(
+        <TypeImage
+          key={uuid.v4()}
+          type={e}
+          color={jsonTypes[e].color}
+          img={typeImagesImport[e]}
+        />,
+      )
+    })
   }
 
   findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index)
@@ -78,21 +72,22 @@ class BotNav extends Component {
   reCalculateDefences = (take2Array, take05Array) => {
     const newArray = take05Array.concat(take2Array).flat()
     const duplicates = [...new Set(this.findDuplicates(newArray))]
-    if (duplicates > 0) {
+    if (duplicates.length > 0) {
       duplicates.forEach(e => {
         take2Array.splice(take2Array.indexOf(e), 1)
         take05Array.splice(take05Array.indexOf(e), 1)
       })
     }
-}
-    calculateDefence(takeArray, dmgString, typesArray, take4Array, take025Array) {
-    let jsonArray = []
-    typesArray.forEach((e) => {
-      jsonArray.push(jsonTypes[e][dmgString])
-    })
-    jsonArray = jsonArray.flat()
+  }
 
-    const duplicates = [...new Set(this.findDuplicates(jsonArray.flat()))] // all unique duplicates
+  calculateDefence(takeArray, dmgString, typesArray, take4Array, take025Array) {
+    let finalArray = []
+    typesArray.forEach((e) => {
+      finalArray.push(jsonTypes[e][dmgString])
+    })
+    finalArray = finalArray.flat()
+
+    const duplicates = [...new Set(this.findDuplicates(finalArray.flat()))]
 
     if (dmgString === "take2") {
       duplicates.forEach((e) => {
@@ -105,13 +100,12 @@ class BotNav extends Component {
     }
 
     duplicates.forEach((type) => {
-      jsonArray = jsonArray.filter((element) => type !== element)
+      finalArray = finalArray.filter((element) => type !== element)
     })
 
-    jsonArray.flat().map(e => (
+    finalArray.flat().map(e => (
       takeArray.push(e)
     ))
-    console.log(takeArray)
   }
 
   render() {
@@ -128,18 +122,26 @@ class BotNav extends Component {
     const take05Array = []
     const take025Array = []
     const take0Array = []
-    const { onePokemonData, myPokemon } = this.props
-    if(onePokemonData.types){this.createTypesButtons(typesArray, typeImages)}
+
+    const { onePokemonData, myPokemon, types } = this.props
+    if(onePokemonData.types) { this.createTypesButtons(typesArray, typeImages) }
     this.calculateDefence(take2Array, "take2", typesArray, take4Array, take025Array)
     this.calculateDefence(take05Array, "take05", typesArray, take4Array, take025Array)
     this.calculateDefence(take0Array, "take0", typesArray, take4Array, take025Array)
+
     this.reCalculateDefences(take2Array, take05Array)
+
     this.createTypes(take0Array, take0)
     this.createTypes(take025Array, take025)
     this.createTypes(take05Array, take05)
     this.createTypes(take2Array, take2)
     this.createTypes(take4Array, take4)
 
+    // this.createTypes(types.take0, take0)
+    // this.createTypes(types.take025, take025)
+    // this.createTypes(types.take05, take05)
+    // this.createTypes(types.take2, take2)
+    // this.createTypes(types.take4, take4)
 
     return (
       <div className="bot-nav-container" ref={(pokemonType) => { this.pokemonType = pokemonType }}>
@@ -166,6 +168,7 @@ class BotNav extends Component {
 const mapStateToProps = (state) => ({
   onePokemonData: state.pokemon.onePokemonData,
   myPokemon: state.pokemon.myPokemon,
+  types: state.pokemon.types,
 })
 const mapDispatchToProps = {
   fetchOnePokemon,
