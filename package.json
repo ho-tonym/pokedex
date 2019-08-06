@@ -11,8 +11,8 @@
     "deploy": "gh-pages -d build",
     "install-client-server": "npm i && cd client && npm i",
     "client": "cd client && react-scripts start",
-    "both": "concurrently \"npm run client\" \"npm run server\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "both": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "",
   "license": "MIT",
@@ -28,5 +28,8 @@
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.1"
+  },
+  "engines": {
+    "node": "10.11.0"
   }
 }
