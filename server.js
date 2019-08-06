@@ -17,7 +17,7 @@ mongoose.connect(mongoURI, { useNewUrlParser: true });
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // set static folder
-  app.use(express.static('client/build'));// load index html in client build
+  app.use(express.static('/client/build'));// load index html in client build
   app.get('*', (req, res) => {
   // any requests that arent app.use('/api/mypokemon', require('./routes/api/mypokemon'));, loads index.html
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))// load index html in client/build/index
