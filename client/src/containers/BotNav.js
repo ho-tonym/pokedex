@@ -82,34 +82,27 @@ class BotNav extends Component {
 
   calculateDefence(takeArray, dmgString, typesArray, take4Array, take025Array) {
     let finalArray = []
-    typesArray.forEach((e) => {
-      finalArray.push(jsonTypes[e][dmgString])
-    })
-    finalArray = finalArray.flat()
 
+    finalArray = typesArray.map((e) => jsonTypes[e][dmgString]).flat()
     const duplicates = [...new Set(this.findDuplicates(finalArray.flat()))]
 
     if (dmgString === "take2") {
-      duplicates.forEach((e) => {
-        take4Array.push(e)
-      })
+      duplicates.forEach((e) => { take4Array.push(e) })
     } else if(dmgString === "take05") {
-      duplicates.forEach((e) => {
-        take025Array.push(e)
-      })
+      duplicates.forEach((e) => { take025Array.push(e) })
     }
 
     duplicates.forEach((type) => {
-      finalArray = finalArray.filter((element) => type !== element)
+      finalArray = finalArray.filter(element => type !== element)
     })
 
-    finalArray.flat().map(e => (
+    finalArray.forEach(e => (
       takeArray.push(e)
     ))
   }
 
   render() {
-    const typeImages = [] // types button that is returned
+    const typeImages = []
     const take4 = []
     const take2 = []
     const take05 = []
@@ -123,7 +116,7 @@ class BotNav extends Component {
     const take025Array = []
     const take0Array = []
 
-    const { onePokemonData, myPokemon, types } = this.props
+    const { onePokemonData, myPokemon } = this.props
     if(onePokemonData.types) { this.createTypesButtons(typesArray, typeImages) }
     this.calculateDefence(take2Array, "take2", typesArray, take4Array, take025Array)
     this.calculateDefence(take05Array, "take05", typesArray, take4Array, take025Array)
@@ -136,12 +129,6 @@ class BotNav extends Component {
     this.createTypes(take05Array, take05)
     this.createTypes(take2Array, take2)
     this.createTypes(take4Array, take4)
-
-    // this.createTypes(types.take0, take0)
-    // this.createTypes(types.take025, take025)
-    // this.createTypes(types.take05, take05)
-    // this.createTypes(types.take2, take2)
-    // this.createTypes(types.take4, take4)
 
     return (
       <div className="bot-nav-container" ref={(pokemonType) => { this.pokemonType = pokemonType }}>
@@ -168,7 +155,6 @@ class BotNav extends Component {
 const mapStateToProps = (state) => ({
   onePokemonData: state.pokemon.onePokemonData,
   myPokemon: state.pokemon.myPokemon,
-  types: state.pokemon.types,
 })
 const mapDispatchToProps = {
   fetchOnePokemon,

@@ -15,6 +15,7 @@ import {
   UPDATE_MYPOKE_INPUTS_CHECK_STATE,
   GET_FROM_BACKEND,
   COLLAPSE_DIVS,
+  ERRORS,
 } from '../actions/types';
 
 const initialState = {
@@ -39,14 +40,7 @@ const initialState = {
   myPokeInputsFocused: { name: false, cp: false },
   showCheckMark: { name: false, cp: false },
 
-  types: {
-    type: [],
-    take4: [],
-    take2: [],
-    take05: [],
-    take025: [],
-    take0: [],
-  },
+  errors: "OH GOD",
 
   collapseDivs: { "collapse-1": false, "collapse-2": false, "collapse-3": false },
 };
@@ -58,14 +52,12 @@ export default function (state = initialState, action) {
         ...state,
         pokemon: state.pokemon.concat(action.payload),
         filteredPokemon: state.filteredPokemon.concat(action.payload),
-        isFetching: false,
       };
 
     case FETCH_ONE_POKEMON:
       return {
         ...state,
         onePokemonData: action.payload,
-        isFetching: false,
       };
 
     case FILTER_POKEMON:
@@ -78,13 +70,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         myPokemon: state.myPokemon.concat(action.payload),
-        isFetching: false,
       };
     case GET_FROM_BACKEND:
       return {
         ...state,
         myPokemon: action.payload,
-        isFetching: false,
       };
     case TOGGLE_SIDE_NAV:
       return {
@@ -121,6 +111,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         id: action.payload,
+        isFetching: false,
       };
     case UPDATE_SELECTED_OPTION:
       return {
@@ -144,6 +135,11 @@ export default function (state = initialState, action) {
         ...state,
         collapseDivs: {
           ...state.collapseDivs, [action.id]: !state.collapseDivs[action.id] },
+      };
+    case ERRORS:
+      return {
+        ...state,
+        errors: action.payload,
       };
     default:
       return state;

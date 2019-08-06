@@ -31,7 +31,7 @@ class NavBar extends Component {
   }
 
   render() {
-    const { sideNav, searchFocused, searchString, isFetching } = this.props // state
+    const { sideNav, searchFocused, searchString, isFetching, errors } = this.props // state
     const { toggleSideNav } = this.props // actions
     const { handleBlur, handleFocus, handleSearch } = this
     return(
@@ -52,6 +52,9 @@ class NavBar extends Component {
           searchFocused={searchFocused}
           searchString={searchString}
         />
+        <div id="errors">
+          {errors}
+        </div>
       </>
 
     )
@@ -59,13 +62,14 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { sideNav, searchFocused, searchString, isFetching, filteredPokemon } = state.pokemon
+  const { sideNav, searchFocused, searchString, isFetching, filteredPokemon, errors } = state.pokemon
   return{
     sideNav,
     searchFocused,
     searchString,
     isFetching,
     filteredPokemon,
+    errors,
   }
 }
 

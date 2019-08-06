@@ -16,67 +16,64 @@ import {
   UPDATE_MYPOKE_INPUTS_CHECK_STATE,
   GET_FROM_BACKEND,
   COLLAPSE_DIVS,
+  ERRORS,
 } from './types'
 
-// retrieve saved pokemon from SQL database
-// export const fetchMyPokemon = () => dispatch => fetch('http://localhost:5000/api/mypokemon/')
-//   .then(response => response.json())
-//   .then(data => dispatch({
-//     type: FETCH_MY_POKEMON,
-//     payload: data,
-//   }))
-
-// save selected pokemon to SQL databse
 export const submitPokemon = () => (dispatch, getState) => {
   const newCP = parseInt(getState().pokemon.myPokeInputs.cp, 10)
-
   dispatch({ type: FETCHING, payload: true });
-  fetch(`https://pokeapi.co/api/v2/pokemon/${getState().pokemon.myPokeInputs.name}`)
-    .then(response => response.json())
-    .then(data => dispatch({
-      type: UPDATE_MY_POKEMON,
-      payload: {
-        cp: newCP,
-        name: data.name,
-        id: data.id,
-        types: data.types,
-      },
-    }))
+  try {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${getState().pokemon.myPokeInputs.name}`)
+      .then(response => response.json())
+      .then(data => dispatch({
+        type: UPDATE_MY_POKEMON,
+        payload: {
+          cp: newCP,
+          name: data.name,
+          id: data.id,
+          types: data.types,
+        },
+      }))
+  } finally {
+    dispatch({ type: FETCHING, payload: false })
+  }
 }
 
-export const sendToBackend = (key) => (dispatch, getState) => fetch('/api/mypokemon/', {
-  method: 'post',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    myPokemon: getState().pokemon.myPokemon,
-    key,
-  }),
-})
-  .then(response => response.json())
-  .then(() => {
-    dispatch({ type: SEND_TO_BACKEND, payload: key })
+export const sendToBackend = (key) => (dispatch, getState) => {
+  if (getState().pokemon.myPokemon.length <= 0) {
+    return(dispatch({ type: ERRORS, payload: "No Pokemon to save" }))
+  }
+  dispatch({ type: FETCHING, payload: true })
+  return fetch('/api/mypokemon/', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      myPokemon: getState().pokemon.myPokemon,
+      key,
+    }),
   })
+    .then(response => response.json())
+    .then(() => {
+      dispatch({ type: SEND_TO_BACKEND, payload: key })
+    })
+    .catch(err => {
+      dispatch({ type: ERRORS, payload: err })
+    });
+}
 
 export const getFromBackend = () => async (dispatch, getState) => {
-  const response = await fetch(`/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
-  const json = await response.json()
-  dispatch({
-    type: GET_FROM_BACKEND,
-    payload: json.myPokemon,
-  })
+  dispatch({ type: FETCHING, payload: true })
+  try {
+    const response = await fetch(`/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
+    const json = await response.json()
+    dispatch({ type: GET_FROM_BACKEND, payload: json.myPokemon })
+  } catch(err) {
+    dispatch({ type: ERRORS, payload: "Invalid code" })
+  } finally {
+    dispatch({ type: FETCHING, payload: false })
+  }
 }
-//
-// export const getFromBackend = () => (dispatch, getState) => fetch(`http://localhost:5000/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
-//   .then(data => data.json())
-//   .then(data => {
-//     dispatch({
-//       type: UPDATE_MY_POKEMON,
-//       payload: data.myPokemon,
-//     })
-//   })
 
-
-// search bar - searches through state for pokemon that match the name
 export const filterPokemon = (searchString = '') => (dispatch, getState) => {
   const displayedPokemons = getState().pokemon.pokemon.filter(pokemon => (
     pokemon.name.includes(searchString.toLowerCase())
@@ -98,28 +95,33 @@ export const fetchPokemon = (numfetchedPokemon = 0, fetchAll = false) => (dispat
     dispatch({ type: FETCHING, payload: true })
     dispatch({ type: NO_MORE_POKEMON, payload: false })
   }
-
-  return(
+  try {
     fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${amtToFetch}/&offset=${numfetchedPokemon}`)
       .then(response => response.json())
       .then(data => dispatch({
         type: FETCH_POKEMON,
         payload: data.results,
-      })))
-  // .catch(e => {
-  //   this.setState({...this.state, isFetching: false});
-  // });
+      }))
+  } finally {
+    dispatch({ type: FETCHING, payload: false })
+  }
 }
 
 export const fetchOnePokemon = pokemon => (dispatch, getState) => {
   if (getState().pokemon.onePokemonData.name !== pokemon) {
     dispatch({ type: FETCHING, payload: true });
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
-      .then(response => response.json())
-      .then(data => dispatch({
-        type: FETCH_ONE_POKEMON,
-        payload: data,
-      }))
+    try {
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+        .then(response => response.json())
+        .then(data => dispatch({
+          type: FETCH_ONE_POKEMON,
+          payload: data,
+        }))
+    } catch(err) {
+      dispatch({ type: ERRORS, payload: "Unable to get more information on that pokemon" })
+    } finally {
+      dispatch({ type: FETCHING, payload: false })
+    }
   }
 }
 
@@ -154,25 +156,16 @@ export const updateMyPokeInputsState = (field, bool) => dispatch => {
 export const updateMyPokeInputs = (field, value) => dispatch => {
   dispatch({
     type: UPDATE_MYPOKE_INPUTS,
-    payload: {
-      field,
-      value,
-    },
+    payload: { field, value },
   })
 }
 
 export const toggleDiv = (id) => dispatch => {
-  dispatch({
-    type: COLLAPSE_DIVS,
-    id,
-  })
+  dispatch({ type: COLLAPSE_DIVS, id })
 }
 
 export const updateSelectedOption = (option) => dispatch => {
-  dispatch({
-    type: UPDATE_SELECTED_OPTION,
-    payload: option,
-  })
+  dispatch({ type: UPDATE_SELECTED_OPTION, payload: option })
 }
 
 export const updateShowCheckMark = (field, bool) => dispatch => {
@@ -180,4 +173,8 @@ export const updateShowCheckMark = (field, bool) => dispatch => {
     type: UPDATE_MYPOKE_INPUTS_CHECK_STATE,
     payload: { field, bool },
   })
+}
+
+export const updateErrors = (err) => dispatch => {
+  dispatch({ type: ERRORS, payload: err })
 }
