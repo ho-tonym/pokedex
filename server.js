@@ -10,9 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/api/mypokemon', require('./routes/api/mypokemon'));
 
-// const db = require('./config/keys').mongoURI;
-
-mongoose.connect(process.env.MONGODB_URI || db, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || require('./config/keys').mongoURI, { useNewUrlParser: true });
 
 app.get('/', (req, res) => {
   res.send('You have reached the backend server. Wooh!');
