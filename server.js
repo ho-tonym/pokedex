@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
   // set static folder
-  app.use(express.static('client/build'));// load index html in client build
+  app.use('/ho-tonym/pokedex', express.static('client/build'));// load index html in client build
   app.get('*', (req, res) => {
   // any requests that arent app.use('/api/mypokemon', require('./routes/api/mypokemon'));, loads index.html
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.hmtl'))// load index html in client/build/index
