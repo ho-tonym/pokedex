@@ -2,13 +2,14 @@
 
 # dependencies
 /node_modules
+.eslintrc.json
 /config
 .sass-cache/
 *.css.map
 *.sass.map
 *.scss.map
 *.sasss
-.eslintrc.json
+
 
 # testing
 /coverage

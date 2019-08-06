@@ -1,6 +1,6 @@
 const express = require('express');
-const router = express.Router();
 
+const router = express.Router();
 const Pokemon = require('../../models/Pokemon');
 
 // GET api/mypokemon - Get All Pokemon
