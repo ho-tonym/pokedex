@@ -16,7 +16,7 @@ app.use('/api/mypokemon', require('./routes/api/mypokemon'));
 mongoose.connect(mongoURI, { useNewUrlParser: true })
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use('/ho-tonym/pokedex/', express.static(path.join(__dirname, 'client/build')));
   // app.get('*', (req, res) => {
   //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   // })
