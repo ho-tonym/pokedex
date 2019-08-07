@@ -26,8 +26,15 @@ Here, we can add pokemon and create a list of your pokemon by adding a name and 
 The CP has to be 0 < CP <9999.
 ### Save
 It would be pretty inconvenient to have to add these pokemon everytime to use the app, so we can save the pokemon to the mongo server hosted on MongoDB Atlas. When it is finished saving to the DB, it will return a key that will be can be used to access the all the pokemon saved at a later time in the Get tab. I opted for a key based apporach rather than user/pw because it is more convenient.
+
+Example:
+Name: bulbasaur CP: 3481
+
 ### Get
 Enter a key here to retrieve data from the backend server and load up previously saved pokemon.
+
+Database entry example for prepopulated data:
+68593dde-3bc9-4f65-819b-0c105bbdd5fd
 
 # Built With
 REACT - The web framework used

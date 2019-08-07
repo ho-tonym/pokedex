@@ -55,9 +55,19 @@ class Faq extends Component {
               It would be pretty inconvenient to have to add these pokemon everytime to use the app, so we can save the pokemon to the mongo server hosted on MongoDB Atlas. When it is finished saving to the DB, it will return a key that will be can be used to access the all the pokemon saved at a later time in the Get tab. I opted for a key based apporach rather than user/pw because it is more convenient.
               <br />
               <br />
+              Example:
+              <br />
+              Name: bulbasaur CP: 3481
+              <br />
+              <br />
               <b>Get:</b>
               <br />
               Enter a key here to retrieve data from the backend server and load up previously saved pokemon.
+              <br />
+              <br />
+              Database entry example for prepopulated data:
+              <br />
+              68593dde-3bc9-4f65-819b-0c105bbdd5fd
             </p>
           </div>
         </InfoSection>
