@@ -6,4 +6,8 @@ const EachPokemon = ({ name, children }) => (
   </>
 )
 
+EachPokemon.defaultProps = {
+  name: "pikachu",
+};
+
 export default EachPokemon

@@ -16,7 +16,6 @@ const EachMyPokemon = ({ eachPokemon, cp, id, types }) => (
       <div className="types">
         {types.map(name => (
           <TypeImage
-            classname="my-pokemon-type-image"
             key={uuid.v4()}
             type={name}
             color={jsonTypes[name].color}
@@ -29,7 +28,10 @@ const EachMyPokemon = ({ eachPokemon, cp, id, types }) => (
 )
 
 EachMyPokemon.defaultProps = {
-
+  eachPokemon: "",
+  cp: "",
+  id: "",
+  types: [],
 };
 
 export default EachMyPokemon

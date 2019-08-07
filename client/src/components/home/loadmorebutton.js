@@ -15,4 +15,10 @@ const LoadMoreButton = ({ filteredPokemon, apiHasMore, handleGetAllPokemon, poke
   </>
 )
 
+LoadMoreButton.defaultProps = {
+  filteredPokemon: [],
+  apiHasMore: true,
+  pokemon: [],
+};
+
 export default LoadMoreButton

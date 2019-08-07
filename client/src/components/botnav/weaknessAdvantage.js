@@ -46,4 +46,12 @@ const WeaknessAdvantage = ({
   </section>
 )
 
+WeaknessAdvantage.defaultProps = {
+  take4: [],
+  take2: [],
+  take05: [],
+  take025: [],
+  take0: [],
+};
+
 export default WeaknessAdvantage

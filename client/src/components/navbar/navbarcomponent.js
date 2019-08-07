@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Burger from './burger'
 
-const NavBarComponent = ({ sideNav, toggleSideNav }) => (
+const NavBarComponent = ({ isSideNaveOpen, toggleSideNav }) => (
   <>
     <div className="navbar">
       <ul id="navbar__list">
         <Burger
-          sideNav={sideNav}
+          isSideNavOpen={isSideNaveOpen}
           toggleSideNav={toggleSideNav}
         />
         <li><Link to="/">Home</Link></li>

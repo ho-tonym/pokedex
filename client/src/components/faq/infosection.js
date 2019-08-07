@@ -17,4 +17,12 @@ const InfoSection = ({ id, onClick, title, isOpen, children }) => (
   </>
 )
 
+InfoSection.defaultProps = {
+  id: "",
+  onClick: () => null,
+  title: "N/A",
+  isOpen: false,
+  children: "",
+};
+
 export default InfoSection

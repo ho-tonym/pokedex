@@ -7,12 +7,11 @@ import './style/containers/HomePage.min.css';
 import './style/containers/navbar.min.css';
 import './style/containers/general.min.css';
 import './style/containers/faq.min.css';
-
+import './style/containers/myPokemon.min.css';
 import './style/containers/BotNav.min.css';
+
 import './style/components/loader.min.css';
 import './style/components/typeButton.min.css';
-
-import './style/myPokemon.min.css';
 
 ReactDOM.render(
   <Provider store={store}>

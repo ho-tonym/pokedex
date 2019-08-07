@@ -9,4 +9,8 @@ const RecommendedList = ({ array }) => (
   </section>
 )
 
+RecommendedList.defaultProps = {
+  array: [],
+};
+
 export default RecommendedList

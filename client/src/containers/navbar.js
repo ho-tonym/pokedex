@@ -37,11 +37,11 @@ class NavBar extends Component {
     return(
       <>
         <SideNav
-          sideNav={sideNav}
+          isSideNavOpen={sideNav}
           toggleSideNav={toggleSideNav}
         />
         <NavBarComponent
-          sideNav={sideNav}
+          isSideNavOpen={sideNav}
           toggleSideNav={toggleSideNav}
         />
         <LoadBar isFetching={isFetching} />

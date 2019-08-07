@@ -6,4 +6,8 @@ const List = ({ typeOfList }) => (
   </div>
 )
 
+List.defaultProps = {
+  typeOfList: "Pokemon List",
+};
+
 export default List

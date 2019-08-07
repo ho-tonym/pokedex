@@ -27,4 +27,9 @@ const PokemonList = ({ filteredPokemon, pokemon, handleActiveOnePokemon }) => {
   )
 }
 
+PokemonList.defaultProps = {
+  filteredPokemon: [],
+  pokemon: [],
+};
+
 export default PokemonList
