@@ -226,7 +226,7 @@
 .w-35
   animation: load-anim-start 0.5s forwards
 
-#errors
+.errors
   z-index: 1000
   position: fixed
   top: 0
@@ -235,8 +235,23 @@
   justify-content: center
   background-color: $red
   width: 100%
-  // max-width: 600px
-  height: 30px
+  height: 45px
+  // transition: $transition
+  transform: translateY(-45px)
+
+.yes-error
+  animation: yes-error 3s forwards
+  // animation-play-state: paused
+
+@keyframes yes-error
+  0%
+    transform: translateY(-45px)
+  20%
+    transform: translateY(-0px)
+  80%
+    transform: translateY(-0px)
+  100%
+    transform: translateY(-45px)
 
 @keyframes load-anim-start
   0%

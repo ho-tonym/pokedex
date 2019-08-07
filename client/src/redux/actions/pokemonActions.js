@@ -34,17 +34,19 @@ export const submitPokemon = () => (dispatch, getState) => {
           types: data.types,
         },
       }))
-  } finally {
+  } catch {
     dispatch({ type: FETCHING, payload: false })
   }
 }
 
 export const sendToBackend = (key) => (dispatch, getState) => {
   if (getState().pokemon.myPokemon.length <= 0) {
-    return(dispatch({ type: ERRORS, payload: "No Pokemon to save" }))
+    (dispatch({ type: ERRORS, payload: "No Pokemon to save" }))
+    setTimeout(() => dispatch({ type: ERRORS, payload: "" }), 3000)
+    return
   }
   dispatch({ type: FETCHING, payload: true })
-  return fetch('/api/mypokemon/', {
+  fetch('/api/mypokemon/', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -56,21 +58,28 @@ export const sendToBackend = (key) => (dispatch, getState) => {
     .then(() => {
       dispatch({ type: SEND_TO_BACKEND, payload: key })
     })
-    .catch(err => {
-      dispatch({ type: ERRORS, payload: err })
+    .catch(() => {
+      dispatch({ type: ERRORS, payload: "Couldn't save your pokemon at this time" })
+      setTimeout(() => dispatch({ type: ERRORS, payload: "" }), 3000)
     });
 }
 
 export const getFromBackend = () => async (dispatch, getState) => {
+  const { id } = getState().pokemon.myPokeInputs
+  if(id.length <= 0) {
+    dispatch({ type: ERRORS, payload: "Type in a valid code" })
+    setTimeout(() => dispatch({ type: ERRORS, payload: "" }), 3000)
+    return
+  }
   dispatch({ type: FETCHING, payload: true })
   try {
-    const response = await fetch(`/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
+    const response = await fetch(`/api/mypokemon/${id}`)
     const json = await response.json()
     dispatch({ type: GET_FROM_BACKEND, payload: json.myPokemon })
   } catch(err) {
     dispatch({ type: ERRORS, payload: "Invalid code" })
-  } finally {
     dispatch({ type: FETCHING, payload: false })
+    setTimeout(() => dispatch({ type: ERRORS, payload: "" }), 3000)
   }
 }
 
@@ -102,7 +111,7 @@ export const fetchPokemon = (numfetchedPokemon = 0, fetchAll = false) => (dispat
         type: FETCH_POKEMON,
         payload: data.results,
       }))
-  } finally {
+  } catch {
     dispatch({ type: FETCHING, payload: false })
   }
 }
@@ -119,8 +128,8 @@ export const fetchOnePokemon = pokemon => (dispatch, getState) => {
         }))
     } catch(err) {
       dispatch({ type: ERRORS, payload: "Unable to get more information on that pokemon" })
-    } finally {
       dispatch({ type: FETCHING, payload: false })
+      setTimeout(() => dispatch({ type: ERRORS, payload: "" }), 3000)
     }
   }
 }

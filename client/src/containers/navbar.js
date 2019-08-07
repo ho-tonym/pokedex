@@ -52,7 +52,7 @@ class NavBar extends Component {
           searchFocused={searchFocused}
           searchString={searchString}
         />
-        <div id="errors">
+        <div className={`errors ${errors.length > 0 ? "yes-error" : ""}`}>
           {errors}
         </div>
       </>

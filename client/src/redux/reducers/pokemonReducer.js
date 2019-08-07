@@ -40,7 +40,7 @@ const initialState = {
   myPokeInputsFocused: { name: false, cp: false },
   showCheckMark: { name: false, cp: false },
 
-  errors: "OH GOD",
+  errors: "",
 
   collapseDivs: { "collapse-1": false, "collapse-2": false, "collapse-3": false },
 };
@@ -52,12 +52,14 @@ export default function (state = initialState, action) {
         ...state,
         pokemon: state.pokemon.concat(action.payload),
         filteredPokemon: state.filteredPokemon.concat(action.payload),
+        isFetching: false,
       };
 
     case FETCH_ONE_POKEMON:
       return {
         ...state,
         onePokemonData: action.payload,
+        isFetching: false,
       };
 
     case FILTER_POKEMON:
@@ -70,11 +72,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         myPokemon: state.myPokemon.concat(action.payload),
+        isFetching: false,
       };
     case GET_FROM_BACKEND:
       return {
         ...state,
         myPokemon: action.payload,
+        isFetching: false,
       };
     case TOGGLE_SIDE_NAV:
       return {
