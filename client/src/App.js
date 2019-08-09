@@ -8,7 +8,7 @@ import Faq from './containers/faq'
 
 const App = () => (
   <Router>
-    <div className="App">
+    <div className="App" data-test="App">
       <NavBar />
       <Route exact path="/" component={HomePage} />
       <Route path="/faq" component={Faq} />
