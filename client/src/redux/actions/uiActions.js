@@ -29,7 +29,7 @@ export const toggleDiv = (id) => dispatch => {
 export const toggleSideNav = () => (dispatch, getState) => {
   dispatch({
     type: TOGGLE_SIDE_NAV,
-    payload: !(getState().pokemon.sideNav),
+    payload: !(getState().ui.sideNav),
   });
 }
 

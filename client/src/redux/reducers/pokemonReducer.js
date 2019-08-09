@@ -3,19 +3,17 @@ import {
   FETCH_POKEMON,
   UPDATE_MY_POKEMON,
   FETCH_ONE_POKEMON,
-  TOGGLE_SIDE_NAV,
-  UPDATE_SEARCH_CSS,
-  UPDATE_SEARCH_STRING,
   NO_MORE_POKEMON,
   FETCHING,
+  SEND_TO_BACKEND,
+  GET_FROM_BACKEND,
+  ERRORS,
+
   UPDATE_MYPOKE_INPUTS,
   UPDATE_SELECTED_OPTION,
-  SEND_TO_BACKEND,
   UPDATE_MYPOKE_INPUTS_STATE,
   UPDATE_MYPOKE_INPUTS_CHECK_STATE,
-  GET_FROM_BACKEND,
   COLLAPSE_DIVS,
-  ERRORS,
 } from '../actions/types';
 
 const initialState = {
@@ -24,11 +22,6 @@ const initialState = {
   filteredPokemon: [],
   myPokemon: [],
   onePokemonData: {},
-
-  sideNav: false,
-
-  searchFocused: false,
-  searchString: "",
 
   apiHasMore: true,
   isFetching: false,
@@ -79,21 +72,6 @@ export default function (state = initialState, action) {
         ...state,
         myPokemon: action.payload,
         isFetching: false,
-      };
-    case TOGGLE_SIDE_NAV:
-      return {
-        ...state,
-        sideNav: action.payload,
-      };
-    case UPDATE_SEARCH_CSS:
-      return {
-        ...state,
-        searchFocused: action.payload,
-      };
-    case UPDATE_SEARCH_STRING:
-      return {
-        ...state,
-        searchString: action.payload,
       };
     case NO_MORE_POKEMON:
       return {

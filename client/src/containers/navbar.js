@@ -58,7 +58,8 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { sideNav, searchFocused, searchString, isFetching, filteredPokemon, errors } = state.pokemon
+  const { searchString, isFetching, filteredPokemon, errors } = state.pokemon
+  const { sideNav, searchFocused } = state.ui
   return{
     sideNav,
     searchFocused,
