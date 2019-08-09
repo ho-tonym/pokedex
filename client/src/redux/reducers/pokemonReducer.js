@@ -8,12 +8,6 @@ import {
   SEND_TO_BACKEND,
   GET_FROM_BACKEND,
   ERRORS,
-
-  UPDATE_MYPOKE_INPUTS,
-  UPDATE_SELECTED_OPTION,
-  UPDATE_MYPOKE_INPUTS_STATE,
-  UPDATE_MYPOKE_INPUTS_CHECK_STATE,
-  COLLAPSE_DIVS,
 } from '../actions/types';
 
 const initialState = {
@@ -26,16 +20,8 @@ const initialState = {
   apiHasMore: true,
   isFetching: false,
 
-  myPokeInputs: { name: "", cp: "", id: "" },
   id: "",
-  selectedOption: "add-pokemon",
-
-  myPokeInputsFocused: { name: false, cp: false },
-  showCheckMark: { name: false, cp: false },
-
   errors: "",
-
-  collapseDivs: { "collapse-1": false, "collapse-2": false, "collapse-3": false },
 };
 
 export default function (state = initialState, action) {
@@ -47,7 +33,6 @@ export default function (state = initialState, action) {
         filteredPokemon: state.filteredPokemon.concat(action.payload),
         isFetching: false,
       };
-
     case FETCH_ONE_POKEMON:
       return {
         ...state,
@@ -83,40 +68,11 @@ export default function (state = initialState, action) {
         ...state,
         isFetching: action.payload,
       };
-    case UPDATE_MYPOKE_INPUTS:
-      return {
-        ...state,
-        myPokeInputs: {
-          ...state.myPokeInputs, [action.payload.field]: action.payload.value },
-      };
     case SEND_TO_BACKEND:
       return {
         ...state,
         id: action.payload,
         isFetching: false,
-      };
-    case UPDATE_SELECTED_OPTION:
-      return {
-        ...state,
-        selectedOption: action.payload,
-      };
-    case UPDATE_MYPOKE_INPUTS_STATE:
-      return {
-        ...state,
-        myPokeInputsFocused: {
-          ...state.myPokeInputsFocused, [action.payload.field]: action.payload.bool },
-      };
-    case UPDATE_MYPOKE_INPUTS_CHECK_STATE:
-      return {
-        ...state,
-        showCheckMark: {
-          ...state.showCheckMark, [action.payload.field]: action.payload.bool },
-      };
-    case COLLAPSE_DIVS:
-      return {
-        ...state,
-        collapseDivs: {
-          ...state.collapseDivs, [action.id]: !state.collapseDivs[action.id] },
       };
     case ERRORS:
       return {
