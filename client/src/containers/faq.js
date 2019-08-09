@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { toggleDiv } from '../redux/actions/pokemonActions'
+import { toggleDiv } from '../redux/actions/uiActions'
 import InfoSection from '../components/faq/infosection'
 
 class Faq extends Component {

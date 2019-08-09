@@ -4,12 +4,8 @@ import Search from '../components/home/search'
 import SideNav from '../components/navbar/sidenav'
 import NavBarComponent from '../components/navbar/navbarcomponent'
 import LoadBar from '../components/navbar/loadbar'
-import {
-  filterPokemon,
-  toggleSideNav,
-  updateSeachCSS,
-  updateSearchState,
-} from '../redux/actions/pokemonActions'
+import { filterPokemon } from '../redux/actions/pokemonActions'
+import { toggleSideNav, updateSeachCSS, updateSearchState } from '../redux/actions/uiActions'
 
 class NavBar extends Component {
   handleSearch = (event) => {
