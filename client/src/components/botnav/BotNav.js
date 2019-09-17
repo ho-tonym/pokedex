@@ -2,15 +2,16 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import uuid from 'uuid'
 
-import { fetchOnePokemon } from '../redux/actions/pokemonActions'
-import WeaknessAdvantage from '../components/botnav/weaknessAdvantage'
-import RecommendedList from '../components/botnav/recommendedList'
+import { fetchOnePokemon } from '../../redux/actions/pokemonActions'
+import WeaknessAdvantage from './weaknessAdvantage'
+import RecommendedList from './recommendedList'
 
-import TypeImage from '../components/general/typeimage'
-import jsonTypes from '../json/types.json'
-import { calculateDefence } from '../components/botnav/functions/calculatedefence'
-import reCalculateDefences from '../components/botnav/functions/recalculatedefences'
-import typeImagesImport from '../images/typeImages'
+import TypeImage from '../general/typeimage'
+import jsonTypes from '../../assets/json/types.json'
+import { calculateDefence } from './functions/calculatedefence'
+import reCalculateDefences from './functions/recalculatedefences'
+import typeImagesImport from '../../assets/images/typeImages'
+import './BotNav.min.css';
 
 class BotNav extends Component {
   componentWillMount() {
@@ -45,19 +46,17 @@ class BotNav extends Component {
 
   createTypesButtons = (typesArray, typeImages) => {
     const { onePokemonData } = this.props
-      this.props.onePokemonData.types.forEach(e => {
-        typesArray.push(e.type.name)
-        typeImages.push(
-          <TypeImage
-            key={uuid.v4()}
-            type={e.type.name}
-            color={jsonTypes[e.type.name].color}
-            img={typeImagesImport[e.type.name]}
-          />,
-        )
-      })
-
-
+    this.props.onePokemonData.types.forEach(e => {
+      typesArray.push(e.type.name)
+      typeImages.push(
+        <TypeImage
+          key={uuid.v4()}
+          type={e.type.name}
+          color={jsonTypes[e.type.name].color}
+          img={typeImagesImport[e.type.name]}
+        />,
+      )
+    })
   }
 
   createTypes = (array, arrayTypeImage) => {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { toggleDiv } from '../redux/actions/pokemonActions'
+import { toggleDiv } from '../../redux/actions/pokemonActions'
+import './faq.min.css';
 
 class Faq extends Component {
   handleonClick = (event) => {

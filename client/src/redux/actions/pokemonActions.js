@@ -60,6 +60,7 @@ export const sendToBackend = (key) => (dispatch, getState) => fetch('/api/mypoke
 export const getFromBackend = () => async (dispatch, getState) => {
   const response = await fetch(`/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
   const json = await response.json()
+
   dispatch({
     type: GET_FROM_BACKEND,
     payload: json.myPokemon,

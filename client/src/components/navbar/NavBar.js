@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Search from '../components/home/search'
-import SideNav from '../components/navbar/sidenav'
-import NavBarComponent from '../components/navbar/navbarcomponent'
-import LoadBar from '../components/navbar/loadbar'
+import Search from '../HomePage/search'
+import SideNav from './sidenav'
+import NavBarComponent from './navbarcomponent'
+import LoadBar from './loadbar'
 import {
   filterPokemon,
   toggleSideNav,
   updateSeachCSS,
   updateSearchState,
-} from '../redux/actions/pokemonActions'
+} from '../../redux/actions/pokemonActions'
+import './navbar.min.css';
 
 class NavBar extends Component {
   handleSearch = (event) => {

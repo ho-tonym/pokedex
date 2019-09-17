@@ -2,9 +2,20 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import uuid from 'uuid'
 import _ from 'lodash'
-import { submitPokemon, updateMyPokeInputs, sendToBackend, getFromBackend, updateSelectedOption, updateMyPokeInputsState, updateShowCheckMark, fetchPokemon, fetchOnePokemon } from '../redux/actions/pokemonActions'
-import Form from '../components/mypokemon/form'
-import MyPokemonList from '../components/mypokemon/mypokemonlist'
+import {
+  submitPokemon,
+  updateMyPokeInputs,
+  sendToBackend,
+  getFromBackend,
+  updateSelectedOption,
+  updateMyPokeInputsState,
+  updateShowCheckMark,
+  fetchPokemon,
+  fetchOnePokemon,
+} from '../../redux/actions/pokemonActions'
+import Form from './form'
+import MyPokemonList from './mypokemonlist'
+import './myPokemon.min.css';
 
 class MyPokemon extends Component {
   handleGetAllPokemon = _.debounce(() => {

@@ -1,10 +1,13 @@
 import React from 'react'
 import { HashRouter as Router, Route } from 'react-router-dom'
 
-import NavBar from './containers/navbar'
-import HomePage from './containers/HomePage'
-import MyPokemon from './containers/MyPokemon'
-import Faq from './containers/faq'
+import NavBar from '../NavBar'
+import HomePage from '../HomePage'
+import MyPokemon from '../MyPokemon'
+import Faq from '../Faq'
+import './App.min.css';
+import '../../assets/style/components/loader.min.css';
+import '../../assets/style/components/typeButton.min.css';
 
 const App = () => (
   <Router>

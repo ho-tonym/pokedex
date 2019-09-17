@@ -2,10 +2,11 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import _ from 'lodash'
 // import PropTypes from 'prop-types'
-import { fetchPokemon, fetchOnePokemon, filterPokemon } from '../redux/actions/pokemonActions'
-import PokemonList from '../components/home/pokemonlist'
-import BotNav from './BotNav'
-import LoadMoreButton from '../components/home/loadmorebutton'
+import { fetchPokemon, fetchOnePokemon, filterPokemon } from '../../redux/actions/pokemonActions'
+import PokemonList from './pokemonlist'
+import BotNav from '../BotNav'
+import LoadMoreButton from './loadmorebutton'
+import './HomePage.min.css';
 
 class HomePage extends Component {
   handleScroll = _.throttle(() => {

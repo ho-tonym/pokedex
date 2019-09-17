@@ -1,4 +1,4 @@
-import jsonTypes from '../../../json/types.json'
+import jsonTypes from '../../../assets/json/types.json'
 import findDuplicates from './helper/findDuplicates'
 
 export function calculateDefence(takeArray, dmgString, typesArray, take4Array, take025Array) {
