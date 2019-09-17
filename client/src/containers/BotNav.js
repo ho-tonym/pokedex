@@ -8,6 +8,8 @@ import RecommendedList from '../components/botnav/recommendedList'
 
 import TypeImage from '../components/general/typeimage'
 import jsonTypes from '../json/types.json'
+import { calculateDefence } from '../components/botnav/functions/calculatedefence'
+import reCalculateDefences from '../components/botnav/functions/recalculatedefences'
 import typeImagesImport from '../images/typeImages'
 
 class BotNav extends Component {
@@ -73,47 +75,6 @@ class BotNav extends Component {
     }
   }
 
-  findDuplicates = arr => arr.filter((item, index) => arr.indexOf(item) !== index)
-
-  reCalculateDefences = (take2Array, take05Array) => {
-    const newArray = take05Array.concat(take2Array).flat()
-    const duplicates = [...new Set(this.findDuplicates(newArray))]
-    if (duplicates > 0) {
-      duplicates.forEach(e => {
-        take2Array.splice(take2Array.indexOf(e), 1)
-        take05Array.splice(take05Array.indexOf(e), 1)
-      })
-    }
-}
-    calculateDefence(takeArray, dmgString, typesArray, take4Array, take025Array) {
-    let jsonArray = []
-    typesArray.forEach((e) => {
-      jsonArray.push(jsonTypes[e][dmgString])
-    })
-    jsonArray = jsonArray.flat()
-
-    const duplicates = [...new Set(this.findDuplicates(jsonArray.flat()))] // all unique duplicates
-
-    if (dmgString === "take2") {
-      duplicates.forEach((e) => {
-        take4Array.push(e)
-      })
-    } else if(dmgString === "take05") {
-      duplicates.forEach((e) => {
-        take025Array.push(e)
-      })
-    }
-
-    duplicates.forEach((type) => {
-      jsonArray = jsonArray.filter((element) => type !== element)
-    })
-
-    jsonArray.flat().map(e => (
-      takeArray.push(e)
-    ))
-    console.log(takeArray)
-  }
-
   render() {
     const typeImages = [] // types button that is returned
     const take4 = []
@@ -130,10 +91,10 @@ class BotNav extends Component {
     const take0Array = []
     const { onePokemonData, myPokemon } = this.props
     if(onePokemonData.types){this.createTypesButtons(typesArray, typeImages)}
-    this.calculateDefence(take2Array, "take2", typesArray, take4Array, take025Array)
-    this.calculateDefence(take05Array, "take05", typesArray, take4Array, take025Array)
-    this.calculateDefence(take0Array, "take0", typesArray, take4Array, take025Array)
-    this.reCalculateDefences(take2Array, take05Array)
+    calculateDefence(take2Array, "take2", typesArray, take4Array, take025Array)
+    calculateDefence(take05Array, "take05", typesArray, take4Array, take025Array)
+    calculateDefence(take0Array, "take0", typesArray, take4Array, take025Array)
+    reCalculateDefences(take2Array, take05Array)
     this.createTypes(take0Array, take0)
     this.createTypes(take025Array, take025)
     this.createTypes(take05Array, take05)
