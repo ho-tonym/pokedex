@@ -52,6 +52,17 @@ class MyPokemon extends Component {
         break
     }
   }
+  handleCreateURL = () => {
+    const { sendToBackend } = this.props
+    const key = uuid.v4()
+    sendToBackend(key)
+  }
+
+  handleGetFromBackend = (event) => {
+    const { getFromBackend } = this.props
+    event.preventDefault()
+    getFromBackend()
+  }
 
   handleChange = (event) => {
     const { updateMyPokeInputs } = this.props
@@ -78,18 +89,6 @@ class MyPokemon extends Component {
         this.handleGetAllPokemon()
       }
     }
-  }
-
-  handleCreateURL = () => {
-    const { sendToBackend } = this.props
-    const key = uuid.v4()
-    sendToBackend(key)
-  }
-
-  handleGetFromBackend = (event) => {
-    const { getFromBackend } = this.props
-    event.preventDefault()
-    getFromBackend()
   }
 
   handleOptionChange = (event) => {

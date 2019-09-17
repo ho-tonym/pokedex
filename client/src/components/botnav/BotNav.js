@@ -100,7 +100,6 @@ class BotNav extends Component {
     this.createTypes(take2Array, take2)
     this.createTypes(take4Array, take4)
 
-
     return (
       <div className="bot-nav-container" ref={(pokemonType) => { this.pokemonType = pokemonType }}>
         <button className="bot-nav" type="button" onClick={this.expandOnePokemon}>

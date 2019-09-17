@@ -6,6 +6,7 @@ const path = require('path')
 const app = express();
 
 const mongoURI = process.env.MONGODB_URI || require('./config/keys').mongoURI
+
 const port = process.env.PORT || 5000;
 
 app.use(cors());
