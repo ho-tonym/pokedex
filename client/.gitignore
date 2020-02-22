@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-.eslintrc.json
+#.eslintrc.json
 /config
 .sass-cache/
 *.css.map

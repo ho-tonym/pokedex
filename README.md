@@ -30,12 +30,12 @@ It would be pretty inconvenient to have to add these pokemon everytime to use th
 Enter a key here to retrieve data from the backend server and load up previously saved pokemon.
 
 # Built With
-REACT - The web framework used
-MongoDB - Database used
-Express.js - Backend server that handles requests from REACT and responses from Mongo.
-Node.js - React, express use node
-Redux - State management
-redux-thunk - for dispatching actions
+1. React
+2. MongoDB/Mongoose
+3. Express.js
+4. Node.js
+5. Redux
+6. Heroku
 
 License
 This project is licensed under the MIT License - see the LICENSE.md file for details
