@@ -1,7 +1,12 @@
 import jsonTypes from '../../../assets/json/types.json'
-import findDuplicates from './helper/findDuplicates'
+// import findDuplicates from './helper/findDuplicates'
+
+function findDuplicates(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) !== index)
+}
 
 export function calculateDefence(takeArray, dmgString, typesArray, take4Array, take025Array) {
+
   if (typesArray <= 0) {
     return
   }
@@ -13,7 +18,7 @@ export function calculateDefence(takeArray, dmgString, typesArray, take4Array, t
   jsonArray = jsonArray.flat()
 
   const duplicates = [...new Set(findDuplicates(jsonArray.flat()))] // all unique duplicates
-
+  // debugger
   if (dmgString === "take2") {
     duplicates.forEach((e) => {
       take4Array.push(e)
