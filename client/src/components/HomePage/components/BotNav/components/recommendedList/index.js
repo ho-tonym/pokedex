@@ -1,5 +1,5 @@
 import React from 'react'
-import List from './list'
+import List from '../shared/list'
 
 const RecommendedList = ({ array }) => (
   <section id="bot-nav__recommended-lists">

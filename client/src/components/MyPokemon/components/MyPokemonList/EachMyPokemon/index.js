@@ -1,9 +1,9 @@
 import React from 'react'
 import uuid from 'uuid'
-import EachPokemon from '../HomePage/eachpokemon'
-import TypeImage from '../general/typeimage'
-import jsonTypes from '../../assets/json/types.json'
-import typeImagesImport from '../../assets/images/typeImages'
+import EachPokemon from '../../../../general/EachPokemon'
+import TypeImage from '../../../../general/typeimage'
+import jsonTypes from '../../../../../assets/json/types.json'
+import typeImagesImport from '../../../../../assets/images/typeImages'
 
 const EachMyPokemon = ({ eachPokemon, cp, id, types }) => (
   <>

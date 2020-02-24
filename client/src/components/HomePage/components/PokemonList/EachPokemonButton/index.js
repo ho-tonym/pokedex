@@ -1,5 +1,5 @@
 import React from 'react'
-import EachPokemon from './eachpokemon'
+import EachPokemon from '../../../../general/EachPokemon'
 
 const EachPokemonButton = ({ eachPokemon, handleActiveOnePokemon, index }) => (
   <>

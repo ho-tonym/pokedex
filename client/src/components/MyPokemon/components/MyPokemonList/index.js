@@ -1,6 +1,6 @@
 import React from 'react'
 import uuid from 'uuid'
-import EachMyPokemon from './eachmypokemon'
+import EachMyPokemon from './EachMyPokemon'
 
 const MyPokemonList = ({ myPokemon }) => (
   <>

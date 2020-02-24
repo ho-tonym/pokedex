@@ -2,22 +2,21 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import uuid from 'uuid'
 
-import { fetchOnePokemon } from '../../redux/actions/pokemonActions'
-import WeaknessAdvantage from './weaknessAdvantage'
-import RecommendedList from './recommendedList'
+import { fetchOnePokemon } from '../../../../redux/actions/pokemonActions'
+import WeaknessAdvantage from './components/weaknessAdvantage'
+import RecommendedList from './components/recommendedList'
 
-import TypeImage from '../general/typeimage'
-import jsonTypes from '../../assets/json/types.json'
-import { calculateDefence } from './functions/calculatedefence'
-import reCalculateDefences from './functions/recalculatedefences'
-import typeImagesImport from '../../assets/images/typeImages'
+import TypeImage from '../../../general/typeimage'
+import jsonTypes from '../../../../assets/json/types.json'
+import calculateDefence from './functions/calculatedefence'
+import typeImagesImport from '../../../../assets/images/typeImages'
 import './BotNav.min.css';
 
 class BotNav extends Component {
   componentWillMount() {
     const { fetchOnePokemon, onePokemonData } = this.props
     if(!onePokemonData.name) {
-      fetchOnePokemon("pidgeotto")
+      fetchOnePokemon("charizard")
     }
     document.addEventListener('mousedown', this.handleClick, false)
   }
@@ -44,19 +43,18 @@ class BotNav extends Component {
     }
   }
 
-  createTypesButtons = (typesArray, typeImages) => {
+  createTypesButtons = () => {
     const { onePokemonData } = this.props
-    this.props.onePokemonData.types.forEach(e => {
-      typesArray.push(e.type.name)
-      typeImages.push(
-        <TypeImage
-          key={uuid.v4()}
-          type={e.type.name}
-          color={jsonTypes[e.type.name].color}
-          img={typeImagesImport[e.type.name]}
-        />,
-      )
-    })
+    if (!onePokemonData.types) return
+    const typesArray = onePokemonData.types.map(e => (
+      <TypeImage
+        key={uuid.v4()}
+        type={e.type.name}
+        color={jsonTypes[e.type.name].color}
+        img={typeImagesImport[e.type.name]}
+      />
+    ))
+    return typesArray
   }
 
   createTypes = (array, arrayTypeImage) => {
@@ -75,46 +73,21 @@ class BotNav extends Component {
   }
 
   render() {
-    const typeImages = [] // types button that is returned
-    const take4 = []
-    const take2 = []
-    const take05 = []
-    const take025 = []
-    const take0 = []
-
-    const typesArray = []
-    const take4Array = []
-    const take2Array = []
-    const take05Array = []
-    const take025Array = []
-    const take0Array = []
     const { onePokemonData, myPokemon } = this.props
-    if(onePokemonData.types){this.createTypesButtons(typesArray, typeImages)}
-    calculateDefence(take2Array, "take2", typesArray, take4Array, take025Array)
-    calculateDefence(take05Array, "take05", typesArray, take4Array, take025Array)
-    calculateDefence(take0Array, "take0", typesArray, take4Array, take025Array)
-    reCalculateDefences(take2Array, take05Array)
-    this.createTypes(take0Array, take0)
-    this.createTypes(take025Array, take025)
-    this.createTypes(take05Array, take05)
-    this.createTypes(take2Array, take2)
-    this.createTypes(take4Array, take4)
-
+    let defence = {}
+    if(onePokemonData.types) {
+      defence = calculateDefence(onePokemonData.types)
+      this.createTypesButtons(onePokemonData.types)
+    }
     return (
       <div className="bot-nav-container" ref={(pokemonType) => { this.pokemonType = pokemonType }}>
         <button className="bot-nav" type="button" onClick={this.expandOnePokemon}>
-          {typeImages}
+          {this.createTypesButtons()}
         </button>
         <div className="bot-nav__scrollable scrollable">
           <h2 className="capitalize">{onePokemonData.name}</h2>
           <hr />
-          <WeaknessAdvantage
-            take2={take2}
-            take05={take05}
-            take0={take0}
-            take4={take4}
-            take025={take025}
-          />
+            {defence.take2 && <WeaknessAdvantage defence={defence} />}
           {myPokemon > 0 ? <RecommendedList /> : null}
         </div>
       </div>

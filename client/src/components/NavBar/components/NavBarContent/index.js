@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Burger from './burger'
+import Burger from './components/Burger'
 
-const NavBarComponent = ({ sideNav, toggleSideNav }) => (
+const NavBarContent = ({ sideNav, toggleSideNav }) => (
   <>
     <div className="navbar">
       <ul id="navbar__list">
@@ -18,4 +18,4 @@ const NavBarComponent = ({ sideNav, toggleSideNav }) => (
   </>
 )
 
-export default NavBarComponent
+export default NavBarContent

@@ -3,30 +3,15 @@ import {
   FETCH_POKEMON,
   UPDATE_MY_POKEMON,
   FETCH_ONE_POKEMON,
-  // CREATE_TYPES,
-  TOGGLE_SIDE_NAV,
-  UPDATE_SEARCH_CSS,
-  UPDATE_SEARCH_STRING,
   NO_MORE_POKEMON,
+  GET_FROM_BACKEND,
+  SEND_TO_BACKEND,
   FETCHING,
   UPDATE_MYPOKE_INPUTS,
-  UPDATE_SELECTED_OPTION,
-  SEND_TO_BACKEND,
   UPDATE_MYPOKE_INPUTS_STATE,
   UPDATE_MYPOKE_INPUTS_CHECK_STATE,
-  GET_FROM_BACKEND,
-  COLLAPSE_DIVS,
 } from './types'
 
-// retrieve saved pokemon from SQL database
-// export const fetchMyPokemon = () => dispatch => fetch('http://localhost:5000/api/mypokemon/')
-//   .then(response => response.json())
-//   .then(data => dispatch({
-//     type: FETCH_MY_POKEMON,
-//     payload: data,
-//   }))
-
-// save selected pokemon to SQL databse
 export const submitPokemon = () => (dispatch, getState) => {
   const newCP = parseInt(getState().pokemon.myPokeInputs.cp, 10)
 
@@ -66,16 +51,6 @@ export const getFromBackend = () => async (dispatch, getState) => {
     payload: json.myPokemon,
   })
 }
-//
-// export const getFromBackend = () => (dispatch, getState) => fetch(`http://localhost:5000/api/mypokemon/${getState().pokemon.myPokeInputs.id}`)
-//   .then(data => data.json())
-//   .then(data => {
-//     dispatch({
-//       type: UPDATE_MY_POKEMON,
-//       payload: data.myPokemon,
-//     })
-//   })
-
 
 // search bar - searches through state for pokemon that match the name
 export const filterPokemon = (searchString = '') => (dispatch, getState) => {
@@ -106,10 +81,8 @@ export const fetchPokemon = (numfetchedPokemon = 0, fetchAll = false) => (dispat
       .then(data => dispatch({
         type: FETCH_POKEMON,
         payload: data.results,
-      })))
-  // .catch(e => {
-  //   this.setState({...this.state, isFetching: false});
-  // });
+      }))
+  )
 }
 
 export const fetchOnePokemon = pokemon => (dispatch, getState) => {
@@ -124,26 +97,6 @@ export const fetchOnePokemon = pokemon => (dispatch, getState) => {
   }
 }
 
-export const toggleSideNav = () => (dispatch, getState) => {
-  dispatch({
-    type: TOGGLE_SIDE_NAV,
-    payload: !(getState().pokemon.sideNav),
-  });
-}
-
-export const updateSeachCSS = bool => dispatch => {
-  dispatch({
-    type: UPDATE_SEARCH_CSS,
-    payload: bool,
-  });
-}
-
-export const updateSearchState = (searchString = '') => dispatch => {
-  dispatch({
-    type: UPDATE_SEARCH_STRING,
-    payload: searchString,
-  })
-}
 
 export const updateMyPokeInputsState = (field, bool) => dispatch => {
   dispatch({
@@ -159,20 +112,6 @@ export const updateMyPokeInputs = (field, value) => dispatch => {
       field,
       value,
     },
-  })
-}
-
-export const toggleDiv = (id) => dispatch => {
-  dispatch({
-    type: COLLAPSE_DIVS,
-    id,
-  })
-}
-
-export const updateSelectedOption = (option) => dispatch => {
-  dispatch({
-    type: UPDATE_SELECTED_OPTION,
-    payload: option,
   })
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import uuid from 'uuid'
-import Loader from '../general/loader'
-import EachPokemonButton from './eachpokemonbutton'
+import Loader from '../../../general/loader'
+import EachPokemonButton from './EachPokemonButton'
 
 const PokemonList = ({ filteredPokemon, pokemon, handleActiveOnePokemon }) => {
   const allPokemon = filteredPokemon.map(eachPokemon => {

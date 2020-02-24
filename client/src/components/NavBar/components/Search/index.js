@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SearchIcon from '../../assets/images/searchicon.svg'
+import SearchIcon from '../../../../assets/images/searchicon.svg'
 
 class Search extends Component {
   handleImgFocus = () => {
