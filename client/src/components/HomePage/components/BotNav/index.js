@@ -76,7 +76,8 @@ class BotNav extends Component {
     const { onePokemonData, myPokemon } = this.props
     let defence = {}
     if(onePokemonData.types) {
-      defence = calculateDefence(onePokemonData.types)
+      const typesArray = onePokemonData.types.map(e => e.type.name)
+      defence = calculateDefence(typesArray)
       this.createTypesButtons(onePokemonData.types)
     }
     return (
@@ -87,8 +88,8 @@ class BotNav extends Component {
         <div className="bot-nav__scrollable scrollable">
           <h2 className="capitalize">{onePokemonData.name}</h2>
           <hr />
-            {defence.take2 && <WeaknessAdvantage defence={defence} />}
-          {myPokemon > 0 ? <RecommendedList /> : null}
+          {defence.take2 && <WeaknessAdvantage defence={defence} />}
+          {myPokemon.length > 0 && defence.take2 && <RecommendedList defence={defence} myPokemon={myPokemon} /> }
         </div>
       </div>
     )

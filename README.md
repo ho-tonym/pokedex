@@ -5,6 +5,8 @@ Under the My Pokemon section, we can add pokemon with their combat power (CP)
 
 A MERN app that makes requests to the RESTFUL API pokeapi.co. We display the data about fetched pokemon to find their type advantages.
 
+![](pokemonGif.gif)
+
 # Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
