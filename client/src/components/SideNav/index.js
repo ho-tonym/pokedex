@@ -12,8 +12,8 @@ import {
 
 class SideNav extends Component {
   render() {
-    const { sideNav } = this.props // state
-    const { toggleSideNav } = this.props // actions
+    const { sideNav } = this.props
+    const { toggleSideNav } = this.props 
     return(
       <>
         <div className={`side-nav-background ${sideNav ? "open-side-nav-back" : "close-side-nav-back"}`} />

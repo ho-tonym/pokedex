@@ -37,9 +37,11 @@ export default function calculateDefence(typesArray) {
   // populate and remove take 4 list
   const duplicatesTake2 = findDuplicates(weaknessObj.take2)
   filterList(weaknessObj.take4, duplicatesTake2, weaknessObj.take2)
+
   // populate and remove take 025 list
   const duplicatesTake05 = findDuplicates(weaknessObj.take05)
   filterList(weaknessObj.take025, duplicatesTake05, weaknessObj.take05)
+
   // remove when in lie 2 and 05 (cancel each other out)
   const duplicatesTake2And05 = findDuplicates([...weaknessObj.take2, ...weaknessObj.take05])
   duplicatesTake2And05.forEach(e => {
@@ -48,17 +50,4 @@ export default function calculateDefence(typesArray) {
   })
   return weaknessObj
 }
-
-
-// duplicatesTake2.forEach(e => {
-//   weaknessObj.take2 = weaknessObj.take2.filter(value => value !== e)
-//   weaknessObj.take4.push(e)
-// })
-
-// populate and remove take 025 list
-// duplicatesTake05.forEach(e => {
-//   weaknessObj.take05 = weaknessObj.take05.filter(value => value !== e)
-//   weaknessObj.take025.push(e)
-// })
-
 // if it is in 2 and 05, they cancel each other out

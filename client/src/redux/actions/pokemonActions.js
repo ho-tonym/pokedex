@@ -52,7 +52,6 @@ export const getFromBackend = () => async (dispatch, getState) => {
   })
 }
 
-// search bar - searches through state for pokemon that match the name
 export const filterPokemon = (searchString = '') => (dispatch, getState) => {
   const displayedPokemons = getState().pokemon.pokemon.filter(pokemon => (
     pokemon.name.includes(searchString.toLowerCase())

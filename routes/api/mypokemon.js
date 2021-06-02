@@ -5,7 +5,7 @@ const Pokemon = require('../../models/Pokemon');
 
 // GET api/mypokemon - Get All Pokemon
 router.get('/', (req, res) => {
-  Pokemon.find()// mongoose method .find
+  Pokemon.find()
     .then(mypokemon => res.json(mypokemon))
     .catch(err => res.status(404).json({ success: false, error: err }));
 });

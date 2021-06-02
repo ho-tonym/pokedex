@@ -11,6 +11,3 @@ const RecommendedList = ({ defence, myPokemon, array }) => {
   )
 }
 export default RecommendedList
-// based on onePokemonData,
-// look at myPokemon figure out those that have 2x, 4x AND 0.5, 0.25 then highest cp
-// 623bb19b-f39a-4615-949f-5cdd24350a27

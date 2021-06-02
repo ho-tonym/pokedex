@@ -19,7 +19,7 @@ These instructions will get you a copy of the project up and running on your loc
 I will guide you on how to use the applicaiton:
 
 ## Home
-On loadup, we query for API for 20 pokemon. You can scroll down to load 20 more. In search located in the navbar, you can find a specific pokemon that you want more information on. Click on that pokemon to make a request to the API for more information. There is a bot navbar that contains the information of the pokemon you clicked on. If you click on it, it expands to show more information on the type weaknesses/strengths.
+On loadup, we query for API (pokeapi.co) for 20 pokemon. You can scroll down to load 20 more. In search located in the navbar, you can find a specific pokemon that you want more information on. Click on that pokemon to make a request to the API for more information. There is a bot navbar that contains the information of the pokemon you clicked on. If you click on it, it expands to show more information on the type weaknesses/strengths.
 
 ## My Pokemon
 There are 3 tabs here:
@@ -27,7 +27,7 @@ There are 3 tabs here:
 Here, we can add pokemon and create a list of your pokemon by adding a name and combat power. If no pokemon match the name entered, we will make another request to the api to get the rest of the pokemon.
 The CP has to be 0 < CP <9999.
 ### Save
-It would be pretty inconvenient to have to add these pokemon everytime to use the app, so we can save the pokemon to the mongo server hosted on MongoDB Atlas. When it is finished saving to the DB, it will return a key that will be can be used to access the all the pokemon saved at a later time in the Get tab. I opted for a key based apporach rather than user/pw because it is more convenient.
+It would be pretty inconvenient to have to add these pokemon every time to use the app, so we can save the pokemon to the mongo server hosted on MongoDB Atlas. When it is finished saving to the DB, it will return a key that will be can be used to access the all the pokemon saved at a later time in the Get tab. I opted for a key based apporach rather than user/pw because it is more convenient.
 ### Get
 Enter a key here to retrieve data from the backend server and load up previously saved pokemon.
 
